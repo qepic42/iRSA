@@ -178,13 +178,16 @@
 	[loadingIndicator startAnimation:self];
 
 	if (self.mode == 0){
-		NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage]string] :self.currentPublicKeyData];
+		NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
 		NSString *resultString = [resultDict objectForKey:@"encryptedString"];
 		[resultTextView setString:resultString];
 	}else if (self.mode == 1){
-		NSData *test = [[[inputTextView textStorage]string ]dataUsingEncoding:NSUTF8StringEncoding];
-		NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test :self.currentPrivateKeyData];
-		NSString *resultString = [resultDict objectForKey:@"decryptedString"];
+		NSData *test = [[[[inputTextView textStorage] string] dataUsingEncoding:NSUTF8StringEncoding] decodeBase64];
+		NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test key:self.currentPrivateKeyData];
+		NSString *resultString = [[NSString alloc] initWithData:[resultDict objectForKey:@"decryptedData"] encoding:NSUTF8StringEncoding];
+		if(!resultString) {
+			resultString = [resultDict objectForKey:@"decryptedString"];
+		}
 		[resultTextView setString:resultString];
 	}
 

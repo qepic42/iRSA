@@ -11,7 +11,7 @@
 
 @implementation CryptBySSCrypto
 
-+(NSDictionary *)encodeByRSAWithData:(NSString *)clearText:(NSData *)publicKey{
++(NSDictionary *)encodeByRSAWithData:(NSString *)clearText key:(NSData *)publicKey{
 	
 	SSCrypto *crypto;
 	crypto = [[SSCrypto alloc] initWithPublicKey:publicKey];
@@ -24,11 +24,11 @@
 	
 	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:encryptedData,@"encryptedData",encryptedString,@"encryptedString",nil];
 	NSLog(@"encryptedString: %@",encryptedString);
-	return dict;
 	[crypto release];
+	return dict;
 }
 
-+(NSDictionary *)decodeByRSAWithData:(NSData *)encodedText:(NSData *)privateKey{
++(NSDictionary *)decodeByRSAWithData:(NSData *)encodedText key:(NSData *)privateKey{
 	
 	SSCrypto *crypto;
 	crypto = [[SSCrypto alloc] initWithPrivateKey:privateKey];
@@ -39,8 +39,8 @@
 	
 	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:decryptedData,@"decryptedData",decryptedString,@"decryptedString",nil];
 	NSLog(@"decryptedString: %@",decryptedString);
-	return dict;
 	[crypto release];
+	return dict;
 }
 
 
