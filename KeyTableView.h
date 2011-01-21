@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "KeyDataModel.h"
 #import "KeyGenerate.h"
 
 @interface KeyTableView : NSObject <NSTableViewDelegate,NSTableViewDataSource> {
@@ -15,7 +14,6 @@
 	IBOutlet NSButton *removeButton;
 	NSMutableArray *dataArray;
 	NSTableView *myTable;
-	KeyDataModel *keyDataModel;
 	KeyGenerate *keyClass;
 }
 

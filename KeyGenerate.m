@@ -7,19 +7,17 @@
 //
 
 #import "KeyGenerate.h"
-#import "KeyGenerateBySSCrypto.h"
-#import "PrimClass.h"
+#import <SSCrypto/SSCrypto.h>
 
 @implementation KeyGenerate
-@synthesize P, Q, N, Phi, E, D;
 
--(void)generateKey{
+-(void)generatePublicAndPrivateRSAKey{
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"startKeyGenerate" object:nil userInfo:nil];
 	
-	NSDictionary *dict = [KeyGenerateBySSCrypto generateKeys];
+	NSDictionary *dict = [self generateKeysBySSCrypto];
 		
 	NSString *publicKeyString = [[NSString alloc] initWithData:[dict objectForKey:@"publicKeyData"] encoding:NSUTF8StringEncoding];
 	NSString *privateKeyString = [[NSString alloc] initWithData:[dict objectForKey:@"privateKeyData"] encoding:NSUTF8StringEncoding];
@@ -49,8 +47,17 @@
     [pool release];
 }
 
+-(NSDictionary *)generateKeysBySSCrypto{
+	
+    NSData *privateKeyData = [SSCrypto generateRSAPrivateKeyWithLength:2048];
+    NSData *publicKeyData = [SSCrypto generateRSAPublicKeyFromPrivateKey:privateKeyData];
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:privateKeyData,@"privateKeyData", publicKeyData,@"publicKeyData",nil];
+	
+	return dict;
+}
+
 - (void) dealloc{
-	[primClass release];
 	[super dealloc];
 }
 

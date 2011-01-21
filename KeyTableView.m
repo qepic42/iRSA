@@ -7,7 +7,7 @@
 //
 
 #import "KeyTableView.h"
-#import "KeyDataModel.h"
+#import "KeyPropertys.h"
 #import "iRSAAppDelegate.h"
 
 @implementation KeyTableView
@@ -39,7 +39,6 @@
 - (void) dealloc{
 	[keyClass release];
 	[myTable release];
-	[keyDataModel release];
 	[dataArray release];
 	[super dealloc];
 }
@@ -73,7 +72,7 @@
 	[center postNotificationName:@"startKeyGenerate" object:nil userInfo:nil];
 
 	keyClass = [[KeyGenerate alloc]init];
-	[keyClass performSelectorInBackground:@selector (generateKey) withObject:nil];
+	[keyClass performSelectorInBackground:@selector (generatePublicAndPrivateRSAKey) withObject:nil];
 
 }
 

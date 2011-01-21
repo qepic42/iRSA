@@ -11,12 +11,11 @@
 		10BA3E0E12E8E648008E5E51 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0C12E8E648008E5E51 /* libcrypto.dylib */; };
 		10BA3E0F12E8E648008E5E51 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0D12E8E648008E5E51 /* libssl.dylib */; };
 		10BA3E2112E8E739008E5E51 /* CryptBySSCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BA3E2012E8E739008E5E51 /* CryptBySSCrypto.m */; };
-		10BA3E2412E8E74C008E5E51 /* KeyGenerateBySSCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BA3E2312E8E74C008E5E51 /* KeyGenerateBySSCrypto.m */; };
 		10BA3E3B12E8EABF008E5E51 /* SSCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E3A12E8EABF008E5E51 /* SSCrypto.framework */; };
 		10BA3E4012E8EAC5008E5E51 /* SSCrypto.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 10BA3E3A12E8EABF008E5E51 /* SSCrypto.framework */; };
 		10C673DD12E3970900F80368 /* KeyGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C673DC12E3970900F80368 /* KeyGenerate.m */; };
 		10C6743412E39DD000F80368 /* KeyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C6743312E39DD000F80368 /* KeyTableView.m */; };
-		10E9566912E0E53800EE2940 /* GUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E9566812E0E53800EE2940 /* GUIController.m */; };
+		10E9566912E0E53800EE2940 /* MainGUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* iRSAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* iRSAAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -46,15 +45,13 @@
 		10BA3E0D12E8E648008E5E51 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libssl.dylib; sourceTree = "<group>"; };
 		10BA3E1F12E8E739008E5E51 /* CryptBySSCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptBySSCrypto.h; sourceTree = "<group>"; };
 		10BA3E2012E8E739008E5E51 /* CryptBySSCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptBySSCrypto.m; sourceTree = "<group>"; };
-		10BA3E2212E8E74C008E5E51 /* KeyGenerateBySSCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyGenerateBySSCrypto.h; sourceTree = "<group>"; };
-		10BA3E2312E8E74C008E5E51 /* KeyGenerateBySSCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyGenerateBySSCrypto.m; sourceTree = "<group>"; };
 		10BA3E3A12E8EABF008E5E51 /* SSCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SSCrypto.framework; sourceTree = "<group>"; };
 		10C673DB12E3970900F80368 /* KeyGenerate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyGenerate.h; sourceTree = "<group>"; };
 		10C673DC12E3970900F80368 /* KeyGenerate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyGenerate.m; sourceTree = "<group>"; };
 		10C6743212E39DD000F80368 /* KeyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyTableView.h; sourceTree = "<group>"; };
 		10C6743312E39DD000F80368 /* KeyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyTableView.m; sourceTree = "<group>"; };
-		10E9566712E0E53800EE2940 /* GUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIController.h; sourceTree = "<group>"; };
-		10E9566812E0E53800EE2940 /* GUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIController.m; sourceTree = "<group>"; };
+		10E9566712E0E53800EE2940 /* MainGUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGUIController.h; sourceTree = "<group>"; };
+		10E9566812E0E53800EE2940 /* MainGUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainGUIController.m; sourceTree = "<group>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* iRSAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRSAAppDelegate.h; sourceTree = "<group>"; };
@@ -87,14 +84,12 @@
 			children = (
 				256AC3D80F4B6AC300CF3369 /* iRSAAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* iRSAAppDelegate.m */,
-				10E9566712E0E53800EE2940 /* GUIController.h */,
-				10E9566812E0E53800EE2940 /* GUIController.m */,
+				10E9566712E0E53800EE2940 /* MainGUIController.h */,
+				10E9566812E0E53800EE2940 /* MainGUIController.m */,
 				10C6743212E39DD000F80368 /* KeyTableView.h */,
 				10C6743312E39DD000F80368 /* KeyTableView.m */,
 				10C673DB12E3970900F80368 /* KeyGenerate.h */,
 				10C673DC12E3970900F80368 /* KeyGenerate.m */,
-				10BA3E2212E8E74C008E5E51 /* KeyGenerateBySSCrypto.h */,
-				10BA3E2312E8E74C008E5E51 /* KeyGenerateBySSCrypto.m */,
 				10BA3E1F12E8E739008E5E51 /* CryptBySSCrypto.h */,
 				10BA3E2012E8E739008E5E51 /* CryptBySSCrypto.m */,
 				1066043212E4FB0900B9695C /* KeyPropertys.h */,
@@ -237,12 +232,11 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* iRSAAppDelegate.m in Sources */,
-				10E9566912E0E53800EE2940 /* GUIController.m in Sources */,
+				10E9566912E0E53800EE2940 /* MainGUIController.m in Sources */,
 				10C673DD12E3970900F80368 /* KeyGenerate.m in Sources */,
 				10C6743412E39DD000F80368 /* KeyTableView.m in Sources */,
 				1066043412E4FB0900B9695C /* KeyPropertys.m in Sources */,
 				10BA3E2112E8E739008E5E51 /* CryptBySSCrypto.m in Sources */,
-				10BA3E2412E8E74C008E5E51 /* KeyGenerateBySSCrypto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

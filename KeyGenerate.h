@@ -7,25 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PrimClass.h"
 
 @interface KeyGenerate : NSObject {
-	int Q;
-	int P;
-	long long N;
-	long long Phi;
-	long long E;
-	long long D;
-	PrimClass *primClass;
+	
 }
 
-@property() int Q;
-@property() int P;
-@property() long long N;
-@property() long long Phi;
-@property() long long E;
-@property() long long D;
-
--(void)generateKey;
+-(void)generatePublicAndPrivateRSAKey;
+-(NSDictionary *)generateKeysBySSCrypto;
 
 @end

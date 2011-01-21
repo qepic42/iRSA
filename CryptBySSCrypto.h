@@ -13,7 +13,7 @@
 
 }
 
-+(NSDictionary *)encode:(NSString *)clearText:(NSData *)publicKey;
-+(NSDictionary *)decode:(NSData *)encodedText:(NSData *)privateKey;
++(NSDictionary *)encodeByRSAWithData:(NSString *)clearText:(NSData *)publicKey;
++(NSDictionary *)decodeByRSAWithData:(NSData *)encodedText:(NSData *)privateKey;
 
 @end
