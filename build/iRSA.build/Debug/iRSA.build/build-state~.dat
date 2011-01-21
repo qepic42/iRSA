@@ -1,504 +1,0 @@
-TiRSA
-v7
-r0
-t317312180.098933
-cCheck dependencies
-cProcessInfoPlistFile /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Info.plist iRSA-Info.plist
-cCopyStringsFile /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-cCompileXIB /Users/Q/Sites/iRSA/English.lproj/MainMenu.xib
-cProcessPCH /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch.gch iRSA_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/main.o /Users/Q/Sites/iRSA/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/iRSAAppDelegate.o /Users/Q/Sites/iRSA/iRSAAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/GUIController.o /Users/Q/Sites/iRSA/GUIController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerate.o /Users/Q/Sites/iRSA/KeyGenerate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyTableView.o /Users/Q/Sites/iRSA/KeyTableView.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyPropertys.o /Users/Q/Sites/iRSA/KeyPropertys.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/CryptBySSCrypto.o /Users/Q/Sites/iRSA/CryptBySSCrypto.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerateBySSCrypto.o /Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cPBXCp build/Debug/iRSA.app/Contents/Frameworks/SSCrypto.framework SSCrypto.framework
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004CAA740B00000000000000EE
-t1286239243
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
-c0000000040C4AA6800000000000001E5
-t1086630504
-s485
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004C23AA0400000000000013E6
-t1277405700
-s5094
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/bio.h
-c000000004C23A1830000000000007866
-t1277403523
-s30822
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/engine.h
-c000000004C23A1830000000000009687
-t1277403523
-s38535
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/err.h
-c000000004C23A1830000000000003299
-t1277403523
-s12953
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/evp.h
-c000000004C23A18300000000000096EA
-t1277403523
-s38634
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/md5.h
-c000000004C23A1830000000000001272
-t1277403523
-s4722
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/pem.h
-c000000004C23A1830000000000006E59
-t1277403523
-s28249
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/rand.h
-c000000004C23A1830000000000001862
-t1277403523
-s6242
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/rsa.h
-c000000004C23A1830000000000004C73
-t1277403523
-s19571
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/sha.h
-c000000004C23A1830000000000001CDE
-t1277403523
-s7390
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/openssl/ssl.h
-c000000004C23A1930000000000014965
-t1277403539
-s84325
-
-N/System/Library/Frameworks/Cocoa.framework/Cocoa
-c000000004A1F2D63000000000000A5E0
-t1243557219
-s42464
-
-N/Users/Q/Sites/iRSA/CryptBySSCrypto.h
-c000000004D39949C0000000000000179
-t1295619228
-s377
-i<Cocoa/Cocoa.h>
-
-N/Users/Q/Sites/iRSA/CryptBySSCrypto.m
-c000000004D39949E000000000000054D
-t1295619230
-s1357
-i"CryptBySSCrypto.h"
-i<SSCrypto/SSCrypto.h>
-
-N/Users/Q/Sites/iRSA/English.lproj/InfoPlist.strings
-c000000004D30A87E000000000000002D
-t1295034494
-s45
-
-N/Users/Q/Sites/iRSA/English.lproj/MainMenu.xib
-c000000004D397BAB0000000000049105
-t1295612843
-s299269
-
-N/Users/Q/Sites/iRSA/GUIController.h
-c000000004D398DB40000000000000869
-t1295617460
-s2153
-i<Cocoa/Cocoa.h>
-i"KeyGenerate.h"
-i"KeyPropertys.h"
-
-N/Users/Q/Sites/iRSA/GUIController.m
-c000000004D3994A60000000000001842
-t1295619238
-s6210
-i"GUIController.h"
-i"PrimClass.h"
-i"KeyGenerate.h"
-i"KeyPropertys.h"
-i"KeyDataModel.h"
-i"iRSAAppDelegate.h"
-i"CryptBySSCrypto.h"
-
-N/Users/Q/Sites/iRSA/KeyGenerate.h
-c000000004D39951D00000000000000F3
-t1295619357
-s243
-i<Cocoa/Cocoa.h>
-
-N/Users/Q/Sites/iRSA/KeyGenerate.m
-c000000004D39952E0000000000000955
-t1295619374
-s2389
-i"KeyGenerate.h"
-i<SSCrypto/SSCrypto.h>
-
-N/Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.h
-c000000004D38B5A40000000000000102
-t1295562148
-s258
-i<Cocoa/Cocoa.h>
-
-N/Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.m
-c000000004D3991D30000000000000263
-t1295618515
-s611
-i"KeyGenerateBySSCrypto.h"
-i<SSCrypto/SSCrypto.h>
-
-N/Users/Q/Sites/iRSA/KeyPropertys.h
-c000000004D3991A800000000000003A9
-t1295618472
-s937
-i<Cocoa/Cocoa.h>
-
-N/Users/Q/Sites/iRSA/KeyPropertys.m
-c000000004D3991BE00000000000005BF
-t1295618494
-s1471
-i"KeyPropertys.h"
-
-N/Users/Q/Sites/iRSA/KeyTableView.h
-c000000004D39844B00000000000002E9
-t1295615051
-s745
-i<Cocoa/Cocoa.h>
-i"KeyDataModel.h"
-i"KeyGenerate.h"
-
-N/Users/Q/Sites/iRSA/KeyTableView.m
-c000000004D39951C000000000000104D
-t1295619356
-s4173
-i"KeyTableView.h"
-i"KeyDataModel.h"
-i"iRSAAppDelegate.h"
-
-N/Users/Q/Sites/iRSA/SSCrypto.framework
-c000000004D38A8F500000000000000CC
-t1295558901
-s204
-
-N/Users/Q/Sites/iRSA/SSCrypto.framework/Headers/SSCrypto.h
-c000000004D38A8E70000000000000F0B
-t1295558887
-s3851
-i<Foundation/Foundation.h>
-i<openssl/evp.h>
-i<openssl/rand.h>
-i<openssl/rsa.h>
-i<openssl/engine.h>
-i<openssl/sha.h>
-i<openssl/pem.h>
-i<openssl/bio.h>
-i<openssl/err.h>
-i<openssl/ssl.h>
-i<openssl/md5.h>
-
-N/Users/Q/Sites/iRSA/SSCrypto.framework/SSCrypto
-c000000004D38A8F5000000000000BC24
-t1295558901
-s48164
-
-N/Users/Q/Sites/iRSA/build/Debug/iRSA.app
-t1295619357
-s102
-
-N/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Frameworks/SSCrypto.framework
-t1295619380
-s204
-
-N/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Info.plist
-t1295619357
-s877
-
-N/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/MacOS/iRSA
-t2
-s0
-
-N/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/PkgInfo
-t1295619357
-s8
-
-N/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Resources/English.lproj/InfoPlist.strings
-t1295619359
-s92
-
-N/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Resources/English.lproj/MainMenu.nib
-t1295619361
-s59409
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/CryptBySSCrypto.o
-t1295619379
-s9444
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/GUIController.o
-t2
-s0
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerate.o
-t2
-s0
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerateBySSCrypto.o
-t1295619380
-s6948
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyPropertys.o
-t1295619379
-s14252
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyTableView.o
-t2
-s0
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/iRSA.LinkFileList
-c000000004D39951D00000000000002CF
-t1295619357
-s719
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/iRSAAppDelegate.o
-t1295619379
-s18420
-
-N/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/main.o
-t1295619379
-s4816
-
-N/Users/Q/Sites/iRSA/iRSAAppDelegate.h
-c000000004D35D5CC0000000000000189
-t1295373772
-s393
-i<Cocoa/Cocoa.h>
-
-N/Users/Q/Sites/iRSA/iRSAAppDelegate.m
-c000000004D35D5F50000000000000235
-t1295373813
-s565
-i"iRSAAppDelegate.h"
-
-N/Users/Q/Sites/iRSA/iRSA_Prefix.pch
-c000000004D30A87E000000000000008B
-t1295034494
-s139
-i<Cocoa/Cocoa.h>
-
-N/Users/Q/Sites/iRSA/libcrypto.dylib
-c000000004D38AE4C0000000000419680
-t1295560268
-s4298368
-
-N/Users/Q/Sites/iRSA/libssl.dylib
-c000000004D38AE4300000000000DA710
-t1295560259
-s894736
-
-N/Users/Q/Sites/iRSA/main.m
-c000000004D30A87E00000000000000F9
-t1295034494
-s249
-i<Cocoa/Cocoa.h>
-
-N/var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch.gch
-t1295619377
-s56932144
-
-NiRSA-Info.plist
-c000000004D30A87E00000000000003EA
-t1295034494
-s1002
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies317312157#317312157#0(0"0(0#1#0"3343187568374212096#0"0#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/CryptBySSCrypto.o /Users/Q/Sites/iRSA/CryptBySSCrypto.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312179.600441
-e317312179.984901
-r1
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/CryptBySSCrypto.o
-x/Users/Q/Sites/iRSA/CryptBySSCrypto.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@45"Compile /Users/Q/Sites/iRSA/CryptBySSCrypto.m317312179#317312179#0(0"0(0#0#37"/Users/Q/Sites/iRSA/CryptBySSCrypto.m8640885216#1219"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/CryptBySSCrypto.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/CryptBySSCrypto.o0#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/GUIController.o /Users/Q/Sites/iRSA/GUIController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312179.036683
-e317312179.333052
-r0
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/GUIController.o
-x/Users/Q/Sites/iRSA/GUIController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/Q/Sites/iRSA/GUIController.m:10:22: error: PrimClass.h: No such file or directory
-o/Users/Q/Sites/iRSA/GUIController.m:13:25: error: KeyDataModel.h: No such file or directory
-lSLF07#2@43"Compile /Users/Q/Sites/iRSA/GUIController.m317312179#317312179#0(181"/Users/Q/Sites/iRSA/GUIController.m:10:22: error: PrimClass.h: No such file or directory/Users/Q/Sites/iRSA/GUIController.m:13:25: error: KeyDataModel.h: No such file or directory2(4@38"PrimClass.h: No such file or directory317312179#0#89#0(6@35"/Users/Q/Sites/iRSA/GUIController.m317312038#10#0#10#0#28"*: No such file or directory0(4@41"KeyDataModel.h: No such file or directory317312179#89#92#0(6@35"/Users/Q/Sites/iRSA/GUIController.m317312038#13#0#13#0#28"*: No such file or directory0(0#0#35"/Users/Q/Sites/iRSA/GUIController.m8746915328#1215"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/GUIController.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/GUIController.o1#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerate.o /Users/Q/Sites/iRSA/KeyGenerate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312179.107358
-e317312179.458537
-r0
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerate.o
-x/Users/Q/Sites/iRSA/KeyGenerate.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/Q/Sites/iRSA/KeyGenerate.m: In function '-[KeyGenerate generatePublicAndPrivateRSAKey]':
-o/Users/Q/Sites/iRSA/KeyGenerate.m:20: error: 'KeyGenerateBySSCrypto' undeclared (first use in this function)
-o/Users/Q/Sites/iRSA/KeyGenerate.m:20: error: (Each undeclared identifier is reported only once
-o/Users/Q/Sites/iRSA/KeyGenerate.m:20: error: for each function it appears in.)
-lSLF07#2@41"Compile /Users/Q/Sites/iRSA/KeyGenerate.m317312179#317312179#0(379"/Users/Q/Sites/iRSA/KeyGenerate.m: In function '-[KeyGenerate generatePublicAndPrivateRSAKey]':/Users/Q/Sites/iRSA/KeyGenerate.m:20: error: 'KeyGenerateBySSCrypto' undeclared (first use in this function)/Users/Q/Sites/iRSA/KeyGenerate.m:20: error: (Each undeclared identifier is reported only once/Users/Q/Sites/iRSA/KeyGenerate.m:20: error: for each function it appears in.)1(4@63"'KeyGenerateBySSCrypto' undeclared (first use in this function)317312179#96#109#0(6@33"/Users/Q/Sites/iRSA/KeyGenerate.m317312157#20#0#20#0#43"'*' undeclared (first use in this function)0(0#0#33"/Users/Q/Sites/iRSA/KeyGenerate.m8746289216#1211"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/KeyGenerate.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerate.o1#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerateBySSCrypto.o /Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312179.726312
-e317312180.057070
-r1
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerateBySSCrypto.o
-x/Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@51"Compile /Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.m317312179#317312180#0(0"0(0#0#43"/Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.m8716302592#1231"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/KeyGenerateBySSCrypto.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyGenerateBySSCrypto.o0#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyPropertys.o /Users/Q/Sites/iRSA/KeyPropertys.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312179.458830
-e317312179.726191
-r1
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyPropertys.o
-x/Users/Q/Sites/iRSA/KeyPropertys.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@42"Compile /Users/Q/Sites/iRSA/KeyPropertys.m317312179#317312179#0(0"0(0#0#34"/Users/Q/Sites/iRSA/KeyPropertys.m8660871712#1213"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/KeyPropertys.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyPropertys.o0#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyTableView.o /Users/Q/Sites/iRSA/KeyTableView.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312179.333173
-e317312179.600325
-r0
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyTableView.o
-x/Users/Q/Sites/iRSA/KeyTableView.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/Q/Sites/iRSA/KeyTableView.m:9:
-o/Users/Q/Sites/iRSA/KeyTableView.h:10:25: error: KeyDataModel.h: No such file or directory
-oIn file included from /Users/Q/Sites/iRSA/KeyTableView.m:9:
-o/Users/Q/Sites/iRSA/KeyTableView.h:18: error: expected specifier-qualifier-list before 'KeyDataModel'
-o/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView dealloc]':
-o/Users/Q/Sites/iRSA/KeyTableView.m:42: error: 'keyDataModel' undeclared (first use in this function)
-o/Users/Q/Sites/iRSA/KeyTableView.m:42: error: (Each undeclared identifier is reported only once
-o/Users/Q/Sites/iRSA/KeyTableView.m:42: error: for each function it appears in.)
-o/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView addItem:]':
-o/Users/Q/Sites/iRSA/KeyTableView.m:54: error: 'KeyPropertys' undeclared (first use in this function)
-o/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView tableView:objectValueForTableColumn:row:]':
-o/Users/Q/Sites/iRSA/KeyTableView.m:107: error: 'KeyPropertys' undeclared (first use in this function)
-o/Users/Q/Sites/iRSA/KeyTableView.m:107: error: 'item' undeclared (first use in this function)
-o/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView tableView:setObjectValue:forTableColumn:row:]':
-o/Users/Q/Sites/iRSA/KeyTableView.m:126: error: 'KeyPropertys' undeclared (first use in this function)
-o/Users/Q/Sites/iRSA/KeyTableView.m:126: error: 'item' undeclared (first use in this function)
-lSLF07#2@42"Compile /Users/Q/Sites/iRSA/KeyTableView.m317312179#317312179#0(1454"In file included from /Users/Q/Sites/iRSA/KeyTableView.m:9:/Users/Q/Sites/iRSA/KeyTableView.h:10:25: error: KeyDataModel.h: No such file or directoryIn file included from /Users/Q/Sites/iRSA/KeyTableView.m:9:/Users/Q/Sites/iRSA/KeyTableView.h:18: error: expected specifier-qualifier-list before 'KeyDataModel'/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView dealloc]':/Users/Q/Sites/iRSA/KeyTableView.m:42: error: 'keyDataModel' undeclared (first use in this function)/Users/Q/Sites/iRSA/KeyTableView.m:42: error: (Each undeclared identifier is reported only once/Users/Q/Sites/iRSA/KeyTableView.m:42: error: for each function it appears in.)/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView addItem:]':/Users/Q/Sites/iRSA/KeyTableView.m:54: error: 'KeyPropertys' undeclared (first use in this function)/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView tableView:objectValueForTableColumn:row:]':/Users/Q/Sites/iRSA/KeyTableView.m:107: error: 'KeyPropertys' undeclared (first use in this function)/Users/Q/Sites/iRSA/KeyTableView.m:107: error: 'item' undeclared (first use in this function)/Users/Q/Sites/iRSA/KeyTableView.m: In function '-[KeyTableView tableView:setObjectValue:forTableColumn:row:]':/Users/Q/Sites/iRSA/KeyTableView.m:126: error: 'KeyPropertys' undeclared (first use in this function)/Users/Q/Sites/iRSA/KeyTableView.m:126: error: 'item' undeclared (first use in this function)8(4@41"KeyDataModel.h: No such file or directory317312179#60#91#2(7@56"In file included from /Users/Q/Sites/iRSA/KeyTableView.m317312179#18446744073709551615#0#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#9#0#9#0#0"0(13@79"KeyDataModel.h: No such file or directory in /Users/Q/Sites/iRSA/KeyTableView.h317312179#18446744073709551615#0#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.h317307851#10#0#10#0#0"0(6@34"/Users/Q/Sites/iRSA/KeyTableView.h317307851#10#0#10#0#28"*: No such file or directory0(4@55"Expected specifier-qualifier-list before 'KeyDataModel'317312179#211#102#2(7@56"In file included from /Users/Q/Sites/iRSA/KeyTableView.m317312179#18446744073709551615#0#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#9#0#9#0#0"0(13@93"Expected specifier-qualifier-list before 'KeyDataModel' in /Users/Q/Sites/iRSA/KeyTableView.h317312179#18446744073709551615#0#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.h317307851#18#0#18#0#0"0(6@34"/Users/Q/Sites/iRSA/KeyTableView.h317307851#18#0#18#0#19"expected * before *0(4@54"'keyDataModel' undeclared (first use in this function)317312179#388#101#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#42#0#42#0#43"'*' undeclared (first use in this function)0(4@54"'KeyPropertys' undeclared (first use in this function)317312179#741#101#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#54#0#54#0#43"'*' undeclared (first use in this function)0(4@54"'KeyPropertys' undeclared (first use in this function)317312179#950#102#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#107#0#107#0#43"'*' undeclared (first use in this function)0(4@46"'item' undeclared (first use in this function)317312179#1052#94#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#107#0#107#0#43"'*' undeclared (first use in this function)0(4@54"'KeyPropertys' undeclared (first use in this function)317312179#1258#102#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#126#0#126#0#43"'*' undeclared (first use in this function)0(4@46"'item' undeclared (first use in this function)317312179#1360#94#0(6@34"/Users/Q/Sites/iRSA/KeyTableView.m317312156#126#0#126#0#43"'*' undeclared (first use in this function)0(0#0#34"/Users/Q/Sites/iRSA/KeyTableView.m8700381056#1213"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/KeyTableView.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/KeyTableView.o1#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/iRSAAppDelegate.o /Users/Q/Sites/iRSA/iRSAAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312177.959366
-e317312179.107224
-r1
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/iRSAAppDelegate.o
-x/Users/Q/Sites/iRSA/iRSAAppDelegate.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@45"Compile /Users/Q/Sites/iRSA/iRSAAppDelegate.m317312177#317312179#0(0"0(0#0#37"/Users/Q/Sites/iRSA/iRSAAppDelegate.m8748912640#1219"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/iRSAAppDelegate.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/iRSAAppDelegate.o0#
-
-CCompileC build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/main.o /Users/Q/Sites/iRSA/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312177.958221
-e317312179.036549
-r1
-xCompileC
-xbuild/iRSA.build/Debug/iRSA.build/Objects-normal/i386/main.o
-x/Users/Q/Sites/iRSA/main.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@34"Compile /Users/Q/Sites/iRSA/main.m317312177#317312179#0(0"0(0#0#26"/Users/Q/Sites/iRSA/main.m8603550208#1197"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -include /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch -c /Users/Q/Sites/iRSA/main.m -o /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/Objects-normal/i386/main.o0#
-
-CCompileXIB /Users/Q/Sites/iRSA/English.lproj/MainMenu.xib
-s317312157.875866
-e317312161.484923
-r1
-xCompileXIB
-x/Users/Q/Sites/iRSA/English.lproj/MainMenu.xib
-lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib317312157#317312161#0(0"0(0#0#46"/Users/Q/Sites/iRSA/English.lproj/MainMenu.xib8723418528#304"    cd /Users/Q/Sites/iRSA    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Resources/English.lproj/MainMenu.nib /Users/Q/Sites/iRSA/English.lproj/MainMenu.xib --sdk /Developer/SDKs/MacOSX10.6.sdk0#
-
-CCopyStringsFile /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
-s317312157.874483
-e317312159.375993
-r1
-xCopyStringsFile
-x/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Resources/English.lproj/InfoPlist.strings
-xEnglish.lproj/InfoPlist.strings
-lSLF07#2@36"Copy English.lproj/InfoPlist.strings317312157#317312159#0(0"0(0#0#51"/Users/Q/Sites/iRSA/English.lproj/InfoPlist.strings8729939712#324"    cd /Users/Q/Sites/iRSA    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Resources/English.lproj0#
-
-CLd /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/MacOS/iRSA normal i386
-r0
-
-CPBXCp build/Debug/iRSA.app/Contents/Frameworks/SSCrypto.framework SSCrypto.framework
-s317312180.057188
-e317312180.098830
-r1
-xPBXCp
-xbuild/Debug/iRSA.app/Contents/Frameworks/SSCrypto.framework
-xSSCrypto.framework
-lSLF07#2@23"Copy SSCrypto.framework317312180#317312180#0(0"0(0#0#38"/Users/Q/Sites/iRSA/SSCrypto.framework8603168128#289"    cd /Users/Q/Sites/iRSA    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/Q/Sites/iRSA/SSCrypto.framework /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Frameworks0#
-
-CProcessInfoPlistFile /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Info.plist iRSA-Info.plist
-s317312157.870976
-e317312157.874372
-r1
-xProcessInfoPlistFile
-x/Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Info.plist
-xiRSA-Info.plist
-lSLF07#2@23"Process iRSA-Info.plist317312157#317312157#0(0"0(0#0#35"/Users/Q/Sites/iRSA/iRSA-Info.plist29555375072215088#244"    cd /Users/Q/Sites/iRSA    builtin-infoPlistUtility iRSA-Info.plist -genpkginfo /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/Q/Sites/iRSA/build/Debug/iRSA.app/Contents/Info.plist0#
-
-CProcessPCH /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch.gch iRSA_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-s317312161.485255
-e317312177.956363
-r1
-xProcessPCH
-x/var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch.gch
-xiRSA_Prefix.pch
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@26"Precompile iRSA_Prefix.pch317312161#317312177#0(0"0(0#0#35"/Users/Q/Sites/iRSA/iRSA_Prefix.pch8747188320#1127"    cd /Users/Q/Sites/iRSA    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-generated-files.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-own-target-headers.hmap -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-all-target-headers.hmap -iquote /Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/iRSA-project-headers.hmap -F/Users/Q/Sites/iRSA/build/Debug -F/Users/Q/Sites/iRSA -I/Users/Q/Sites/iRSA/build/Debug/include -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources/i386 -I/Users/Q/Sites/iRSA/build/iRSA.build/Debug/iRSA.build/DerivedSources -c /Users/Q/Sites/iRSA/iRSA_Prefix.pch -o /var/folders/Nn/NnH7z34FGNeoS7vlZOR55k+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/iRSA_Prefix-brlxqvsbrhgdhmbbtntwxevqtsmi/iRSA_Prefix.pch.gch0#
-
-CTouch /Users/Q/Sites/iRSA/build/Debug/iRSA.app
-r0
-
