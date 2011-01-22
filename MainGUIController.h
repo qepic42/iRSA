@@ -18,9 +18,11 @@
 	IBOutlet NSWindow *keyManageSheet;
 	IBOutlet NSWindow *resultWindow;
 	IBOutlet NSWindow *mailSetupWindow;
+	IBOutlet NSWindow *publicKeyToShareSheet;
 	IBOutlet NSButton *enterButton;
 	IBOutlet NSButton *removeButton;
 	IBOutlet NSButton *keyPopUpButton;
+	IBOutlet NSButton *chooseKeyPopUpButton;
 	IBOutlet NSButton *loadingButton;
 	IBOutlet NSTextView *inputTextView;
 	IBOutlet NSTextView *resultTextView;
@@ -63,7 +65,6 @@
 
 
 -(IBAction)pushEnter:(id)sender;
--(IBAction)typeInTextField:(id)sender;
 -(IBAction)pushSwitch:(id)sender;
 -(IBAction)pushShowKeyWindow:(id)sender;
 -(IBAction)pushCloseKeyWindow:(id)sender;
@@ -71,6 +72,9 @@
 -(IBAction)pushResultDoneSheet:(id)sender;
 -(IBAction)pushShareByEMail:(id)sender;
 -(IBAction)pushSendMail:(id)sender;
+-(IBAction)pushInvitePerson:(id)sender;
+-(IBAction)pushChooseKeyToShare:(id)sender;
+-(IBAction)pushChoosedKeyToShare:(id)sender;
 -(void)setPopUpStatus;
 -(void)setupPopUpButton;
 -(void)openResultWindow;
@@ -79,5 +83,7 @@
 -(void)addNSNotificationObserver;
 -(void)enableInterface:(NSNotification *)notification;
 -(void)setupOwnPropertys;
+-(void)openInviteSheet;
+-(void)setupChooseKeyPopUpButton;
 
 @end

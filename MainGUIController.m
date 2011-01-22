@@ -114,7 +114,7 @@
 	}
 	
 	KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
-	self.currentIdentifier = @"Fail";
+	self.currentIdentifier = currentItem.keyIdentifier;
 	self.currentPrivateKey = currentItem.privateKey;
 	self.currentPrivateKeyData = currentItem.privateKeyData;
 	self.currentPublicKey = currentItem.publicKey;
@@ -122,6 +122,32 @@
 	//	[item release];
 	
 	[self setPopUpStatus];
+}
+
+- (void)setupChooseKeyPopUpButton{
+	
+	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+	[[chooseKeyPopUpButton menu]removeAllItems];
+	
+	int i;
+	int max = [myAppDelegate.keyDataArray count];
+	
+	for(i=0;i<max;i++){
+		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+		[newItem setTarget:self];
+		[[chooseKeyPopUpButton menu] addItem:newItem];
+		[newItem release];
+	}
+	
+	KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
+	self.currentIdentifier = currentItem.keyIdentifier;
+	self.currentPrivateKey = currentItem.privateKey;
+	self.currentPrivateKeyData = currentItem.privateKeyData;
+	self.currentPublicKey = currentItem.publicKey;
+	self.currentPublicKeyData = currentItem.publicKeyData;
+	//	[item release];
+	
 }
 
 - (void)openResultWindow{	
@@ -140,13 +166,6 @@
 
 #pragma mark -
 #pragma mark IBActions
-
-- (IBAction)typeInTextField:(id)sender{
-	self.currentText = [[inputTextView textStorage] string];
-    int noChars = [self.currentText length];
-    NSLog(@"Counted %d chars",noChars);
-	[countChars setStringValue:[NSString stringWithFormat:@"%d",noChars]];
-}
 
 - (IBAction)pushSwitch:(id)sender{
 	if ([switchButton selectedSegment] == 0) {
@@ -215,7 +234,7 @@
 	[NSApp endSheet:resultWindow];
 }
 
--(IBAction)pushShareByEMail:(id)sender{
+- (IBAction)pushShareByEMail:(id)sender{
 	[NSApp beginSheet:mailSetupWindow modalForWindow:resultWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	[sendMailContent setString:[[resultTextView textStorage]string]];
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
@@ -227,11 +246,53 @@
 	 [sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
 }
 
--(IBAction)pushSendMail:(id)sender{
+- (IBAction)pushSendMail:(id)sender{
 	[SendMail sendEMailMessageWith:[[sendMailContent textStorage]string] targetAddress:[sendMailTo stringValue] from:[sendMailFrom stringValue] and:[sendMailSubject stringValue]];
 	[mailSetupWindow orderOut:nil];
 	[NSApp endSheet:mailSetupWindow];
 }
+
+- (IBAction)pushInvitePerson:(id)sender{
+	[self setupChooseKeyPopUpButton];
+	[NSApp beginSheet:publicKeyToShareSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+}
+
+-(IBAction)pushChoosedKeyToShare:(id)sender{
+	[publicKeyToShareSheet orderOut:nil];
+	[NSApp endSheet:publicKeyToShareSheet];
+	[self openInviteSheet];
+}
+
+- (IBAction)pushChooseKeyToShare:(id)sender{
+	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+	KeyPropertys *item = [myAppDelegate.keyDataArray objectAtIndex:[sender indexOfSelectedItem]];
+	
+	self.currentIdentifier = item.keyIdentifier;
+	self.currentPublicKey = item.publicKey;
+	self.currentPrivateKey = item.privateKey;
+	self.currentPublicKeyData = item.publicKeyData;
+	self.currentPrivateKeyData = item.privateKeyData;
+}
+
+
+#pragma mark -
+#pragma mark Other Methods
+
+-(void)openInviteSheet{
+	[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+	
+	NSString *cache = @"Invite\nI want invite you to enjoy mailing with me encrypted by RSA.\nYou can easily download this App here: http://galler-web.de/iRSA.zip\"\nTo encrypt me text use my following public key:\n\n ";
+	
+	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
+	[publicKeyMutableString setString: self.currentPublicKey];
+	NSRange myRange = 
+	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
+	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];	
+	
+	[sendMailSubject setStringValue:@"Invite to use iRSA"];
+	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",cache, publicKeyMutableString]];
+}
+
 
 #pragma mark -
 #pragma mark Delegate Methods
