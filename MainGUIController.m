@@ -11,9 +11,11 @@
 #import "KeyPropertys.h"
 #import "iRSAAppDelegate.h"
 #import "CryptBySSCrypto.h"
+#import <SSCrypto/SSCrypto.h>
+#import "SendMail.h"
 
 @implementation MainGUIController
-@synthesize mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData;
+@synthesize mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
 
 #pragma mark -
 #pragma mark Initialization & Dealloc
@@ -75,6 +77,7 @@
 }
 
 - (void) dealloc{
+	[currentEncodedText release];
 	[currentPublicKeyData release];
 	[currentPrivateKeyData release];
 	[currentText release];
@@ -92,7 +95,6 @@
 - (void)enableInterface:(NSNotification *)notification{
 	[loadingIndicatorKeyWindow stopAnimation:self];
 	[enterButton setEnabled:YES];
-	[newKeyButton setEnabled:YES];
 }
 
 - (void)setupPopUpButton{
@@ -141,14 +143,19 @@
 
 - (IBAction)typeInTextField:(id)sender{
 	self.currentText = [[inputTextView textStorage] string];
+    int noChars = [self.currentText length];
+    NSLog(@"Counted %d chars",noChars);
+	[countChars setStringValue:[NSString stringWithFormat:@"%d",noChars]];
 }
 
 - (IBAction)pushSwitch:(id)sender{
 	if ([switchButton selectedSegment] == 0) {
 		[enterButton setTitle:@"Encode"];
+		[loadingLabel setStringValue:@"Encode…"];
 		self.mode = 0;
 	}else if ([switchButton selectedSegment] == 1) {
 		[enterButton setTitle:@"Decode"];
+		[loadingLabel setStringValue:@"Decode…"];
 		self.mode = 1;
 	}
 }
@@ -177,6 +184,8 @@
 	[NSApp beginSheet:loadingSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	[loadingIndicator startAnimation:self];
 
+	NSString *resultString = @"";
+	
 	if (self.mode == 0){
 		NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
 		NSString *resultString = [resultDict objectForKey:@"encryptedString"];
@@ -188,9 +197,12 @@
 		if(!resultString) {
 			resultString = [resultDict objectForKey:@"decryptedString"];
 		}
+		self.currentEncodedText = resultString;
 		[resultTextView setString:resultString];
 	}
 
+	[resultString release];
+	
 	[loadingSheet orderOut:nil];
 	[NSApp endSheet:loadingSheet];
 	
@@ -203,12 +215,31 @@
 	[NSApp endSheet:resultWindow];
 }
 
+-(IBAction)pushShareByEMail:(id)sender{
+	[NSApp beginSheet:mailSetupWindow modalForWindow:resultWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+	[sendMailContent setString:[[resultTextView textStorage]string]];
+	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
+	[publicKeyMutableString setString: self.currentPublicKey];
+	NSRange myRange = 
+	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
+	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
+	self.currentPublicKey = [NSString stringWithFormat:@"%@",publicKeyMutableString];
+	 [sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
+}
+
+-(IBAction)pushSendMail:(id)sender{
+	[SendMail sendEMailMessageWith:[[sendMailContent textStorage]string] targetAddress:[sendMailTo stringValue] from:[sendMailFrom stringValue] and:[sendMailSubject stringValue]];
+	[mailSetupWindow orderOut:nil];
+	[NSApp endSheet:mailSetupWindow];
+}
 
 #pragma mark -
 #pragma mark Delegate Methods
 
 -(void)textViewDidChangeSelection:(NSNotification*)aNotification{
-	
+	self.currentText = [[inputTextView textStorage] string];
+    int noChars = [self.currentText length];
+	[countChars setStringValue:[NSString stringWithFormat:@"%d",noChars]];
 }
 
 -(void)tabView:(NSTabView *)tabV didSelectTabViewItem:(NSTabViewItem *)tabViewItem{

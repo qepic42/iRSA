@@ -11,7 +11,7 @@
 #import "iRSAAppDelegate.h"
 
 @implementation KeyTableView
-@synthesize dataArray, myTable;
+@synthesize dataArray, myTable, currentKeyLength, bitArray, keyAddModeInt;
 
 
 #pragma mark -
@@ -20,9 +20,12 @@
 - (id) init{
 	self = [super init];
 	if (self != nil) {
+		self.currentKeyLength = [NSNumber numberWithInt:2048];
+		self.bitArray = [[NSArray alloc]init];
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		myAppDelegate.keyDataArray = [[NSMutableArray alloc]init];
 		[myTable setFocusRingType:NSFocusRingTypeNone];
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(addItem:)
 													 name:@"addNewKey"
@@ -31,12 +34,32 @@
 	return self;
 }
 
--(void)setupPopUpButton{
+- (void)awakeFromNib{
+	[self setupBitPopupButton];
+}
+
+-(void)setupKeyPopUpButton{
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"itemCountChanged" object:nil userInfo:nil];	
 }
 
+-(void)setupBitPopupButton{
+	self.bitArray = [NSArray arrayWithObjects:@"128",@"256",@"512",@"1024",@"2048",@"4096",@"8192",@"16384",nil];
+	
+	for(NSString *currentBit in self.bitArray){
+		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:currentBit action:nil keyEquivalent:@""];
+		[newItem setTarget:self];
+		[[setupBitPopUpButton menu] addItem:newItem];
+		[newItem release];		
+	}
+	
+	int cache = [[self.bitArray objectAtIndex:4] intValue];
+	self.currentKeyLength = [NSNumber numberWithInt:cache];
+}
+
 - (void) dealloc{
+	[bitArray release];
+	[currentKeyLength release];
 	[keyClass release];
 	[myTable release];
 	[dataArray release];
@@ -50,9 +73,9 @@
 - (void)addItem:(NSNotification *)notification{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"Untitled" :[[notification userInfo]objectForKey:@"publicKey"] :[[notification userInfo]objectForKey:@"privateKey"] :[[notification userInfo]objectForKey:@"publicKeyData"] :[[notification userInfo]objectForKey:@"privateKeyData"]]];
+	[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[[notification userInfo]objectForKey:@"publicKey"] :[[notification userInfo]objectForKey:@"privateKey"] :[[notification userInfo]objectForKey:@"publicKeyData"] :[[notification userInfo]objectForKey:@"privateKeyData"]]];
 	
-	[self setupPopUpButton];
+	[self setupKeyPopUpButton];
 	[self.myTable noteNumberOfRowsChanged];
 	
 	NSInteger newRowIndex = [myAppDelegate.keyDataArray count]-1;
@@ -68,21 +91,59 @@
 #pragma mark IBActions
 
 - (IBAction)pushAddNewKey:(id)sender{
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName:@"startKeyGenerate" object:nil userInfo:nil];
-
-	keyClass = [[KeyGenerate alloc]init];
-	[keyClass performSelectorInBackground:@selector (generatePublicAndPrivateRSAKey) withObject:nil];
-
+	[NSApp beginSheet:keySetupSheet modalForWindow:keyTableView modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
 - (IBAction)pushRemoveKey:(id)sender{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	[myAppDelegate.keyDataArray removeObjectsAtIndexes:[self.myTable selectedRowIndexes]];
-	[self setupPopUpButton];
+	[self setupKeyPopUpButton];
 	[self.myTable noteNumberOfRowsChanged];
 }
 
+-(IBAction)pushGenerateSetupKey:(id)sender{
+	
+	if(self.keyAddModeInt == 0){
+		
+		[keySetupSheet orderOut:nil];
+		[NSApp endSheet:keySetupSheet];
+		
+		NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+		[center postNotificationName:@"startKeyGenerate" object:nil userInfo:nil];
+		
+		if (self.currentKeyLength == 0) {
+			self.currentKeyLength = [NSNumber numberWithInt:2048];
+		}
+		
+		keyClass = [[KeyGenerate alloc]init];
+		[keyClass performSelectorInBackground:@selector (generatePublicAndPrivateRSAKeyWithPrivatKeyLength:) withObject:self.currentKeyLength];
+		
+	}else if (self.keyAddModeInt == 1) {
+		[keySetupSheet orderOut:nil];
+		[NSApp endSheet:keySetupSheet];
+		
+		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+		NSData *cache = [[enterOwnPublicKey stringValue] dataUsingEncoding:NSUTF8StringEncoding];
+		[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[enterOwnPublicKey stringValue] :@"-" :cache :nil]];
+
+		[self setupKeyPopUpButton];
+		[self.myTable noteNumberOfRowsChanged];
+		
+		NSInteger newRowIndex = [myAppDelegate.keyDataArray count]-1;
+		[myTable selectRowIndexes:[NSIndexSet indexSetWithIndex:newRowIndex]
+			 byExtendingSelection:NO];
+		
+		[myTable editColumn:[myTable columnWithIdentifier:@"identifier"]
+						row:newRowIndex withEvent:nil select:YES];
+	}
+	
+		
+
+}
+-(IBAction)pushChooseBit:(id)sender{
+	int cache = [[self.bitArray objectAtIndex:[sender indexOfSelectedItem]] intValue];
+	self.currentKeyLength = [NSNumber numberWithInt:cache];
+}
 
 #pragma mark -
 #pragma mark Delegate Methods
@@ -115,7 +176,7 @@
 		returnString = item.privateKey;
 	}
 	
-	[self setupPopUpButton];
+	[self setupKeyPopUpButton];
 	
 	return returnString;
 }
@@ -123,8 +184,19 @@
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:rowIndex];
-	[self setupPopUpButton];
+	[self setupKeyPopUpButton];
 	item.keyIdentifier = anObject;
+}
+
+- (void)tabView:(NSTabView *)tabV didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+	self.keyAddModeInt = [[tabViewItem identifier]intValue];
+	
+	if (self.keyAddModeInt == 0) {
+		[keyAddEnterButton setTitle:@"Generate"];
+	}else if(self.keyAddModeInt == 1){
+		[keyAddEnterButton setTitle:@"Enter"];
+	}
+
 }
 
 @end

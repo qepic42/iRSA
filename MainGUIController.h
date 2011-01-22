@@ -17,16 +17,20 @@
 	IBOutlet NSWindow *loadingSheet;
 	IBOutlet NSWindow *keyManageSheet;
 	IBOutlet NSWindow *resultWindow;
+	IBOutlet NSWindow *mailSetupWindow;
 	IBOutlet NSButton *enterButton;
 	IBOutlet NSButton *removeButton;
-	IBOutlet NSButton *newKeyButton;
-	IBOutlet NSButton *removeKeyButton;
 	IBOutlet NSButton *keyPopUpButton;
 	IBOutlet NSButton *loadingButton;
 	IBOutlet NSTextView *inputTextView;
 	IBOutlet NSTextView *resultTextView;
+	IBOutlet NSTextView *sendMailContent;
+	IBOutlet NSTextField *countChars;
 	IBOutlet NSTextField *outputFormatLabel;
 	IBOutlet NSTextField *loadingLabel;
+	IBOutlet NSTextField *sendMailSubject;
+	IBOutlet NSTextField *sendMailFrom;
+	IBOutlet NSTextField *sendMailTo;
 	IBOutlet NSSegmentedControl *switchButton;
 	IBOutlet NSProgressIndicator *loadingIndicatorKeyWindow;
 	IBOutlet NSProgressIndicator *loadingIndicator;
@@ -37,6 +41,7 @@
 	BOOL mode;
 	KeyGenerate *keyClass;
 	NSString *currentText;
+	NSString *currentEncodedText;
 	NSString *currentIdentifier;
 	NSString *currentPublicKey;
 	NSString *currentPrivateKey;
@@ -52,6 +57,7 @@
 @property(nonatomic,retain)NSString *currentPublicKey;
 @property(nonatomic,retain)NSString *currentPrivateKey;
 @property(nonatomic,retain)NSString *currentText;
+@property(nonatomic,retain)NSString *currentEncodedText;
 @property(nonatomic,retain)NSData *currentPublicKeyData;
 @property(nonatomic,retain)NSData *currentPrivateKeyData;
 
@@ -63,6 +69,8 @@
 -(IBAction)pushCloseKeyWindow:(id)sender;
 -(IBAction)pushChooseKey:(id)sender;
 -(IBAction)pushResultDoneSheet:(id)sender;
+-(IBAction)pushShareByEMail:(id)sender;
+-(IBAction)pushSendMail:(id)sender;
 -(void)setPopUpStatus;
 -(void)setupPopUpButton;
 -(void)openResultWindow;
