@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface KeyPropertys : NSObject {
+@interface KeyPropertys : NSObject <NSCoding> {
 	NSString *keyIdentifier; 
 	NSString *privateKey;
 	NSString *publicKey;

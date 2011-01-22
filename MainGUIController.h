@@ -10,7 +10,7 @@
 #import "KeyGenerate.h"
 #import "KeyPropertys.h"
 
-@interface MainGUIController : NSObject <NSTextViewDelegate,NSTabViewDelegate> {
+@interface MainGUIController : NSObject <NSTextViewDelegate,NSTabViewDelegate,NSCoding> {
 	
 	IBOutlet NSWindow *mainWindow;
 	IBOutlet NSWindow *keysWindow;

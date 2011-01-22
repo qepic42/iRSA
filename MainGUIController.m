@@ -281,7 +281,7 @@
 -(void)openInviteSheet{
 	[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	
-	NSString *cache = @"Invite\nI want invite you to enjoy mailing with me encrypted by RSA.\nYou can easily download this App here: http://galler-web.de/iRSA.zip\"\nTo encrypt me text use my following public key:\n\n ";
+	NSString *cache = @"Invite\nI want invite you to enjoy mailing with me encrypted by RSA.\nYou can easily download this App here: http://galler-web.de/iRSA.zip\"\nTo encrypt my texts use my following public key:\n\n ";
 	
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
@@ -308,4 +308,25 @@
 }
 
 
+#pragma mark -
+#pragma mark NSCoding Methods
+/*
+- (void)encodeWithCoder:(NSCoder*)encoder {
+	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:myAppDelegate.keyDataArray forKey:@"keyDataArray"];
+}
+
+- (id) initWithCoder:(NSCoder*)decoder {
+    if (self = [super init]) {
+		[super initWithCoder:decoder];
+		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+
+		myAppDelegate.keyDataArray = [[decoder decodeObjectForKey:@"keyDataArray"] retain];
+    }
+	
+    return self;
+}
+
+*/
 @end

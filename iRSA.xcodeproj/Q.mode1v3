@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -316,6 +314,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -333,20 +333,16 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>1017533B12EB7F5300C39ED0</string>
+										<string>1017544D12EB985200C39ED0</string>
 										<key>history</key>
 										<array>
 											<string>10BA3DBD12E8D0BB008E5E51</string>
 											<string>10174EAA12E9A42700C39ED0</string>
-											<string>10174F7512E9C93100C39ED0</string>
-											<string>10174F7812E9C95500C39ED0</string>
-											<string>10174FE112EA024400C39ED0</string>
 											<string>1017519112EA48C600C39ED0</string>
 											<string>101751B112EA4CFF00C39ED0</string>
 											<string>101751BE12EADFF800C39ED0</string>
 											<string>101751C412EAE04F00C39ED0</string>
 											<string>101751D812EAE21E00C39ED0</string>
-											<string>101751EA12EAE43400C39ED0</string>
 											<string>1017522D12EAF5FD00C39ED0</string>
 											<string>1017524612EAF79600C39ED0</string>
 											<string>101752ED12EB730E00C39ED0</string>
@@ -354,8 +350,12 @@
 											<string>101752EF12EB730E00C39ED0</string>
 											<string>101752F012EB730E00C39ED0</string>
 											<string>1017532A12EB799000C39ED0</string>
-											<string>1017533912EB7F5300C39ED0</string>
-											<string>1017533A12EB7F5300C39ED0</string>
+											<string>1017541612EB967400C39ED0</string>
+											<string>1017541912EB967400C39ED0</string>
+											<string>1017542612EB96C800C39ED0</string>
+											<string>1017542712EB96C800C39ED0</string>
+											<string>1017544B12EB985200C39ED0</string>
+											<string>1017544C12EB985200C39ED0</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -553,14 +553,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1017533C12EB7F5300C39ED0</string>
+		<string>1017544E12EB985200C39ED0</string>
 		<string>1066043B12E508C900B9695C</string>
 		<string>101750C912EA221500C39ED0</string>
 		<string>101750CA12EA221500C39ED0</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>10E9565F12E0E00300EE2940</string>
 		<string>/Users/Q/Sites/iRSA/iRSA.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 59 1280 719 0 0 1280 778 </string>
@@ -579,12 +579,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>KeyTableView.m</string>
+								<string>iRSAAppDelegate.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -601,8 +603,6 @@
 							<string>502pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -944,7 +944,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

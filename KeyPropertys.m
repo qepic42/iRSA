@@ -7,7 +7,7 @@
 //
 
 #import "KeyPropertys.h"
-
+#import "iRSAAppDelegate.h"
 
 @implementation KeyPropertys
 @synthesize keyIdentifier, privateKey, publicKey, privateKeyData, publicKeyData;
@@ -57,5 +57,17 @@
 	return self;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder
+{
+	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+    [encoder encodeObject:myAppDelegate.keyDataArray forKey:@"keyDataArray"];
+}
+
+-(id)initWithCoder:(NSCoder *)decoder
+{
+	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+    myAppDelegate.keyDataArray = [myAppDelegate.keyDataArray decodeObjectForKey:@"keyDataArray"];
+    return self;
+}
 
 @end
