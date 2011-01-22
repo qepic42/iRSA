@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -279,7 +281,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -315,14 +316,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MainGUIController.h</string>
+								<string>MainGUIController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MainGUIController.h</string>
+										<string>MainGUIController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>1017533412EB7B5700C39ED0</string>
+										<string>1017533B12EB7F5300C39ED0</string>
 										<key>history</key>
 										<array>
 											<string>10BA3DBD12E8D0BB008E5E51</string>
@@ -355,8 +354,8 @@
 											<string>101752EF12EB730E00C39ED0</string>
 											<string>101752F012EB730E00C39ED0</string>
 											<string>1017532A12EB799000C39ED0</string>
-											<string>1017533212EB7B5700C39ED0</string>
-											<string>1017533312EB7B5700C39ED0</string>
+											<string>1017533912EB7F5300C39ED0</string>
+											<string>1017533A12EB7F5300C39ED0</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -554,13 +553,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1017533512EB7B5700C39ED0</string>
+		<string>1017533C12EB7F5300C39ED0</string>
 		<string>1066043B12E508C900B9695C</string>
 		<string>101750C912EA221500C39ED0</string>
 		<string>101750CA12EA221500C39ED0</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>10E9565F12E0E00300EE2940</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/Q/Sites/iRSA/iRSA.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -945,7 +944,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
