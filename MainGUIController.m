@@ -249,12 +249,15 @@
 		}
 		@catch (NSException * e) {
 			NSBeep();
-			[errorName setStringValue:[e name]];
-			[errorReason setStringValue:[e reason]];
-			[errorWindow setTitle:[e name]];
-			[errorWindow orderFront:self];
-			[errorWindow center];
-			[errorWindow makeKeyWindow];
+			
+			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			[alert addButtonWithTitle:@"OK"];
+			[alert setMessageText:[e name]];
+			[alert setInformativeText:[e reason]];
+			[alert setAlertStyle:NSWarningAlertStyle];
+			//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+			[alert runModal];
+			
 			fail = YES;
 		}
 		
@@ -277,12 +280,13 @@
 		}
 		@catch (NSException * e) {
 			NSBeep();
-			[errorName setStringValue:[e name]];
-			[errorReason setStringValue:[e reason]];
-			[errorWindow setTitle:[e name]];
-			[errorWindow orderFront:self];
-			[errorWindow center];
-			[errorWindow makeKeyWindow];
+			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			[alert addButtonWithTitle:@"OK"];
+			[alert setMessageText:[e name]];
+			[alert setInformativeText:[e reason]];
+			[alert setAlertStyle:NSWarningAlertStyle];
+			[alert runModal];
+			//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 			fail = YES;
 		}
 		
@@ -352,10 +356,6 @@
 - (IBAction)pushCancelSendMail:(id)sender{
 	[mailSetupWindow orderOut:nil];
 	[NSApp endSheet:mailSetupWindow];
-}
-
-- (IBAction)pushOkErrorButton:(id)sender{
-	[errorWindow orderOut:self];
 }
 
 - (IBAction)pushShowPreferencesWindow:(NSToolbarItem *)sender{
