@@ -19,6 +19,7 @@
 	IBOutlet NSWindow *resultWindow;
 	IBOutlet NSWindow *mailSetupWindow;
 	IBOutlet NSWindow *publicKeyToShareSheet;
+	IBOutlet NSWindow *errorWindow;
 	IBOutlet NSButton *enterButton;
 	IBOutlet NSButton *removeButton;
 	IBOutlet NSButton *keyPopUpButton;
@@ -33,6 +34,8 @@
 	IBOutlet NSTextField *sendMailSubject;
 	IBOutlet NSTextField *sendMailFrom;
 	IBOutlet NSTextField *sendMailTo;
+	IBOutlet NSTextField *errorName;
+	IBOutlet NSTextField *errorReason;
 	IBOutlet NSSegmentedControl *switchButton;
 	IBOutlet NSProgressIndicator *loadingIndicatorKeyWindow;
 	IBOutlet NSProgressIndicator *loadingIndicator;
@@ -75,6 +78,9 @@
 -(IBAction)pushInvitePerson:(id)sender;
 -(IBAction)pushChooseKeyToShare:(id)sender;
 -(IBAction)pushChoosedKeyToShare:(id)sender;
+-(IBAction)pushCancelSendMail:(id)sender;
+-(IBAction)pushOkErrorButton:(id)sender;
+-(IBAction)pushShowKeyWindowFromMenu:(id)sender;
 -(void)setPopUpStatus;
 -(void)setupPopUpButton;
 -(void)openResultWindow;

@@ -107,10 +107,21 @@
 	
 	for(i=0;i<max;i++){
 		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
-		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-		[newItem setTarget:self];
-		[[keyPopUpButton menu] addItem:newItem];
-		[newItem release];
+		if (self.mode == 1) {
+			if ([item.privateKey isEqualToString:@"-"]) {
+				
+			}else {
+				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+				[newItem setTarget:self];
+				[[keyPopUpButton menu] addItem:newItem];
+				[newItem release];
+			}
+		}else{
+			NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+			[newItem setTarget:self];
+			[[keyPopUpButton menu] addItem:newItem];
+			[newItem release];
+		}
 	}
 	
 	KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
@@ -134,10 +145,16 @@
 	
 	for(i=0;i<max;i++){
 		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
-		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-		[newItem setTarget:self];
-		[[chooseKeyPopUpButton menu] addItem:newItem];
-		[newItem release];
+		
+		if ([item.privateKey isEqualToString:@"-"]) {
+			
+		}else {
+			NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+			[newItem setTarget:self];
+			[[chooseKeyPopUpButton menu] addItem:newItem];
+			[newItem release];
+		}
+			
 	}
 	
 	KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
@@ -172,14 +189,20 @@
 		[enterButton setTitle:@"Encode"];
 		[loadingLabel setStringValue:@"Encode…"];
 		self.mode = 0;
+		[self setupPopUpButton];
 	}else if ([switchButton selectedSegment] == 1) {
 		[enterButton setTitle:@"Decode"];
 		[loadingLabel setStringValue:@"Decode…"];
 		self.mode = 1;
+		[self setupPopUpButton];
 	}
 }
 
 - (IBAction)pushShowKeyWindow:(id)sender{
+	[NSApp beginSheet:keyManageSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+}
+
+- (IBAction)pushShowKeyWindowFromMenu:(id)sender{
 	[NSApp beginSheet:keyManageSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
@@ -206,18 +229,52 @@
 	NSString *resultString = @"";
 	
 	if (self.mode == 0){
-		NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
-		NSString *resultString = [resultDict objectForKey:@"encryptedString"];
-		[resultTextView setString:resultString];
-	}else if (self.mode == 1){
-		NSData *test = [[[[inputTextView textStorage] string] dataUsingEncoding:NSUTF8StringEncoding] decodeBase64];
-		NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test key:self.currentPrivateKeyData];
-		NSString *resultString = [[NSString alloc] initWithData:[resultDict objectForKey:@"decryptedData"] encoding:NSUTF8StringEncoding];
-		if(!resultString) {
-			resultString = [resultDict objectForKey:@"decryptedString"];
+		
+		@try {
+			NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
+			NSString *resultString = [resultDict objectForKey:@"encryptedString"];
+			[resultTextView setString:resultString];
+			
+			NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+			[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
 		}
-		self.currentEncodedText = resultString;
-		[resultTextView setString:resultString];
+		@catch (NSException * e) {
+			NSBeep();
+			[errorName setStringValue:[e name]];
+			[errorReason setStringValue:[e reason]];
+			[errorWindow setTitle:[e name]];
+			[errorWindow orderFront:self];
+			[errorWindow center];
+			[errorWindow makeKeyWindow];
+		}
+		
+	}else if (self.mode == 1){
+		
+		NSData *test = [[[[inputTextView textStorage] string] dataUsingEncoding:NSUTF8StringEncoding] decodeBase64];
+		
+		@try {
+			NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test key:self.currentPrivateKeyData];
+			NSString *resultString = [[NSString alloc] initWithData:[resultDict objectForKey:@"decryptedData"] encoding:NSUTF8StringEncoding];
+			if(!resultString) {
+				resultString = [resultDict objectForKey:@"decryptedString"];
+			}
+			self.currentEncodedText = resultString;
+			[resultTextView setString:resultString];
+			
+			NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+			[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+		}
+		@catch (NSException * e) {
+			NSBeep();
+			[errorName setStringValue:[e name]];
+			[errorReason setStringValue:[e reason]];
+			[errorWindow setTitle:[e name]];
+			[errorWindow orderFront:self];
+			[errorWindow center];
+			[errorWindow makeKeyWindow];
+		}
+		
+		
 	}
 
 	[resultString release];
@@ -225,8 +282,6 @@
 	[loadingSheet orderOut:nil];
 	[NSApp endSheet:loadingSheet];
 	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
 }
 
 - (IBAction)pushResultDoneSheet:(id)sender{
@@ -236,14 +291,18 @@
 
 - (IBAction)pushShareByEMail:(id)sender{
 	[NSApp beginSheet:mailSetupWindow modalForWindow:resultWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-	[sendMailContent setString:[[resultTextView textStorage]string]];
+	
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
 	NSRange myRange = 
 	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
 	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
 	self.currentPublicKey = [NSString stringWithFormat:@"%@",publicKeyMutableString];
-	 [sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
+	
+	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@",@"Public key",self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string]];
+	[sendMailContent setString:contentCache];
+
+	[sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
 }
 
 - (IBAction)pushSendMail:(id)sender{
@@ -274,6 +333,14 @@
 	self.currentPrivateKeyData = item.privateKeyData;
 }
 
+- (IBAction)pushCancelSendMail:(id)sender{
+	[mailSetupWindow orderOut:nil];
+	[NSApp endSheet:mailSetupWindow];
+}
+
+- (IBAction)pushOkErrorButton:(id)sender{
+	[errorWindow orderOut:self];
+}
 
 #pragma mark -
 #pragma mark Other Methods
@@ -310,7 +377,7 @@
 
 #pragma mark -
 #pragma mark NSCoding Methods
-/*
+
 - (void)encodeWithCoder:(NSCoder*)encoder {
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
     [super encodeWithCoder:encoder];
@@ -328,5 +395,4 @@
     return self;
 }
 
-*/
 @end

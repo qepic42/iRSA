@@ -15,6 +15,8 @@
 		1017526912EB000600C39ED0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1017526812EB000600C39ED0 /* Sparkle.framework */; };
 		1017527612EB003300C39ED0 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1017526812EB000600C39ED0 /* Sparkle.framework */; };
 		101752B512EB628000C39ED0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 101752B412EB628000C39ED0 /* dsa_pub.pem */; };
+		1017545512EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png in Resources */ = {isa = PBXBuildFile; fileRef = 1017545412EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png */; };
+		101754A512EC450600C39ED0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 101754A412EC450600C39ED0 /* Credits.rtf */; };
 		1066043412E4FB0900B9695C /* KeyPropertys.m in Sources */ = {isa = PBXBuildFile; fileRef = 1066043312E4FB0900B9695C /* KeyPropertys.m */; };
 		10BA3E0E12E8E648008E5E51 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0C12E8E648008E5E51 /* libcrypto.dylib */; };
 		10BA3E0F12E8E648008E5E51 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0D12E8E648008E5E51 /* libssl.dylib */; };
@@ -68,6 +70,8 @@
 		1017526112EAFF5800C39ED0 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		1017526812EB000600C39ED0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		101752B412EB628000C39ED0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		1017545412EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Keychain_Access_Icon 20-56-52-327.png"; sourceTree = "<group>"; };
+		101754A412EC450600C39ED0 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		1066043212E4FB0900B9695C /* KeyPropertys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyPropertys.h; sourceTree = "<group>"; };
 		1066043312E4FB0900B9695C /* KeyPropertys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyPropertys.m; sourceTree = "<group>"; };
@@ -187,9 +191,11 @@
 			children = (
 				1017519412EA494500C39ED0 /* Mail.app */,
 				101752B412EB628000C39ED0 /* dsa_pub.pem */,
+				101754A412EC450600C39ED0 /* Credits.rtf */,
 				1017526112EAFF5800C39ED0 /* AppIcon.icns */,
 				10BA3E0C12E8E648008E5E51 /* libcrypto.dylib */,
 				10BA3E0D12E8E648008E5E51 /* libssl.dylib */,
+				1017545412EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png */,
 				8D1107310486CEB800E47090 /* iRSA-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
@@ -263,6 +269,8 @@
 				1017519512EA494500C39ED0 /* Mail.app in Resources */,
 				1017526212EAFF5800C39ED0 /* AppIcon.icns in Resources */,
 				101752B512EB628000C39ED0 /* dsa_pub.pem in Resources */,
+				1017545512EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png in Resources */,
+				101754A512EC450600C39ED0 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

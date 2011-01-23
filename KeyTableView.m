@@ -53,7 +53,7 @@
 		[newItem release];		
 	}
 	
-	int cache = [[self.bitArray objectAtIndex:4] intValue];
+	int cache = [[self.bitArray objectAtIndex:0] intValue];
 	self.currentKeyLength = [NSNumber numberWithInt:cache];
 }
 
