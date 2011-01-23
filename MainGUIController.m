@@ -359,15 +359,10 @@
 }
 
 - (IBAction)pushShowPreferencesWindow:(NSToolbarItem *)sender{
-	[NSApp beginSheet:preferencesWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-//	[preferencesWindow orderFront:self];
-//	[preferencesWindow makeKeyWindow];
+	[preferencesWindow orderFront:self];
+	[preferencesWindow makeKeyWindow];
 }
 
-- (IBAction)pushPreferencesDoneButton:(id)sender{
-	[preferencesWindow orderOut:nil];
-	[NSApp endSheet:preferencesWindow];
-}
 
 - (IBAction)pushShowKeysWindow:(NSToolbarItem *)sender{
 	[NSApp beginSheet:keyManageSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];

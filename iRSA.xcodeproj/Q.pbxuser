@@ -382,17 +382,17 @@
 	};
 	10E9566712E0E53800EE2940 /* MainGUIController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {950, 1365}}";
-			sepNavSelRange = "{2997, 47}";
-			sepNavVisRange = "{1709, 1692}";
+			sepNavIntBoundsRect = "{{0, 0}, {950, 1352}}";
+			sepNavSelRange = "{2996, 0}";
+			sepNavVisRange = "{1648, 1704}";
 			sepNavWindowFrame = "{{153, 258}, {1049, 389}}";
 		};
 	};
 	10E9566812E0E53800EE2940 /* MainGUIController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1489, 5798}}";
-			sepNavSelRange = "{11366, 0}";
-			sepNavVisRange = "{10700, 1524}";
+			sepNavIntBoundsRect = "{{0, 0}, {1489, 5759}}";
+			sepNavSelRange = "{11085, 0}";
+			sepNavVisRange = "{10789, 1527}";
 			sepNavWindowFrame = "{{84, 321}, {1049, 389}}";
 		};
 	};
@@ -471,7 +471,7 @@
 		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
 		name = "MainGUIController.h: 82";
 		rLen = 0;
-		rLoc = 3045;
+		rLoc = 2996;
 		rType = 0;
 		vrLen = 1562;
 		vrLoc = 1339;
@@ -501,7 +501,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 318";
 		rLen = 0;
-		rLoc = 11766;
+		rLoc = 11519;
 		rType = 0;
 		vrLen = 1860;
 		vrLoc = 9448;
@@ -920,7 +920,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 346";
 		rLen = 0;
-		rLoc = 11243;
+		rLoc = 11120;
 		rType = 0;
 		vrLen = 1790;
 		vrLoc = 10030;
@@ -930,7 +930,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 346";
 		rLen = 0;
-		rLoc = 11243;
+		rLoc = 11120;
 		rType = 0;
 		vrLen = 2206;
 		vrLoc = 8410;
@@ -1049,7 +1049,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 351";
 		rLen = 0;
-		rLoc = 11543;
+		rLoc = 11296;
 		rType = 0;
 		vrLen = 1811;
 		vrLoc = 10650;
@@ -1069,7 +1069,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 350";
 		rLen = 0;
-		rLoc = 11374;
+		rLoc = 11127;
 		rType = 0;
 		vrLen = 1873;
 		vrLoc = 10573;
@@ -1079,7 +1079,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 355";
 		rLen = 0;
-		rLoc = 11764;
+		rLoc = 11517;
 		rType = 0;
 		vrLen = 1824;
 		vrLoc = 10573;
@@ -1089,7 +1089,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 355";
 		rLen = 0;
-		rLoc = 11764;
+		rLoc = 11517;
 		rType = 0;
 		vrLen = 1824;
 		vrLoc = 10573;
@@ -1229,7 +1229,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 371";
 		rLen = 0;
-		rLoc = 11764;
+		rLoc = 11517;
 		rType = 0;
 		vrLen = 1912;
 		vrLoc = 11057;
@@ -1269,7 +1269,7 @@
 		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
 		name = "MainGUIController.h: 98";
 		rLen = 0;
-		rLoc = 3360;
+		rLoc = 3311;
 		rType = 0;
 		vrLen = 1644;
 		vrLoc = 1600;
@@ -1290,7 +1290,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 394;
+		rLoc = 389;
 		rType = 1;
 	};
 	10EC67BD12EC941B00809979 /* PBXTextBookmark */ = {
@@ -1298,7 +1298,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 363";
 		rLen = 0;
-		rLoc = 11977;
+		rLoc = 11730;
 		rType = 0;
 		vrLen = 1690;
 		vrLoc = 10599;
@@ -1318,7 +1318,7 @@
 		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
 		name = "MainGUIController.h: 98";
 		rLen = 0;
-		rLoc = 3360;
+		rLoc = 3311;
 		rType = 0;
 		vrLen = 1673;
 		vrLoc = 1571;
@@ -1328,7 +1328,7 @@
 		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
 		name = "MainGUIController.h: 98";
 		rLen = 0;
-		rLoc = 3359;
+		rLoc = 3310;
 		rType = 0;
 		vrLen = 1684;
 		vrLoc = 1571;
@@ -1338,7 +1338,7 @@
 		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
 		name = "MainGUIController.h: 98";
 		rLen = 0;
-		rLoc = 3359;
+		rLoc = 3310;
 		rType = 0;
 		vrLen = 1684;
 		vrLoc = 1571;
@@ -1358,7 +1358,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 365";
 		rLen = 0;
-		rLoc = 12134;
+		rLoc = 11887;
 		rType = 0;
 		vrLen = 2114;
 		vrLoc = 10826;
@@ -1368,7 +1368,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 365";
 		rLen = 0;
-		rLoc = 12098;
+		rLoc = 11851;
 		rType = 0;
 		vrLen = 2065;
 		vrLoc = 10826;
@@ -1388,7 +1388,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 370";
 		rLen = 0;
-		rLoc = 11941;
+		rLoc = 11694;
 		rType = 0;
 		vrLen = 1991;
 		vrLoc = 11331;
@@ -1408,7 +1408,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 370";
 		rLen = 0;
-		rLoc = 11941;
+		rLoc = 11694;
 		rType = 0;
 		vrLen = 1533;
 		vrLoc = 3493;
@@ -1478,7 +1478,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 371";
 		rLen = 0;
-		rLoc = 11894;
+		rLoc = 11647;
 		rType = 0;
 		vrLen = 1522;
 		vrLoc = 10518;
@@ -1488,7 +1488,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 371";
 		rLen = 0;
-		rLoc = 11894;
+		rLoc = 11647;
 		rType = 0;
 		vrLen = 1522;
 		vrLoc = 10518;
@@ -1538,7 +1538,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 381";
 		rLen = 34;
-		rLoc = 11943;
+		rLoc = 11696;
 		rType = 0;
 		vrLen = 1665;
 		vrLoc = 10683;
@@ -1568,7 +1568,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 362";
 		rLen = 0;
-		rLoc = 11083;
+		rLoc = 11046;
 		rType = 0;
 		vrLen = 1426;
 		vrLoc = 10392;
@@ -1578,7 +1578,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 362";
 		rLen = 0;
-		rLoc = 11083;
+		rLoc = 11046;
 		rType = 0;
 		vrLen = 1426;
 		vrLoc = 10392;
@@ -1598,7 +1598,7 @@
 		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
 		name = "MainGUIController.h: 91";
 		rLen = 0;
-		rLoc = 3045;
+		rLoc = 2996;
 		rType = 0;
 		vrLen = 1692;
 		vrLoc = 1709;
@@ -1607,8 +1607,8 @@
 		isa = PBXTextBookmark;
 		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
 		name = "MainGUIController.h: 91";
-		rLen = 47;
-		rLoc = 2997;
+		rLen = 0;
+		rLoc = 2996;
 		rType = 0;
 		vrLen = 1692;
 		vrLoc = 1709;
@@ -1618,7 +1618,7 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 362";
 		rLen = 0;
-		rLoc = 11083;
+		rLoc = 11046;
 		rType = 0;
 		vrLen = 1427;
 		vrLoc = 10391;
@@ -1628,10 +1628,40 @@
 		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
 		name = "MainGUIController.m: 369";
 		rLen = 0;
-		rLoc = 11366;
+		rLoc = 11123;
 		rType = 0;
 		vrLen = 1524;
 		vrLoc = 10700;
+	};
+	10EC680312EC9C9300809979 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */;
+		name = "MainGUIController.m: 363";
+		rLen = 0;
+		rLoc = 11085;
+		rType = 0;
+		vrLen = 1527;
+		vrLoc = 10789;
+	};
+	10EC680412EC9C9300809979 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
+		name = "MainGUIController.h: 91";
+		rLen = 0;
+		rLoc = 2996;
+		rType = 0;
+		vrLen = 1723;
+		vrLoc = 1678;
+	};
+	10EC680512EC9C9300809979 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 10E9566712E0E53800EE2940 /* MainGUIController.h */;
+		name = "MainGUIController.h: 90";
+		rLen = 0;
+		rLoc = 2996;
+		rType = 0;
+		vrLen = 1704;
+		vrLoc = 1648;
 	};
 	256AC3D80F4B6AC300CF3369 /* iRSAAppDelegate.h */ = {
 		uiCtxt = {
@@ -1856,6 +1886,9 @@
 			10EC67FC12EC99AD00809979 /* PBXTextBookmark */ = 10EC67FC12EC99AD00809979 /* PBXTextBookmark */;
 			10EC67FD12EC99AD00809979 /* PBXTextBookmark */ = 10EC67FD12EC99AD00809979 /* PBXTextBookmark */;
 			10EC67FE12EC99AD00809979 /* PBXTextBookmark */ = 10EC67FE12EC99AD00809979 /* PBXTextBookmark */;
+			10EC680312EC9C9300809979 /* PBXTextBookmark */ = 10EC680312EC9C9300809979 /* PBXTextBookmark */;
+			10EC680412EC9C9300809979 /* PBXTextBookmark */ = 10EC680412EC9C9300809979 /* PBXTextBookmark */;
+			10EC680512EC9C9300809979 /* PBXTextBookmark */ = 10EC680512EC9C9300809979 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 10E9566112E0E00300EE2940 /* Source Control */;
 		userBuildSettings = {

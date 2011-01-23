@@ -88,7 +88,6 @@
 -(IBAction)pushShowKeysWindow:(NSToolbarItem *)sender;
 -(IBAction)pushShowInviteWindow:(NSToolbarItem *)sender;
 -(IBAction)pushCancelChooseKeyButton:(id)sender;
--(IBAction)pushPreferencesDoneButton:(id)sender;
 -(void)setPopUpStatus;
 -(void)setupPopUpButton;
 -(void)openResultWindow;
