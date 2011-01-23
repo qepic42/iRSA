@@ -7,6 +7,7 @@
 //
 
 #import "iRSAAppDelegate.h"
+#import "AGKeychain.h"
 
 @implementation iRSAAppDelegate
 @synthesize window, keyDataArray;
@@ -16,7 +17,7 @@
 	
 	if (self != nil) {
 		self.keyDataArray = [[NSMutableArray alloc]init];
-		/*
+/*		
 		NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
 		// Das Standard-Einstellungen-Objekt für dieses Programm vom System holen
 		NSData* archive = [defaults objectForKey:@"keyDataArray"];
@@ -29,7 +30,7 @@
 		} else {
 			self.keyDataArray = [NSMutableArray array];
 		}
-		*/
+*/		
 	}
 	
 	return self;
@@ -52,7 +53,16 @@
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.keyDataArray];
 	[defaults setObject:data forKey:@"keyDataArray"];
 }
-
+/*
+-(void)saveArray{
+	
+	BOOL result = [AGKeychain addKeychainItem:[keychainItemNameTextField stringValue] 
+								 withItemKind:[keychainItemKindTextField stringValue] 
+								  forUsername:[usernameTextField stringValue] 
+								 withPassword:[passwordTextField stringValue]];
+	
+}
+*/
 
 #pragma mark -
 #pragma mark NSCoding Methods

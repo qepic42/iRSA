@@ -100,37 +100,42 @@
 - (void)setupPopUpButton{
 	
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-	[[keyPopUpButton menu]removeAllItems];
 	
-	int i;
-	int max = [myAppDelegate.keyDataArray count];
-	
-	for(i=0;i<max;i++){
-		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
-		if (self.mode == 1) {
-			if ([item.privateKey isEqualToString:@"-"]) {
-				
-			}else {
+	if(myAppDelegate.keyDataArray == 0){
+		NSLog(@"Keine Items");
+	}else if ([myAppDelegate.keyDataArray count] >= 1) {
+		[[keyPopUpButton menu]removeAllItems];
+		
+		int i;
+		int max = [myAppDelegate.keyDataArray count];
+		
+		for(i=0;i<max;i++){
+			KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+			if (self.mode == 1) {
+				if ([item.privateKey isEqualToString:@"-"]) {
+					
+				}else {
+					NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+					[newItem setTarget:self];
+					[[keyPopUpButton menu] addItem:newItem];
+					[newItem release];
+				}
+			}else{
 				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
 				[newItem setTarget:self];
 				[[keyPopUpButton menu] addItem:newItem];
 				[newItem release];
 			}
-		}else{
-			NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-			[newItem setTarget:self];
-			[[keyPopUpButton menu] addItem:newItem];
-			[newItem release];
 		}
+		
+		KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
+		self.currentIdentifier = currentItem.keyIdentifier;
+		self.currentPrivateKey = currentItem.privateKey;
+		self.currentPrivateKeyData = currentItem.privateKeyData;
+		self.currentPublicKey = currentItem.publicKey;
+		self.currentPublicKeyData = currentItem.publicKeyData;
+		//	[item release];
 	}
-	
-	KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
-	self.currentIdentifier = currentItem.keyIdentifier;
-	self.currentPrivateKey = currentItem.privateKey;
-	self.currentPrivateKeyData = currentItem.privateKeyData;
-	self.currentPublicKey = currentItem.publicKey;
-	self.currentPublicKeyData = currentItem.publicKeyData;
-	//	[item release];
 	
 	[self setPopUpStatus];
 }
@@ -138,33 +143,42 @@
 - (void)setupChooseKeyPopUpButton{
 	
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-	[[chooseKeyPopUpButton menu]removeAllItems];
 	
-	int i;
-	int max = [myAppDelegate.keyDataArray count];
-	
-	for(i=0;i<max;i++){
-		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+	if(myAppDelegate.keyDataArray == 0){
+		NSLog(@"Keine Items");
+	}else if ([myAppDelegate.keyDataArray count] >= 1) {
+		[[chooseKeyPopUpButton menu]removeAllItems];
 		
-		if ([item.privateKey isEqualToString:@"-"]) {
-			
-		}else {
-			NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-			[newItem setTarget:self];
-			[[chooseKeyPopUpButton menu] addItem:newItem];
-			[newItem release];
+		int i;
+		int max = [myAppDelegate.keyDataArray count];
+		
+		for(i=0;i<max;i++){
+			KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+			if (self.mode == 1) {
+				if ([item.privateKey isEqualToString:@"-"]) {
+					
+				}else {
+					NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+					[newItem setTarget:self];
+					[[chooseKeyPopUpButton menu] addItem:newItem];
+					[newItem release];
+				}
+			}else{
+				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+				[newItem setTarget:self];
+				[[chooseKeyPopUpButton menu] addItem:newItem];
+				[newItem release];
+			}
 		}
-			
+		
+		KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
+		self.currentIdentifier = currentItem.keyIdentifier;
+		self.currentPrivateKey = currentItem.privateKey;
+		self.currentPrivateKeyData = currentItem.privateKeyData;
+		self.currentPublicKey = currentItem.publicKey;
+		self.currentPublicKeyData = currentItem.publicKeyData;
+		//	[item release];
 	}
-	
-	KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
-	self.currentIdentifier = currentItem.keyIdentifier;
-	self.currentPrivateKey = currentItem.privateKey;
-	self.currentPrivateKeyData = currentItem.privateKeyData;
-	self.currentPublicKey = currentItem.publicKey;
-	self.currentPublicKeyData = currentItem.publicKeyData;
-	//	[item release];
-	
 }
 
 - (void)openResultWindow{	
@@ -212,14 +226,7 @@
 }
 
 - (IBAction)pushChooseKey:(id)sender{
-	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-	KeyPropertys *item = [myAppDelegate.keyDataArray objectAtIndex:[sender indexOfSelectedItem]];
-	
-	self.currentIdentifier = item.keyIdentifier;
-	self.currentPublicKey = item.publicKey;
-	self.currentPrivateKey = item.privateKey;
-	self.currentPublicKeyData = item.publicKeyData;
-	self.currentPrivateKeyData = item.privateKeyData;
+	[self chooseKeyToShare:sender];
 }
 
 - (IBAction)pushEnter:(id)sender{
@@ -227,6 +234,7 @@
 	[loadingIndicator startAnimation:self];
 
 	NSString *resultString = @"";
+	BOOL fail;
 	
 	if (self.mode == 0){
 		
@@ -237,6 +245,7 @@
 			
 			NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 			[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+			fail = NO;
 		}
 		@catch (NSException * e) {
 			NSBeep();
@@ -246,6 +255,7 @@
 			[errorWindow orderFront:self];
 			[errorWindow center];
 			[errorWindow makeKeyWindow];
+			fail = YES;
 		}
 		
 	}else if (self.mode == 1){
@@ -263,6 +273,7 @@
 			
 			NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 			[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+			fail = NO;
 		}
 		@catch (NSException * e) {
 			NSBeep();
@@ -272,6 +283,7 @@
 			[errorWindow orderFront:self];
 			[errorWindow center];
 			[errorWindow makeKeyWindow];
+			fail = YES;
 		}
 		
 		
@@ -281,6 +293,11 @@
 	
 	[loadingSheet orderOut:nil];
 	[NSApp endSheet:loadingSheet];
+	
+	if (fail == NO) {
+		NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+		[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+	}
 	
 }
 
@@ -299,7 +316,7 @@
 	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
 	self.currentPublicKey = [NSString stringWithFormat:@"%@",publicKeyMutableString];
 	
-	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@",@"Public key",self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string]];
+	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@",@"I used the following publick key to encrypt this mail",self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string]];
 	[sendMailContent setString:contentCache];
 
 	[sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
@@ -316,21 +333,20 @@
 	[NSApp beginSheet:publicKeyToShareSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
--(IBAction)pushChoosedKeyToShare:(id)sender{
+- (IBAction)pushChoosedKeyToShare:(id)sender{
 	[publicKeyToShareSheet orderOut:nil];
 	[NSApp endSheet:publicKeyToShareSheet];
 	[self openInviteSheet];
 }
 
 - (IBAction)pushChooseKeyToShare:(id)sender{
-	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-	KeyPropertys *item = [myAppDelegate.keyDataArray objectAtIndex:[sender indexOfSelectedItem]];
-	
-	self.currentIdentifier = item.keyIdentifier;
-	self.currentPublicKey = item.publicKey;
-	self.currentPrivateKey = item.privateKey;
-	self.currentPublicKeyData = item.publicKeyData;
-	self.currentPrivateKeyData = item.privateKeyData;
+	if ([[[sender menu] itemArray]count] == 0) {
+		NSLog(@"nil");
+		[chooseKeyToShareDoneButton setEnabled:NO];
+	}else{
+		[self chooseKeyToShare:sender];
+		[chooseKeyToShareDoneButton setEnabled:YES];
+	}
 }
 
 - (IBAction)pushCancelSendMail:(id)sender{
@@ -342,8 +358,49 @@
 	[errorWindow orderOut:self];
 }
 
+- (IBAction)pushShowPreferencesWindow:(NSToolbarItem *)sender{
+	[NSApp beginSheet:preferencesWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+//	[preferencesWindow orderFront:self];
+//	[preferencesWindow makeKeyWindow];
+}
+
+- (IBAction)pushPreferencesDoneButton:(id)sender{
+	[preferencesWindow orderOut:nil];
+	[NSApp endSheet:preferencesWindow];
+}
+
+- (IBAction)pushShowKeysWindow:(NSToolbarItem *)sender{
+	[NSApp beginSheet:keyManageSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+}
+
+ -(IBAction)pushShowInviteWindow:(NSToolbarItem *)sender{
+	 [self setupChooseKeyPopUpButton];
+	 [NSApp beginSheet:publicKeyToShareSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+}
+
+-(IBAction)pushCancelChooseKeyButton:(id)sender{
+	[publicKeyToShareSheet orderOut:nil];
+	[NSApp endSheet:publicKeyToShareSheet];
+}
+
 #pragma mark -
 #pragma mark Other Methods
+
+-(void)chooseKeyToShare:(id)sender{
+	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+	NSLog(@"Items: %i",[myAppDelegate.keyDataArray count]);
+	if ([myAppDelegate.keyDataArray count] == 0) {
+		NSLog(@"Kein Key vorhanden");
+	}else {
+		KeyPropertys *item = [myAppDelegate.keyDataArray objectAtIndex:[sender indexOfSelectedItem]];
+		
+		self.currentIdentifier = item.keyIdentifier;
+		self.currentPublicKey = item.publicKey;
+		self.currentPrivateKey = item.privateKey;
+		self.currentPublicKeyData = item.publicKeyData;
+		self.currentPrivateKeyData = item.privateKeyData;
+	}
+}
 
 -(void)openInviteSheet{
 	[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];

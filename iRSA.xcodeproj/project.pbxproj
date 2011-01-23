@@ -26,6 +26,8 @@
 		10C673DD12E3970900F80368 /* KeyGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C673DC12E3970900F80368 /* KeyGenerate.m */; };
 		10C6743412E39DD000F80368 /* KeyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C6743312E39DD000F80368 /* KeyTableView.m */; };
 		10E9566912E0E53800EE2940 /* MainGUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E9566812E0E53800EE2940 /* MainGUIController.m */; };
+		10EC66C612EC6B3B00809979 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EC66C512EC6B3B00809979 /* Security.framework */; };
+		10EC670A12EC6BD800809979 /* AGKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EC670912EC6BD800809979 /* AGKeychain.m */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* iRSAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* iRSAAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -86,6 +88,9 @@
 		10C6743312E39DD000F80368 /* KeyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyTableView.m; sourceTree = "<group>"; };
 		10E9566712E0E53800EE2940 /* MainGUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGUIController.h; sourceTree = "<group>"; };
 		10E9566812E0E53800EE2940 /* MainGUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainGUIController.m; sourceTree = "<group>"; };
+		10EC66C512EC6B3B00809979 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		10EC670812EC6BD800809979 /* AGKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeychain.h; sourceTree = "<group>"; };
+		10EC670912EC6BD800809979 /* AGKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeychain.m; sourceTree = "<group>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* iRSAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRSAAppDelegate.h; sourceTree = "<group>"; };
@@ -109,6 +114,7 @@
 				10BA3E3B12E8EABF008E5E51 /* SSCrypto.framework in Frameworks */,
 				1017519A12EA49D900C39ED0 /* ScriptingBridge.framework in Frameworks */,
 				1017526912EB000600C39ED0 /* Sparkle.framework in Frameworks */,
+				10EC66C612EC6B3B00809979 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +138,8 @@
 				1066043312E4FB0900B9695C /* KeyPropertys.m */,
 				1017518112EA47AC00C39ED0 /* SendMail.h */,
 				1017518212EA47AC00C39ED0 /* SendMail.m */,
+				10EC670812EC6BD800809979 /* AGKeychain.h */,
+				10EC670912EC6BD800809979 /* AGKeychain.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10EC66C512EC6B3B00809979 /* Security.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
@@ -290,6 +299,7 @@
 				1066043412E4FB0900B9695C /* KeyPropertys.m in Sources */,
 				10BA3E2112E8E739008E5E51 /* CryptBySSCrypto.m in Sources */,
 				1017518312EA47AC00C39ED0 /* SendMail.m in Sources */,
+				10EC670A12EC6BD800809979 /* AGKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

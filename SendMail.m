@@ -30,6 +30,8 @@
     [emailMessage.toRecipients addObject: theRecipient];
 	
 	[emailMessage send];
+	[emailMessage release];
+	[theRecipient release];
 }
 
 /*

@@ -10,7 +10,7 @@
 #import "KeyGenerate.h"
 #import "KeyPropertys.h"
 
-@interface MainGUIController : NSObject <NSTextViewDelegate,NSTabViewDelegate,NSCoding> {
+@interface MainGUIController : NSObject <NSTextViewDelegate,NSTabViewDelegate,NSCoding,NSToolbarDelegate> {
 	
 	IBOutlet NSWindow *mainWindow;
 	IBOutlet NSWindow *keysWindow;
@@ -20,11 +20,13 @@
 	IBOutlet NSWindow *mailSetupWindow;
 	IBOutlet NSWindow *publicKeyToShareSheet;
 	IBOutlet NSWindow *errorWindow;
+	IBOutlet NSWindow *preferencesWindow;
 	IBOutlet NSButton *enterButton;
 	IBOutlet NSButton *removeButton;
 	IBOutlet NSButton *keyPopUpButton;
 	IBOutlet NSButton *chooseKeyPopUpButton;
 	IBOutlet NSButton *loadingButton;
+	IBOutlet NSButton *chooseKeyToShareDoneButton;
 	IBOutlet NSTextView *inputTextView;
 	IBOutlet NSTextView *resultTextView;
 	IBOutlet NSTextView *sendMailContent;
@@ -39,6 +41,7 @@
 	IBOutlet NSSegmentedControl *switchButton;
 	IBOutlet NSProgressIndicator *loadingIndicatorKeyWindow;
 	IBOutlet NSProgressIndicator *loadingIndicator;
+	IBOutlet NSToolbar *mainViewToolbar;
 	
 	
 	int tab;
@@ -81,6 +84,11 @@
 -(IBAction)pushCancelSendMail:(id)sender;
 -(IBAction)pushOkErrorButton:(id)sender;
 -(IBAction)pushShowKeyWindowFromMenu:(id)sender;
+-(IBAction)pushShowPreferencesWindow:(NSToolbarItem *)sender;
+-(IBAction)pushShowKeysWindow:(NSToolbarItem *)sender;
+-(IBAction)pushShowInviteWindow:(NSToolbarItem *)sender;
+-(IBAction)pushCancelChooseKeyButton:(id)sender;
+-(IBAction)pushPreferencesDoneButton:(id)sender;
 -(void)setPopUpStatus;
 -(void)setupPopUpButton;
 -(void)openResultWindow;
@@ -90,6 +98,7 @@
 -(void)enableInterface:(NSNotification *)notification;
 -(void)setupOwnPropertys;
 -(void)openInviteSheet;
+-(void)chooseKeyToShare:(id)sender;
 -(void)setupChooseKeyPopUpButton;
 
 @end

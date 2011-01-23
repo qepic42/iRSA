@@ -30,7 +30,7 @@
 	}
 	
 	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:encryptedData,@"encryptedData",encryptedString,@"encryptedString",nil];
-	NSLog(@"encryptedString: %@",encryptedString);
+
 	[crypto release];
 	return dict;
 }
@@ -52,7 +52,7 @@
 	}
 	
 	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:decryptedData,@"decryptedData",decryptedString,@"decryptedString",nil];
-	NSLog(@"decryptedString: %@",decryptedString);
+
 	[crypto release];
 	return dict;
 }
