@@ -1,0 +1,12 @@
+/*
+ *  Gloabals.h
+ *  iRSA
+ *
+ *  Created by Jan Galler on 23.01.11.
+ *  Copyright 2011 PQ-Developing.com. All rights reserved.
+ *
+ */
+
+#define INVITE_MESSAGE @"Invite\nI want to invite you to enjoy mailing with me encrypted by RSA.\nYou can easily download this App here: http://galler-web.de/iRSA.zip\\nTo encrypt my texts use my following public key:\n\n "
+#define INVITE_SUBJECT @"Invite to use iRSA"
+#define MESSAGE_SIGNATURE @"_____________________________________________________\nThis mail is encrypted by iRSA. You can download it here: http://galler-web.de/iRSA.zip"

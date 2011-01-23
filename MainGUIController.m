@@ -13,6 +13,7 @@
 #import "CryptBySSCrypto.h"
 #import <SSCrypto/SSCrypto.h>
 #import "SendMail.h"
+#import "Globals.h"
 
 @implementation MainGUIController
 @synthesize mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
@@ -320,7 +321,7 @@
 	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
 	self.currentPublicKey = [NSString stringWithFormat:@"%@",publicKeyMutableString];
 	
-	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@",@"I used the following publick key to encrypt this mail",self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string]];
+	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@\n\n\n\n\n\n%@",@"I used the following public key to encrypt this mail",self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
 	[sendMailContent setString:contentCache];
 
 	[sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
@@ -385,7 +386,6 @@
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	NSLog(@"Items: %i",[myAppDelegate.keyDataArray count]);
 	if ([myAppDelegate.keyDataArray count] == 0) {
-		NSLog(@"Kein Key vorhanden");
 	}else {
 		KeyPropertys *item = [myAppDelegate.keyDataArray objectAtIndex:[sender indexOfSelectedItem]];
 		
@@ -400,7 +400,7 @@
 -(void)openInviteSheet{
 	[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	
-	NSString *cache = @"Invite\nI want invite you to enjoy mailing with me encrypted by RSA.\nYou can easily download this App here: http://galler-web.de/iRSA.zip\"\nTo encrypt my texts use my following public key:\n\n ";
+	NSString *cache = INVITE_MESSAGE;
 	
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
@@ -408,7 +408,7 @@
 	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
 	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];	
 	
-	[sendMailSubject setStringValue:@"Invite to use iRSA"];
+	[sendMailSubject setStringValue:INVITE_SUBJECT];
 	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",cache, publicKeyMutableString]];
 }
 

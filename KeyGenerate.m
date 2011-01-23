@@ -13,7 +13,7 @@
 
 - (void)generatePublicAndPrivateRSAKeyWithPrivatKeyLength:(NSNumber *)privateKeyLength{
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	NSLog(@"PrivatKeyLength: %@",privateKeyLength);
+
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"startKeyGenerate" object:nil userInfo:nil];
 	
