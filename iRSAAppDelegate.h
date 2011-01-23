@@ -16,5 +16,6 @@
 @property (assign) IBOutlet NSWindow *window;
 @property(nonatomic,retain)NSMutableArray *keyDataArray;
 
+- (NSString *) pathForDataFile;
 
 @end

@@ -276,7 +276,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>5</integer>
+									<integer>3</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -319,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MainGUIController.m</string>
+								<string>iRSAAppDelegate.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +327,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MainGUIController.m</string>
+										<string>iRSAAppDelegate.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>10EC689512ECC12700809979</string>
+										<string>10F77FAA12ECF2C700D7722B</string>
 										<key>history</key>
 										<array>
 											<string>10BA3DBD12E8D0BB008E5E51</string>
@@ -339,24 +339,25 @@
 											<string>101751B112EA4CFF00C39ED0</string>
 											<string>101751C412EAE04F00C39ED0</string>
 											<string>101751D812EAE21E00C39ED0</string>
-											<string>1017524612EAF79600C39ED0</string>
 											<string>101752F012EB730E00C39ED0</string>
-											<string>1017541912EB967400C39ED0</string>
-											<string>1017542612EB96C800C39ED0</string>
 											<string>1017547812EBAA1700C39ED0</string>
 											<string>101754B812EC462700C39ED0</string>
 											<string>101754CF12EC47CC00C39ED0</string>
-											<string>101754DB12EC4A6200C39ED0</string>
-											<string>101754DC12EC4A6200C39ED0</string>
 											<string>10EC671D12EC7DE700809979</string>
-											<string>10EC67DF12EC96FB00809979</string>
 											<string>10EC681912EC9F8300809979</string>
 											<string>10EC685E12ECB4D300809979</string>
 											<string>10EC686712ECB86F00809979</string>
 											<string>10EC686C12ECB9B500809979</string>
 											<string>10EC687F12ECBDAC00809979</string>
 											<string>10EC689212ECC0F600809979</string>
-											<string>10EC689312ECC0F600809979</string>
+											<string>10EC689C12ECCA3000809979</string>
+											<string>10EC68A812ECCC9000809979</string>
+											<string>10F77F8712ECED5400D7722B</string>
+											<string>10F77F9712ECF15F00D7722B</string>
+											<string>10F77FA612ECF2C700D7722B</string>
+											<string>10F77FA712ECF2C700D7722B</string>
+											<string>10F77FA812ECF2C700D7722B</string>
+											<string>10F77FA912ECF2C700D7722B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -414,9 +415,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>10EC661612EC57E000809979</string>
+				<string>10F77EBD12ECD26200D7722B</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>10EC661712EC57E000809979</string>
+				<string>10F77EBE12ECD26200D7722B</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -554,12 +555,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>10EC664712EC5BB000809979</string>
-		<string>10EC664812EC5BB000809979</string>
+		<string>10F77FAB12ECF2C700D7722B</string>
+		<string>10F77ECE12ECD4A600D7722B</string>
+		<string>10F77ECF12ECD4A600D7722B</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>10E9565F12E0E00300EE2940</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/Q/Sites/iRSA/iRSA.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 59 1280 719 0 0 1280 778 </string>
@@ -578,14 +580,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>KeyGenerate.m</string>
+								<string>iRSAAppDelegate.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -602,6 +602,8 @@
 							<string>502pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -641,7 +643,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>10E9565F12E0E00300EE2940</string>
-				<string>10EC661812EC57E000809979</string>
+				<string>10F77EBF12ECD26200D7722B</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -763,13 +765,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>10EC663F12EC5BB000809979</string>
+				<string>10F77EC612ECD4A600D7722B</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>10EC664012EC5BB000809979</string>
-				<string>10EC664112EC5BB000809979</string>
-				<string>10EC664212EC5BB000809979</string>
-				<string>10EC664312EC5BB000809979</string>
-				<string>10EC664412EC5BB000809979</string>
+				<string>10F77EC712ECD4A600D7722B</string>
+				<string>10F77EC812ECD4A600D7722B</string>
+				<string>10F77EC912ECD4A600D7722B</string>
+				<string>10F77ECA12ECD4A600D7722B</string>
+				<string>10F77ECB12ECD4A600D7722B</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -933,7 +935,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>10EC664512EC5BB000809979</string>
+				<string>10F77ECC12ECD4A600D7722B</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

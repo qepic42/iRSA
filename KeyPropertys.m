@@ -57,17 +57,25 @@
 	return self;
 }
 
--(void)encodeWithCoder:(NSCoder *)encoder
-{
-	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-    [encoder encodeObject:myAppDelegate.keyDataArray forKey:@"keyDataArray"];
+-(void)encodeWithCoder:(NSCoder *)encoder{
+	[encoder encodeObject:self.keyIdentifier forKey:@"keyIdentifier"];
+	[encoder encodeObject:self.privateKey forKey:@"privateKey"];
+	[encoder encodeObject:self.privateKeyData forKey:@"privateKeyData"];
+	[encoder encodeObject:self.publicKey forKey:@"publicKey"];
+	[encoder encodeObject:self.publicKeyData forKey:@"publicKeyData"];
 }
 
--(id)initWithCoder:(NSCoder *)decoder
-{
-	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-    myAppDelegate.keyDataArray = [myAppDelegate.keyDataArray decodeObjectForKey:@"keyDataArray"];
-    return self;
+-(id)initWithCoder:(NSCoder *)decoder{
+	
+	self = [super init];
+	if (self != nil) {
+		self.keyIdentifier = [decoder decodeObjectForKey:@"keyIdentifier"];
+		self.privateKey = [decoder decodeObjectForKey:@"privateKey"];
+		self.privateKeyData = [decoder decodeObjectForKey:@"privateKeyData"];
+		self.publicKey = [decoder decodeObjectForKey:@"publicKey"];
+		self.publicKeyData = [decoder decodeObjectForKey:@"publicKeyData"];
+	}
+	return self;
 }
 
 @end
