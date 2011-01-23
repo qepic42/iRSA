@@ -103,7 +103,6 @@
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
 	if(myAppDelegate.keyDataArray == 0){
-		NSLog(@"Keine Items");
 	}else if ([myAppDelegate.keyDataArray count] >= 1) {
 		[[keyPopUpButton menu]removeAllItems];
 		
@@ -146,7 +145,6 @@
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
 	if(myAppDelegate.keyDataArray == 0){
-		NSLog(@"Keine Items");
 	}else if ([myAppDelegate.keyDataArray count] >= 1) {
 		[[chooseKeyPopUpButton menu]removeAllItems];
 		
@@ -321,7 +319,7 @@
 	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
 	self.currentPublicKey = [NSString stringWithFormat:@"%@",publicKeyMutableString];
 	
-	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@\n\n\n\n\n\n%@",@"I used the following public key to encrypt this mail",self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
+	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
 	[sendMailContent setString:contentCache];
 
 	[sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
@@ -384,7 +382,7 @@
 
 -(void)chooseKeyToShare:(id)sender{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-	NSLog(@"Items: %i",[myAppDelegate.keyDataArray count]);
+	
 	if ([myAppDelegate.keyDataArray count] == 0) {
 	}else {
 		KeyPropertys *item = [myAppDelegate.keyDataArray objectAtIndex:[sender indexOfSelectedItem]];
@@ -400,8 +398,6 @@
 -(void)openInviteSheet{
 	[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	
-	NSString *cache = INVITE_MESSAGE;
-	
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
 	NSRange myRange = 
@@ -409,7 +405,7 @@
 	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];	
 	
 	[sendMailSubject setStringValue:INVITE_SUBJECT];
-	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",cache, publicKeyMutableString]];
+	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, publicKeyMutableString]];
 }
 
 

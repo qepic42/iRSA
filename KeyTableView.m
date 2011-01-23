@@ -84,6 +84,7 @@
 	
 	[myTable editColumn:[myTable columnWithIdentifier:@"identifier"]
 					row:newRowIndex withEvent:nil select:YES];
+	
 }
 
 
