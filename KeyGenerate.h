@@ -13,5 +13,6 @@
 }
 
 -(void)generatePublicAndPrivateRSAKeyWithPrivatKeyLength:(NSNumber *)privateKeyLength;
--(NSDictionary *)generateKeysBySSCryptoWith:(NSNumber *)keyLenght;
+-(NSDictionary *)generateKeys:(NSNumber *)keyLenght;
+
 @end

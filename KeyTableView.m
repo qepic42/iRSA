@@ -44,7 +44,7 @@
 }
 
 -(void)setupBitPopupButton{
-	self.bitArray = [NSArray arrayWithObjects:@"128",@"256",@"512",@"1024",@"2048",@"4096",@"8192",@"16384",@"32768",@"65536",nil];
+	self.bitArray = [NSArray arrayWithObjects:@"512",@"1024",@"2048",@"4096",@"8192",@"16384",@"32768",@"65536",nil];
 	
 	for(NSString *currentBit in self.bitArray){
 		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:currentBit action:nil keyEquivalent:@""];
@@ -65,7 +65,6 @@
 	[dataArray release];
 	[super dealloc];
 }
-
 
 #pragma mark -
 #pragma mark NSNotification Methods

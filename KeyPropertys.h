@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "PasswordController.h"
 
 @interface KeyPropertys : NSObject <NSCoding> {
 	NSString *keyIdentifier; 
@@ -15,6 +15,8 @@
 	NSString *publicKey;
 	NSData *privateKeyData;
 	NSData *publicKeyData;
+	
+	PasswordController *pwController;
 }
 
 @property(nonatomic,retain)NSString *keyIdentifier;
@@ -27,5 +29,8 @@
 + (id)keyItemWithData:(NSString*)identifier:(NSString *)publicKeyData: (NSString *)privateKeyData:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData;
 - (id)initKeyItemWithData:(NSString*)identifier:(NSString *)publicKeyData: (NSString *)privateKeyData:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData;
 - (void)setupInstanceVariables;
+
+-(void)decodePrivateKey;
+-(void)encodePrivateKey;
 
 @end

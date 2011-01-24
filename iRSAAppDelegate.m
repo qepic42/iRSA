@@ -7,7 +7,6 @@
 //
 
 #import "iRSAAppDelegate.h"
-#import "AGKeychain.h"
 
 @implementation iRSAAppDelegate
 @synthesize window, keyDataArray;
@@ -45,8 +44,7 @@
 	[window center];
 }
 
--(void)applicationWillTerminate:(NSNotification *)notification{
-	
+- (void)applicationWillTerminate:(NSNotification *)notification{
 	NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:self.keyDataArray];
 	[NSKeyedArchiver archiveRootObject:archive toFile:[self pathForDataFile]];
 }
@@ -65,17 +63,6 @@
 	NSString *fileName = @"iRSA_Keys.plist";
 	return [folder stringByAppendingPathComponent: fileName];    
 }
-
-/*
--(void)saveArray{
-	
-	BOOL result = [AGKeychain addKeychainItem:[keychainItemNameTextField stringValue] 
-								 withItemKind:[keychainItemKindTextField stringValue] 
-								  forUsername:[usernameTextField stringValue] 
-								 withPassword:[passwordTextField stringValue]];
-	
-}
-*/
 
 #pragma mark -
 #pragma mark NSCoding Methods

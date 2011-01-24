@@ -231,7 +231,7 @@
 - (IBAction)pushEnter:(id)sender{
 	[NSApp beginSheet:loadingSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	[loadingIndicator startAnimation:self];
-
+	
 	NSString *resultString = @"";
 	BOOL fail;
 	
@@ -289,9 +289,8 @@
 			fail = YES;
 		}
 		
-		
 	}
-
+	
 	[resultString release];
 	
 	[loadingSheet orderOut:nil];

@@ -8,6 +8,7 @@
 
 #import "KeyGenerate.h"
 #import <SSCrypto/SSCrypto.h>
+#import "PasswordController.h"
 
 @implementation KeyGenerate
 
@@ -17,10 +18,12 @@
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"startKeyGenerate" object:nil userInfo:nil];
 	
-	NSDictionary *dict = [self generateKeysBySSCryptoWith:privateKeyLength];
+	NSDictionary *dict = [self generateKeys:privateKeyLength];
 	
 	NSString *publicKeyString = [[NSString alloc] initWithData:[dict objectForKey:@"publicKeyData"] encoding:NSUTF8StringEncoding];
-	NSString *privateKeyString = [[NSString alloc] initWithData:[dict objectForKey:@"privateKeyData"] encoding:NSUTF8StringEncoding];
+//	NSString *privateKeyString = [[NSString alloc] initWithData:[dict objectForKey:@"privateKeyData"] encoding:NSUTF8StringEncoding];
+	
+	NSString *privateKeyString = [dict objectForKey:@"privateKeyString"];
 	
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[publicKeyString length]];
 	[publicKeyMutableString setString: publicKeyString];
@@ -30,32 +33,45 @@
 	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
 	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
 	
-	NSMutableString *privateKeyMutableString = [NSMutableString stringWithCapacity:[privateKeyString length]];
-	[privateKeyMutableString setString: privateKeyString];
-	NSRange myRangePrivate = 
-	[privateKeyMutableString rangeOfString:@"-----BEGIN RSA PRIVATE KEY-----"options:NSCaseInsensitiveSearch];
-	[privateKeyMutableString replaceCharactersInRange:myRangePrivate withString:@""];
-	[privateKeyMutableString rangeOfString:@"-----END RSA PRIVATE KEY-----"options:NSCaseInsensitiveSearch];
-	[privateKeyMutableString replaceCharactersInRange:myRangePrivate withString:@""];
-	
-	NSDictionary *dictToSend = [NSDictionary dictionaryWithObjectsAndKeys:[dict objectForKey:@"publicKeyData"], @"publicKeyData",[dict objectForKey:@"privateKeyData"], @"privateKeyData", publicKeyMutableString, @"publicKey", privateKeyMutableString, @"privateKey", nil];
+	NSDictionary *dictToSend = [NSDictionary dictionaryWithObjectsAndKeys:[dict objectForKey:@"publicKeyData"], @"publicKeyData",[dict objectForKey:@"privateKeyData"], @"privateKeyData", publicKeyMutableString, @"publicKey", privateKeyString, @"privateKey", nil];
 	
 	[center postNotificationName:@"addNewKey" object:nil userInfo:dictToSend];
 	
 	[center postNotificationName:@"endKeyGenerate" object:nil userInfo:nil];
 	
+	[publicKeyString release];
+	
     [pool release];
 }
 
-- (NSDictionary *)generateKeysBySSCryptoWith:(NSNumber *)keyLenght{
+-(NSDictionary *)generateKeys:(NSNumber *)keyLenght{
 	
-    NSData *privateKeyData = [SSCrypto generateRSAPrivateKeyWithLength:[keyLenght intValue]];
-    NSData *publicKeyData = [SSCrypto generateRSAPublicKeyFromPrivateKey:privateKeyData];
+	PasswordController *pwController = [[PasswordController alloc]init];
 	
-	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:privateKeyData,@"privateKeyData", publicKeyData,@"publicKeyData",nil];
+	SSCrypto *crypto;
+	
+	NSData *privateKeyData = [SSCrypto generateRSAPrivateKeyWithLength:[keyLenght intValue]];
+	NSData *publicKeyData = [SSCrypto generateRSAPublicKeyFromPrivateKey:privateKeyData];
+	
+	NSString *privateKeyString = [[NSString alloc]initWithData:privateKeyData encoding:NSUTF8StringEncoding];
+	
+	crypto = [[SSCrypto alloc] initWithSymmetricKey:[pwController.symetricKey dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	[crypto setClearTextWithString:privateKeyString];
+	
+	NSData *cipherText = [crypto encrypt:@"aes256"];
+	
+	NSString *test = [cipherText encodeBase64];
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:test, @"privateKeyString", cipherText,@"privateKeyData", publicKeyData,@"publicKeyData",nil];
+	
+	[pwController release];
+	[privateKeyString release];
+	[crypto release];	
 	
 	return dict;
 }
+
 
 - (void) dealloc{
 	[super dealloc];

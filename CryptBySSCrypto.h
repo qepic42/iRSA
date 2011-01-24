@@ -7,13 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PasswordController.h"
 
-
-@interface CryptBySSCrypto : NSObject {
-
-}
+@interface CryptBySSCrypto : NSObject {}
 
 +(NSDictionary *)encodeByRSAWithData:(NSString *)clearText key:(NSData *)publicKey;
 +(NSDictionary *)decodeByRSAWithData:(NSData *)encodedText key:(NSData *)privateKey;
++(NSDictionary *)encodePrivateKeyWithData:(NSData *)password key:(NSData *)privateKey;
++(NSDictionary *)decodePrivateKeyWithData:(NSData *)password key:(NSData *)encryptedPrivateKey;
++(NSDictionary *)generateSymetricKeyWith:(NSNumber *)length;
+
 
 @end

@@ -8,11 +8,14 @@
 
 #import "KeyPropertys.h"
 #import "iRSAAppDelegate.h"
+#import "PasswordController.h"
+#import "CryptBySSCrypto.h"
 
 @implementation KeyPropertys
 @synthesize keyIdentifier, privateKey, publicKey, privateKeyData, publicKeyData;
 
 - (void) dealloc{
+	[pwController release];
 	[publicKeyData release];
 	[privateKeyData release];
 	[keyIdentifier release];
@@ -39,6 +42,7 @@
 	self = [super init];
 	if (self != nil) {
 		[self setupInstanceVariables];
+		pwController = [[PasswordController alloc]init];
 	}
 	return self;
 }
@@ -58,6 +62,7 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder{
+//	[self encodePrivateKey];
 	[encoder encodeObject:self.keyIdentifier forKey:@"keyIdentifier"];
 	[encoder encodeObject:self.privateKey forKey:@"privateKey"];
 	[encoder encodeObject:self.privateKeyData forKey:@"privateKeyData"];
@@ -74,8 +79,32 @@
 		self.privateKeyData = [decoder decodeObjectForKey:@"privateKeyData"];
 		self.publicKey = [decoder decodeObjectForKey:@"publicKey"];
 		self.publicKeyData = [decoder decodeObjectForKey:@"publicKeyData"];
+		
+//		[self decodePrivateKey];
 	}
 	return self;
 }
+
+
+
+-(void)decodePrivateKey{
+	NSLog(@"Decode: %@",self.privateKey);
+	pwController = [[PasswordController alloc]init];
+	NSDictionary *dict = [CryptBySSCrypto decodePrivateKeyWithData:pwController.symetricKeyData key:self.privateKeyData];
+	self.privateKey = [dict objectForKey:@"decryptedString"];
+	self.privateKeyData = [dict objectForKey:@"decryptedPrivateKey"];
+	NSLog(@"Decoded: %@",self.privateKey);
+}
+
+-(void)encodePrivateKey{
+	NSLog(@"Encode: %@",self.privateKey);
+	pwController = [[PasswordController alloc]init];
+	NSDictionary *dict = [CryptBySSCrypto encodePrivateKeyWithData:pwController.symetricKeyData key:self.privateKeyData];
+	self.privateKey = [dict objectForKey:@"encryptedString"];
+	self.privateKeyData = [dict objectForKey:@"encryptedPrivateKey"];
+	NSLog(@"Encoded: %@",self.privateKey);
+}
+
+
 
 @end
