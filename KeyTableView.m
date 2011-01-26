@@ -99,6 +99,7 @@
 	[myAppDelegate.keyDataArray removeObjectsAtIndexes:[self.myTable selectedRowIndexes]];
 	[self setupKeyPopUpButton];
 	[self.myTable noteNumberOfRowsChanged];
+	[self setupKeyPopUpButton];
 }
 
 -(IBAction)pushGenerateSetupKey:(id)sender{
@@ -144,6 +145,12 @@
 	int cache = [[self.bitArray objectAtIndex:[sender indexOfSelectedItem]] intValue];
 	self.currentKeyLength = [NSNumber numberWithInt:cache];
 }
+
+-(IBAction)pushCancelGenerate:(id)sender{
+	[keySetupSheet orderOut:nil];
+	[NSApp endSheet:keySetupSheet];
+}
+
 
 #pragma mark -
 #pragma mark Delegate Methods

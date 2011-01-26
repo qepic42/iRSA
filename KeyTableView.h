@@ -37,7 +37,9 @@
 -(IBAction)pushRemoveKey:(id)sender;
 -(IBAction)pushGenerateSetupKey:(id)sender;
 -(IBAction)pushChooseBit:(id)sender;
+-(IBAction)pushCancelGenerate:(id)sender;
 -(void)setupKeyPopUpButton;
 -(void)setupBitPopupButton;
+
 
 @end

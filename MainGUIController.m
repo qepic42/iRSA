@@ -102,39 +102,63 @@
 	
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	if(myAppDelegate.keyDataArray == 0){
-	}else if ([myAppDelegate.keyDataArray count] >= 1) {
-		[[keyPopUpButton menu]removeAllItems];
+	BOOL refresh;
+	
+	if([myAppDelegate.keyDataArray count] == 0){
 		
+		[[keyPopUpButton menu]removeAllItems];
+		NSMenuItem *fail = [[NSMenuItem alloc]initWithTitle:@"" action:nil keyEquivalent:@""];
+		[[keyPopUpButton menu]addItem:fail];
+		[[keyPopUpButton menu]removeAllItems];
+		refresh = YES;
+		
+	}else if ([myAppDelegate.keyDataArray count] >= 1) {
+		
+		[[keyPopUpButton menu]removeAllItems];
+
 		int i;
 		int max = [myAppDelegate.keyDataArray count];
 		
 		for(i=0;i<max;i++){
-			KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
-			if (self.mode == 1) {
-				if ([item.privateKey isEqualToString:@"-"]) {
-					
-				}else {
+				KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+				if (self.mode == 1) {
+					if ([item.privateKey isEqualToString:@"-"]) {
+						
+					}else {
+						NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+						[newItem setTarget:self];
+						[[keyPopUpButton menu] addItem:newItem];
+						[newItem release];
+					}
+				}else{
 					NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
 					[newItem setTarget:self];
 					[[keyPopUpButton menu] addItem:newItem];
 					[newItem release];
 				}
-			}else{
-				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-				[newItem setTarget:self];
-				[[keyPopUpButton menu] addItem:newItem];
-				[newItem release];
-			}
+			refresh = NO;
 		}
 		
-		KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
-		self.currentIdentifier = currentItem.keyIdentifier;
-		self.currentPrivateKey = currentItem.privateKey;
-		self.currentPrivateKeyData = currentItem.privateKeyData;
-		self.currentPublicKey = currentItem.publicKey;
-		self.currentPublicKeyData = currentItem.publicKeyData;
-		//	[item release];
+		if (refresh == NO) {
+			KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
+			
+			self.currentIdentifier = currentItem.keyIdentifier;
+			self.currentPrivateKey = currentItem.privateKey;
+			self.currentPrivateKeyData = currentItem.privateKeyData;
+			self.currentPublicKey = currentItem.publicKey;
+			self.currentPublicKeyData = currentItem.publicKeyData;
+			//	[item release];
+			
+		}else{
+		
+			self.currentIdentifier = 0;
+			self.currentPrivateKey = 0;
+			self.currentPrivateKeyData = 0;
+			self.currentPublicKey = 0;
+			self.currentPublicKeyData = 0;
+			
+		}
+		
 	}
 	
 	[self setPopUpStatus];
@@ -186,10 +210,16 @@
 
 
 - (void)startKeyGenerateIndicator{
+	[keySheetAddButton setEnabled:NO];
+	[keySheetDoneButton setEnabled:NO];
+	[keySheetRemoveButton setEnabled:NO];
 	[loadingIndicatorKeyWindow startAnimation:self];
 }
 
 - (void)stopKeyGenerateIndicator{
+	[keySheetAddButton setEnabled:YES];
+	[keySheetDoneButton setEnabled:YES];
+	[keySheetRemoveButton setEnabled:YES];
 	[loadingIndicatorKeyWindow stopAnimation:self];
 }
 
@@ -383,6 +413,7 @@
 	[publicKeyToShareSheet orderOut:nil];
 	[NSApp endSheet:publicKeyToShareSheet];
 }
+
 
 #pragma mark -
 #pragma mark Other Methods

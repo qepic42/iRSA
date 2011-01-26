@@ -331,7 +331,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>10745E2912F056B5006FD617</string>
+										<string>10745E8612F09D5C006FD617</string>
 										<key>history</key>
 										<array>
 											<string>10BA3DBD12E8D0BB008E5E51</string>
@@ -339,9 +339,7 @@
 											<string>1017547812EBAA1700C39ED0</string>
 											<string>101754B812EC462700C39ED0</string>
 											<string>10EC687F12ECBDAC00809979</string>
-											<string>10EC689C12ECCA3000809979</string>
 											<string>10310B4B12EDA02500ABCAC1</string>
-											<string>10310B8612EDA5C800ABCAC1</string>
 											<string>10310B8712EDA5C800ABCAC1</string>
 											<string>108048E212EDF2E500F591B4</string>
 											<string>1080490A12EDF7FE00F591B4</string>
@@ -353,11 +351,14 @@
 											<string>10745DD312F042D3006FD617</string>
 											<string>10745DE612F044F4006FD617</string>
 											<string>10745DE712F044F4006FD617</string>
-											<string>10745DF412F045F5006FD617</string>
 											<string>10745E0112F047C0006FD617</string>
 											<string>10745E0212F047C0006FD617</string>
 											<string>10745E1F12F05648006FD617</string>
-											<string>10745E2012F05648006FD617</string>
+											<string>10745E2F12F05CED006FD617</string>
+											<string>10745E3D12F0959D006FD617</string>
+											<string>10745E4712F0965E006FD617</string>
+											<string>10745E7D12F09C16006FD617</string>
+											<string>10745E7E12F09C16006FD617</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -911,7 +912,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {950, 630}}</string>
 								<key>RubberWindowFrame</key>
-								<string>231 107 950 671 0 0 1280 778 </string>
+								<string>472 107 950 671 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugCLIModule</string>
@@ -940,7 +941,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.consoleV3</string>
 			<key>WindowString</key>
-			<string>231 107 950 671 0 0 1280 778 </string>
+			<string>472 107 950 671 0 0 1280 778 </string>
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>

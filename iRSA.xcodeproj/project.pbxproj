@@ -19,6 +19,7 @@
 		101754A512EC450600C39ED0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 101754A412EC450600C39ED0 /* Credits.rtf */; };
 		10310B3812ED9E4900ABCAC1 /* PasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10310B3712ED9E4900ABCAC1 /* PasswordController.m */; };
 		1066043412E4FB0900B9695C /* KeyPropertys.m in Sources */ = {isa = PBXBuildFile; fileRef = 1066043312E4FB0900B9695C /* KeyPropertys.m */; };
+		10745E2E12F05B37006FD617 /* app.icns in Resources */ = {isa = PBXBuildFile; fileRef = 10745E2D12F05B37006FD617 /* app.icns */; };
 		10804A8312EE2FB100F591B4 /* EMKeychainItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 10804A8212EE2FB100F591B4 /* EMKeychainItem.m */; };
 		10BA3E0E12E8E648008E5E51 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0C12E8E648008E5E51 /* libcrypto.dylib */; };
 		10BA3E0F12E8E648008E5E51 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0D12E8E648008E5E51 /* libssl.dylib */; };
@@ -80,6 +81,7 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		1066043212E4FB0900B9695C /* KeyPropertys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyPropertys.h; sourceTree = "<group>"; };
 		1066043312E4FB0900B9695C /* KeyPropertys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyPropertys.m; sourceTree = "<group>"; };
+		10745E2D12F05B37006FD617 /* app.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = app.icns; sourceTree = "<group>"; };
 		10804A8112EE2FB100F591B4 /* EMKeychainItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMKeychainItem.h; sourceTree = "<group>"; };
 		10804A8212EE2FB100F591B4 /* EMKeychainItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMKeychainItem.m; sourceTree = "<group>"; };
 		10BA3E0C12E8E648008E5E51 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libcrypto.dylib; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				10EC684312ECA82800809979 /* MainMenu.xib */,
 				1017519412EA494500C39ED0 /* Mail.app */,
+				10745E2D12F05B37006FD617 /* app.icns */,
 				101752B412EB628000C39ED0 /* dsa_pub.pem */,
 				101754A412EC450600C39ED0 /* Credits.rtf */,
 				1017526112EAFF5800C39ED0 /* AppIcon.icns */,
@@ -287,6 +290,7 @@
 				1017545512EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png in Resources */,
 				101754A512EC450600C39ED0 /* Credits.rtf in Resources */,
 				10EC684412ECA82800809979 /* MainMenu.xib in Resources */,
+				10745E2E12F05B37006FD617 /* app.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,9 @@
 	IBOutlet NSButton *chooseKeyPopUpButton;
 	IBOutlet NSButton *loadingButton;
 	IBOutlet NSButton *chooseKeyToShareDoneButton;
+	IBOutlet NSButton *keySheetDoneButton;
+	IBOutlet NSButton *keySheetAddButton;
+	IBOutlet NSButton *keySheetRemoveButton;
 	IBOutlet NSTextView *inputTextView;
 	IBOutlet NSTextView *resultTextView;
 	IBOutlet NSTextView *sendMailContent;
