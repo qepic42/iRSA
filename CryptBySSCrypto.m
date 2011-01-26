@@ -14,6 +14,8 @@
 
 +(NSDictionary *)encodeByRSAWithData:(NSString *)clearText key:(NSData *)publicKey{
 	
+//	NSLog(@"PKey: %@",[[NSString alloc] initWithData:publicKey encoding:NSUTF8StringEncoding]);
+	
 	SSCrypto *crypto;
 	
 	crypto = [[SSCrypto alloc] initWithPublicKey:publicKey];

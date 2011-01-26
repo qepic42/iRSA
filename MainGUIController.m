@@ -238,6 +238,9 @@
 	if (self.mode == 0){
 		
 		@try {
+		//	NSLog(@"Text: %@",[[inputTextView textStorage] string]);
+		//	NSLog(@"PKey: %@",[[NSString alloc] initWithData:self.currentPublicKeyData encoding:NSUTF8StringEncoding]);
+			
 			NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
 			NSString *resultString = [resultDict objectForKey:@"encryptedString"];
 			[resultTextView setString:resultString];
@@ -314,11 +317,17 @@
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
 	NSRange myRange = 
-	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
-	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
-	self.currentPublicKey = [NSString stringWithFormat:@"%@",publicKeyMutableString];
+	[publicKeyMutableString rangeOfString:@" "options:NSCaseInsensitivePredicateOption];
 	
-	NSString *contentCache = [NSString stringWithFormat:@"%@:\n%@%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
+	if (myRange.location != NSNotFound) {
+		[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
+	}else{
+		
+	}
+	
+	self.currentPublicKey = publicKeyMutableString;
+	
+	NSString *contentCache = [NSString stringWithFormat:@"%@:\n\n%@\n\n%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
 	[sendMailContent setString:contentCache];
 
 	[sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
@@ -343,7 +352,6 @@
 
 - (IBAction)pushChooseKeyToShare:(id)sender{
 	if ([[[sender menu] itemArray]count] == 0) {
-		NSLog(@"nil");
 		[chooseKeyToShareDoneButton setEnabled:NO];
 	}else{
 		[self chooseKeyToShare:sender];
@@ -400,11 +408,18 @@
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
 	NSRange myRange = 
-	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
-	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];	
+	[publicKeyMutableString rangeOfString:@" "options:NSCaseInsensitivePredicateOption];
+	
+	if (myRange.location != NSNotFound) {
+		[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
+	}else{
+		
+	}
+	
+	self.currentPublicKey = publicKeyMutableString;
 	
 	[sendMailSubject setStringValue:INVITE_SUBJECT];
-	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, publicKeyMutableString]];
+	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, self.currentPublicKey]];
 }
 
 
