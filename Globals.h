@@ -11,3 +11,4 @@
 #define INVITE_SUBJECT @"Invite to use iRSA"
 #define MESSAGE_SIGNATURE @"_____________________________________________________\nThis mail is encrypted by iRSA. You can download it here: http://galler-web.de/iRSA.zip"
 #define MESSAGE_PREFIX @"I used the following public key to encrypt this mail"
+#define MESSAGE_SUBJECT @"This message is encrypted by iRSA"

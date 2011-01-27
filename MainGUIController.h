@@ -87,6 +87,7 @@
 -(IBAction)pushShowKeysWindow:(NSToolbarItem *)sender;
 -(IBAction)pushShowInviteWindow:(NSToolbarItem *)sender;
 -(IBAction)pushCancelChooseKeyButton:(id)sender;
+-(IBAction)showPrefernencesWindow:(id)sender;
 -(void)setPopUpStatus;
 -(void)setupPopUpButton;
 -(void)openResultWindow;
@@ -98,5 +99,7 @@
 -(void)openInviteSheet;
 -(void)chooseKeyToShare:(id)sender;
 -(void)setupChooseKeyPopUpButton;
+-(void)setEnterButtonState;
+-(void)clearText;
 
 @end

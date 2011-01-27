@@ -24,10 +24,10 @@
 			NSDictionary *dict = [CryptBySSCrypto generateSymetricKeyWith:[NSNumber numberWithInt:128]];
 			self.symetricKey = [dict objectForKey:@"symetricKey"];
 			[EMInternetKeychainItem addInternetKeychainItemForServer:@"iRSA" withUsername:@"aes256-key" password:self.symetricKey path:@"/" port:128 protocol:kSecProtocolTypeFTP];
-			NSLog(@"War nil");
+	//		NSLog(@"Keychainitem nicht vorhanden");
 		}else {
 			self.symetricKey = keychainItem.password;
-			NSLog(@"War NICHT nil");
+	//		NSLog(@"Keychainitem nicht vorhanden");
 		}
 
 		

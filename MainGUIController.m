@@ -14,6 +14,7 @@
 #import <SSCrypto/SSCrypto.h>
 #import "SendMail.h"
 #import "Globals.h"
+#import "Preferences Controller.h"
 
 @implementation MainGUIController
 @synthesize mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
@@ -29,6 +30,10 @@
 		[self setupPopUpButton];
 	}
 	return self;
+}
+
+-(void)awakeFromNib{
+	[self setEnterButtonState];
 }
 
 - (void)setupOwnPropertys{
@@ -72,7 +77,7 @@
 		[enterButton setEnabled:NO];
 		[removeButton setEnabled:NO];
 	}else {
-		[enterButton setEnabled:YES];
+		[self setEnterButtonState];
 		[removeButton setEnabled:YES];
 	}
 }
@@ -94,8 +99,8 @@
 #pragma mark NSNotification Methods
 
 - (void)enableInterface:(NSNotification *)notification{
-	[loadingIndicatorKeyWindow stopAnimation:self];
-	[enterButton setEnabled:YES];
+	[loadingIndicatorKeyWindow stopAnimation:self];	
+	[self setEnterButtonState];
 }
 
 - (void)setupPopUpButton{
@@ -110,56 +115,59 @@
 		NSMenuItem *fail = [[NSMenuItem alloc]initWithTitle:@"" action:nil keyEquivalent:@""];
 		[[keyPopUpButton menu]addItem:fail];
 		[[keyPopUpButton menu]removeAllItems];
+		[enterButton setEnabled:NO];
 		refresh = YES;
 		
 	}else if ([myAppDelegate.keyDataArray count] >= 1) {
 		
 		[[keyPopUpButton menu]removeAllItems];
-
+		
 		int i;
 		int max = [myAppDelegate.keyDataArray count];
 		
 		for(i=0;i<max;i++){
-				KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
-				if (self.mode == 1) {
-					if ([item.privateKey isEqualToString:@"-"]) {
-						
-					}else {
-						NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-						[newItem setTarget:self];
-						[[keyPopUpButton menu] addItem:newItem];
-						[newItem release];
-					}
-				}else{
+			KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+			if (self.mode == 1) {
+				if ([item.privateKey isEqualToString:@"-"]) {
+					
+				}else {
 					NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
 					[newItem setTarget:self];
 					[[keyPopUpButton menu] addItem:newItem];
 					[newItem release];
 				}
+			}else{
+				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+				[newItem setTarget:self];
+				[[keyPopUpButton menu] addItem:newItem];
+				[newItem release];
+			}
 			refresh = NO;
 		}
+	}			
+	
 		
-		if (refresh == NO) {
-			KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
-			
-			self.currentIdentifier = currentItem.keyIdentifier;
-			self.currentPrivateKey = currentItem.privateKey;
-			self.currentPrivateKeyData = currentItem.privateKeyData;
-			self.currentPublicKey = currentItem.publicKey;
-			self.currentPublicKeyData = currentItem.publicKeyData;
-			//	[item release];
-			
-		}else{
+	[self setEnterButtonState];
 		
-			self.currentIdentifier = 0;
-			self.currentPrivateKey = 0;
-			self.currentPrivateKeyData = 0;
-			self.currentPublicKey = 0;
-			self.currentPublicKeyData = 0;
-			
-		}
+	if (refresh == NO) {
+		KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
 		
-	}
+		self.currentIdentifier = currentItem.keyIdentifier;
+		self.currentPrivateKey = currentItem.privateKey;
+		self.currentPrivateKeyData = currentItem.privateKeyData;
+		self.currentPublicKey = currentItem.publicKey;
+		self.currentPublicKeyData = currentItem.publicKeyData;
+		//	[item release];
+		
+	}else{
+		
+		self.currentIdentifier = 0;
+		self.currentPrivateKey = 0;
+		self.currentPrivateKeyData = 0;
+		self.currentPublicKey = 0;
+		self.currentPublicKeyData = 0;
+		
+	}	
 	
 	[self setPopUpStatus];
 }
@@ -232,13 +240,15 @@
 		[enterButton setTitle:@"Encode"];
 		[loadingLabel setStringValue:@"Encode…"];
 		self.mode = 0;
-		[self setupPopUpButton];
 	}else if ([switchButton selectedSegment] == 1) {
 		[enterButton setTitle:@"Decode"];
 		[loadingLabel setStringValue:@"Decode…"];
 		self.mode = 1;
-		[self setupPopUpButton];
+		
 	}
+	[self clearText];
+	[self setupPopUpButton];
+	[self setEnterButtonState];
 }
 
 - (IBAction)pushShowKeyWindow:(id)sender{
@@ -265,65 +275,78 @@
 	NSString *resultString = @"";
 	BOOL fail;
 	
-	if (self.mode == 0){
+	if([[[inputTextView textStorage] string] length] == 0){
+		NSBeep();
 		
-		@try {
-		//	NSLog(@"Text: %@",[[inputTextView textStorage] string]);
-		//	NSLog(@"PKey: %@",[[NSString alloc] initWithData:self.currentPublicKeyData encoding:NSUTF8StringEncoding]);
-			
-			NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
-			NSString *resultString = [resultDict objectForKey:@"encryptedString"];
-			[resultTextView setString:resultString];
-			
-			NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-			[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
-			fail = NO;
-		}
-		@catch (NSException * e) {
-			NSBeep();
-			
-			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-			[alert addButtonWithTitle:@"OK"];
-			[alert setMessageText:[e name]];
-			[alert setInformativeText:[e reason]];
-			[alert setAlertStyle:NSWarningAlertStyle];
-			//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-			[alert runModal];
-			
-			fail = YES;
-		}
+		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		[alert addButtonWithTitle:@"OK"];
+		[alert setMessageText:@"Enter text"];
+		[alert setInformativeText:@"Please enter some text to en/decode"];
+		[alert setAlertStyle:NSWarningAlertStyle];
+		[alert runModal];
 		
-	}else if (self.mode == 1){
+		fail = YES;
+	}else{
 		
-		NSData *test = [[[[inputTextView textStorage] string] dataUsingEncoding:NSUTF8StringEncoding] decodeBase64];
-		
-		@try {
-			NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test key:self.currentPrivateKeyData];
-			NSString *resultString = [[NSString alloc] initWithData:[resultDict objectForKey:@"decryptedData"] encoding:NSUTF8StringEncoding];
-			if(!resultString) {
-				resultString = [resultDict objectForKey:@"decryptedString"];
+		if (self.mode == 0){
+			
+			@try {
+				//	NSLog(@"Text: %@",[[inputTextView textStorage] string]);
+				//	NSLog(@"PKey: %@",[[NSString alloc] initWithData:self.currentPublicKeyData encoding:NSUTF8StringEncoding]);
+				
+				NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
+				NSString *resultString = [resultDict objectForKey:@"encryptedString"];
+				[resultTextView setString:resultString];
+				
+				NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+				[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+				fail = NO;
 			}
-			self.currentEncodedText = resultString;
-			[resultTextView setString:resultString];
+			@catch (NSException * e) {
+				NSBeep();
+				
+				NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+				[alert addButtonWithTitle:@"OK"];
+				[alert setMessageText:[e name]];
+				[alert setInformativeText:[e reason]];
+				[alert setAlertStyle:NSWarningAlertStyle];
+				//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+				[alert runModal];
+				
+				fail = YES;
+			}
 			
-			NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-			[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
-			fail = NO;
+		}else if (self.mode == 1){
+			
+			NSData *test = [[[[inputTextView textStorage] string] dataUsingEncoding:NSUTF8StringEncoding] decodeBase64];
+			
+			@try {
+				NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test key:self.currentPrivateKeyData];
+				NSString *resultString = [[NSString alloc] initWithData:[resultDict objectForKey:@"decryptedData"] encoding:NSUTF8StringEncoding];
+				if(!resultString) {
+					resultString = [resultDict objectForKey:@"decryptedString"];
+				}
+				self.currentEncodedText = resultString;
+				[resultTextView setString:resultString];
+				
+				NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+				[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+				fail = NO;
+			}
+			@catch (NSException * e) {
+				NSBeep();
+				NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+				[alert addButtonWithTitle:@"OK"];
+				[alert setMessageText:[e name]];
+				[alert setInformativeText:[e reason]];
+				[alert setAlertStyle:NSWarningAlertStyle];
+				[alert runModal];
+				//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+				fail = YES;
+			}
 		}
-		@catch (NSException * e) {
-			NSBeep();
-			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-			[alert addButtonWithTitle:@"OK"];
-			[alert setMessageText:[e name]];
-			[alert setInformativeText:[e reason]];
-			[alert setAlertStyle:NSWarningAlertStyle];
-			[alert runModal];
-			//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-			fail = YES;
-		}
+	}	
 		
-	}
-	
 	[resultString release];
 	
 	[loadingSheet orderOut:nil];
@@ -347,7 +370,7 @@
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
 	NSRange myRange = 
-	[publicKeyMutableString rangeOfString:@" "options:NSCaseInsensitivePredicateOption];
+	[publicKeyMutableString rangeOfString:@""options:NSCaseInsensitivePredicateOption];
 	
 	if (myRange.location != NSNotFound) {
 		[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
@@ -360,7 +383,7 @@
 	NSString *contentCache = [NSString stringWithFormat:@"%@:\n\n%@\n\n%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
 	[sendMailContent setString:contentCache];
 
-	[sendMailSubject setStringValue:[NSString stringWithFormat:@"Public key: %@",self.currentPublicKey]];
+	[sendMailSubject setStringValue:MESSAGE_SUBJECT];
 }
 
 - (IBAction)pushSendMail:(id)sender{
@@ -371,6 +394,17 @@
 
 - (IBAction)pushInvitePerson:(id)sender{
 	[self setupChooseKeyPopUpButton];
+	
+	if ([[[chooseKeyPopUpButton menu] itemArray]count] == 0) {
+		[chooseKeyToShareDoneButton setEnabled:NO];
+	}else{
+		[self chooseKeyToShare:sender];
+		[chooseKeyToShareDoneButton setEnabled:YES];
+		[chooseKeyToShareDoneButton highlight:YES];
+	}
+	
+	[chooseKeyToShareDoneButton highlight:YES];
+	
 	[NSApp beginSheet:publicKeyToShareSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
@@ -386,6 +420,7 @@
 	}else{
 		[self chooseKeyToShare:sender];
 		[chooseKeyToShareDoneButton setEnabled:YES];
+		[chooseKeyToShareDoneButton highlight:YES];
 	}
 }
 
@@ -406,12 +441,26 @@
 
  -(IBAction)pushShowInviteWindow:(NSToolbarItem *)sender{
 	 [self setupChooseKeyPopUpButton];
+	 
+	 if ([[[chooseKeyPopUpButton menu] itemArray]count] == 0) {
+		 [chooseKeyToShareDoneButton setEnabled:NO];
+	 }else{
+		 [chooseKeyToShareDoneButton setEnabled:YES];
+		 [chooseKeyToShareDoneButton highlight:YES];
+	 }
+	 
+	 [chooseKeyToShareDoneButton highlight:YES];
 	 [NSApp beginSheet:publicKeyToShareSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
 -(IBAction)pushCancelChooseKeyButton:(id)sender{
 	[publicKeyToShareSheet orderOut:nil];
 	[NSApp endSheet:publicKeyToShareSheet];
+}
+
+
+-(IBAction)showPrefernencesWindow:(id)sender{	
+	[[Preferences_Controller sharedPrefsWindowController] showWindow:nil];
 }
 
 
@@ -439,7 +488,7 @@
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
 	NSRange myRange = 
-	[publicKeyMutableString rangeOfString:@" "options:NSCaseInsensitivePredicateOption];
+	[publicKeyMutableString rangeOfString:@""options:NSCaseInsensitivePredicateOption];
 	
 	if (myRange.location != NSNotFound) {
 		[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
@@ -453,6 +502,17 @@
 	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, self.currentPublicKey]];
 }
 
+-(void)setEnterButtonState{
+	if ([[[inputTextView textStorage] string] length] == 0) {
+		[enterButton setEnabled:NO];
+	}else if ([[[inputTextView textStorage] string] length] >= 1){
+		[enterButton setEnabled:YES];
+	}
+}
+
+-(void)clearText{
+	[inputTextView setString:@""];
+}
 
 #pragma mark -
 #pragma mark Delegate Methods
@@ -461,6 +521,7 @@
 	self.currentText = [[inputTextView textStorage] string];
     int noChars = [self.currentText length];
 	[countChars setStringValue:[NSString stringWithFormat:@"%d",noChars]];
+	[self setEnterButtonState];
 }
 
 -(void)tabView:(NSTabView *)tabV didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
