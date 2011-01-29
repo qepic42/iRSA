@@ -68,6 +68,7 @@
 	[encoder encodeObject:self.privateKeyData forKey:@"privateKeyData"];
 	[encoder encodeObject:self.publicKey forKey:@"publicKey"];
 	[encoder encodeObject:self.publicKeyData forKey:@"publicKeyData"];
+//	NSLog(@"Encode:\n%@",self.publicKey);
 }
 
 -(id)initWithCoder:(NSCoder *)decoder{
@@ -79,7 +80,7 @@
 		self.privateKeyData = [decoder decodeObjectForKey:@"privateKeyData"];
 		self.publicKey = [decoder decodeObjectForKey:@"publicKey"];
 		self.publicKeyData = [decoder decodeObjectForKey:@"publicKeyData"];
-		
+//		NSLog(@"Decode:\n%@",self.publicKey);
 //		[self decodePrivateKey];
 	}
 	return self;
@@ -88,21 +89,21 @@
 
 
 -(void)decodePrivateKey{
-	NSLog(@"Decode: %@",self.privateKey);
+//	NSLog(@"Decode: %@",self.privateKey);
 	pwController = [[PasswordController alloc]init];
 	NSDictionary *dict = [CryptBySSCrypto decodePrivateKeyWithData:pwController.symetricKeyData key:self.privateKeyData];
 	self.privateKey = [dict objectForKey:@"decryptedString"];
 	self.privateKeyData = [dict objectForKey:@"decryptedPrivateKey"];
-	NSLog(@"Decoded: %@",self.privateKey);
+//	NSLog(@"Decoded: %@",self.privateKey);
 }
 
 -(void)encodePrivateKey{
-	NSLog(@"Encode: %@",self.privateKey);
+//	NSLog(@"Encode: %@",self.privateKey);
 	pwController = [[PasswordController alloc]init];
 	NSDictionary *dict = [CryptBySSCrypto encodePrivateKeyWithData:pwController.symetricKeyData key:self.privateKeyData];
 	self.privateKey = [dict objectForKey:@"encryptedString"];
 	self.privateKeyData = [dict objectForKey:@"encryptedPrivateKey"];
-	NSLog(@"Encoded: %@",self.privateKey);
+//	NSLog(@"Encoded: %@",self.privateKey);
 }
 
 

@@ -17,7 +17,7 @@
 #import "Preferences Controller.h"
 
 @implementation MainGUIController
-@synthesize mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
+@synthesize notificationPublicKeyDict, sendMailByNotification, mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
 
 #pragma mark -
 #pragma mark Initialization & Dealloc
@@ -69,6 +69,11 @@
 												 name:@"endKeyGenerate"
 											   object:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(sendMailByNotification:)
+												 name:@"sendMail"
+											   object:nil];
+	
 }
 
 - (void)setPopUpStatus{
@@ -83,6 +88,7 @@
 }
 
 - (void) dealloc{
+	[notificationPublicKeyDict release];
 	[currentEncodedText release];
 	[currentPublicKeyData release];
 	[currentPrivateKeyData release];
@@ -231,6 +237,11 @@
 	[loadingIndicatorKeyWindow stopAnimation:self];
 }
 
+-(void)sendMailByNotification:(NSNotification *)notification{
+	self.sendMailByNotification = YES;
+	self.notificationPublicKeyDict = [notification userInfo];
+	[self openInviteSheet];
+}
 
 #pragma mark -
 #pragma mark IBActions
@@ -365,6 +376,7 @@
 }
 
 - (IBAction)pushShareByEMail:(id)sender{
+	
 	[NSApp beginSheet:mailSetupWindow modalForWindow:resultWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
@@ -380,7 +392,8 @@
 	
 	self.currentPublicKey = publicKeyMutableString;
 	
-	NSString *contentCache = [NSString stringWithFormat:@"%@:\n\n%@\n\n%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
+	NSString *contentCache = contentCache = [NSString stringWithFormat:@"%@:\n\n%@\n\n%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
+
 	[sendMailContent setString:contentCache];
 
 	[sendMailSubject setStringValue:MESSAGE_SUBJECT];
@@ -393,19 +406,8 @@
 }
 
 - (IBAction)pushInvitePerson:(id)sender{
-	[self setupChooseKeyPopUpButton];
-	
-	if ([[[chooseKeyPopUpButton menu] itemArray]count] == 0) {
-		[chooseKeyToShareDoneButton setEnabled:NO];
-	}else{
-		[self chooseKeyToShare:sender];
-		[chooseKeyToShareDoneButton setEnabled:YES];
-		[chooseKeyToShareDoneButton highlight:YES];
-	}
-	
-	[chooseKeyToShareDoneButton highlight:YES];
-	
-	[NSApp beginSheet:publicKeyToShareSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+	[self openInviteSheet];
+	self.sendMailByNotification = YES;
 }
 
 - (IBAction)pushChoosedKeyToShare:(id)sender{
@@ -430,8 +432,10 @@
 }
 
 - (IBAction)pushShowPreferencesWindow:(NSToolbarItem *)sender{
-	[preferencesWindow orderFront:self];
-	[preferencesWindow makeKeyWindow];
+	[oldPreferencesWindow orderFront:self];
+	[oldPreferencesWindow makeKeyWindow];
+//	[preferencesWindow orderFront:self];
+//	[preferencesWindow makeKeyWindow];
 }
 
 
@@ -460,7 +464,10 @@
 
 
 -(IBAction)showPrefernencesWindow:(id)sender{	
-	[[Preferences_Controller sharedPrefsWindowController] showWindow:nil];
+	//[[Preferences_Controller sharedPrefsWindowController] showWindow:nil];
+	[oldPreferencesWindow orderFront:self];
+	[oldPreferencesWindow center];
+	[oldPreferencesWindow makeKeyWindow];
 }
 
 
@@ -483,8 +490,16 @@
 }
 
 -(void)openInviteSheet{
-	[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	
+	if (self.sendMailByNotification == NO){
+		NSLog(@"NO");
+		[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+	}else {
+		NSLog(@"YES");
+		[NSApp beginSheet:mailSetupWindow modalForWindow:infoSheet modalDelegate:self didEndSelector:nil contextInfo:nil];
+
+	}
+
 	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[self.currentPublicKey length]];
 	[publicKeyMutableString setString: self.currentPublicKey];
 	NSRange myRange = 
@@ -499,7 +514,14 @@
 	self.currentPublicKey = publicKeyMutableString;
 	
 	[sendMailSubject setStringValue:INVITE_SUBJECT];
-	[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, self.currentPublicKey]];
+	
+	if (self.sendMailByNotification == YES) {
+		NSString *publicKey = [self.notificationPublicKeyDict objectForKey:@"publicKey"];
+		NSLog(@"pubK: %@",publicKey);
+		[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, publicKey]];
+	}else {
+		[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, self.currentPublicKey]];
+	}
 }
 
 -(void)setEnterButtonState{

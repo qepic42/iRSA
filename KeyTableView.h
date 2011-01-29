@@ -18,6 +18,9 @@
 	IBOutlet NSButton *keyAddEnterButton;
 	IBOutlet NSTextField *enterOwnPublicKey;
 	IBOutlet NSTabView *keyAddMode;
+	IBOutlet NSWindow *infoSheet;
+	IBOutlet NSBox *infoBox;
+	IBOutlet NSTextView *publicKeyView;
 	NSMutableArray *dataArray;
 	NSTableView *myTable;
 	NSArray *bitArray;
@@ -32,14 +35,19 @@
 @property (nonatomic,retain)NSArray *bitArray;
 @property (nonatomic,retain)NSNumber *currentKeyLength;
 
--(void)addItem:(NSNotification *)notification;
 -(IBAction)pushAddNewKey:(id)sender;
 -(IBAction)pushRemoveKey:(id)sender;
 -(IBAction)pushGenerateSetupKey:(id)sender;
 -(IBAction)pushChooseBit:(id)sender;
 -(IBAction)pushCancelGenerate:(id)sender;
+-(IBAction)doubleClickAction:(NSTableView *)sender;
+-(IBAction)pushDoneButton:(id)sender;
+-(IBAction)pushCancelButton:(id)sender;
+-(IBAction)pushShareByMailButton:(id)sender;
+-(void)addItem:(NSNotification *)notification;
 -(void)setupKeyPopUpButton;
 -(void)setupBitPopupButton;
+
 
 
 @end

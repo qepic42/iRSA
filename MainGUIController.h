@@ -20,6 +20,8 @@
 	IBOutlet NSWindow *mailSetupWindow;
 	IBOutlet NSWindow *publicKeyToShareSheet;
 	IBOutlet NSWindow *preferencesWindow;
+	IBOutlet NSWindow *infoSheet;
+	IBOutlet NSWindow *oldPreferencesWindow;
 	IBOutlet NSButton *enterButton;
 	IBOutlet NSButton *removeButton;
 	IBOutlet NSButton *keyPopUpButton;
@@ -47,6 +49,7 @@
 	int tab;
 	int loopCount;
 	BOOL mode;
+	BOOL sendMailByNotification;
 	KeyGenerate *keyClass;
 	NSString *currentText;
 	NSString *currentEncodedText;
@@ -55,10 +58,12 @@
 	NSString *currentPrivateKey;
 	NSData *currentPublicKeyData;
 	NSData *currentPrivateKeyData;
+	NSDictionary *notificationPublicKeyDict;
 	
 }
 
 @property()BOOL mode;
+@property()BOOL sendMailByNotification;
 @property() int tab;
 @property() int loopCount;
 @property(nonatomic,retain)NSString *currentIdentifier;
@@ -68,6 +73,7 @@
 @property(nonatomic,retain)NSString *currentEncodedText;
 @property(nonatomic,retain)NSData *currentPublicKeyData;
 @property(nonatomic,retain)NSData *currentPrivateKeyData;
+@property(nonatomic,retain)NSDictionary *notificationPublicKeyDict;
 
 
 -(IBAction)pushEnter:(id)sender;
@@ -101,5 +107,6 @@
 -(void)setupChooseKeyPopUpButton;
 -(void)setEnterButtonState;
 -(void)clearText;
+-(void)sendMailByNotification:(NSNotification *)notification;
 
 @end

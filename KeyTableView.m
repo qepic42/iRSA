@@ -9,6 +9,7 @@
 #import "KeyTableView.h"
 #import "KeyPropertys.h"
 #import "iRSAAppDelegate.h"
+#import "SendMail.h"
 
 @implementation KeyTableView
 @synthesize dataArray, myTable, currentKeyLength, bitArray, keyAddModeInt;
@@ -77,6 +78,8 @@
 	[self setupKeyPopUpButton];
 	[self.myTable noteNumberOfRowsChanged];
 	
+	NSLog(@"Add:\n%@",[[notification userInfo]objectForKey:@"publicKey"]);
+	
 	NSInteger newRowIndex = [myAppDelegate.keyDataArray count]-1;
 	[myTable selectRowIndexes:[NSIndexSet indexSetWithIndex:newRowIndex]
 		 byExtendingSelection:NO];
@@ -125,6 +128,7 @@
 		
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		NSData *cache = [[enterOwnPublicKey stringValue] dataUsingEncoding:NSUTF8StringEncoding];
+		NSLog(@"Add:\n%@",[enterOwnPublicKey stringValue]);
 		[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[enterOwnPublicKey stringValue] :@"-" :cache :nil]];
 
 		[self setupKeyPopUpButton];
@@ -204,6 +208,41 @@
 		[keyAddEnterButton setTitle:@"Enter"];
 	}
 
+}
+
+- (IBAction)doubleClickAction:(NSTableView *)sender {
+	
+	if ([sender clickedColumn] == 0){
+	
+	}else if ([sender clickedColumn] >= 1){
+		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:[sender clickedRow]];
+	//	NSLog(@"Item Nummer: %i",[sender clickedRow]);
+	//	NSLog(@"ItemIdentifier: %@",item.keyIdentifier);
+	//	NSLog(@"PublicKey: %@",item.publicKey);
+		[infoBox setTitle:item.keyIdentifier];
+		[publicKeyView setString:item.publicKey];
+		
+		[NSApp beginSheet:infoSheet modalForWindow:keyTableView modalDelegate:self didEndSelector:nil contextInfo:@""];
+	}
+	
+}
+
+-(IBAction)pushDoneButton:(id)sender{
+	[infoSheet orderOut:nil];
+	[NSApp endSheet:infoSheet];
+}
+
+-(IBAction)pushCancelButton:(id)sender{
+	[infoSheet orderOut:nil];
+	[NSApp endSheet:infoSheet];
+}
+
+-(IBAction)pushShareByMailButton:(id)sender{
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[[publicKeyView textStorage]string],@"publicKey",nil];
+//	NSLog(@"fail: %@",[[publicKeyView textStorage]string]);
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center postNotificationName:@"sendMail" object:nil userInfo:dict];
 }
 
 @end
