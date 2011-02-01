@@ -46,7 +46,7 @@
 
 -(NSDictionary *)generateKeys:(NSNumber *)keyLenght{
 	
-	PasswordController *pwController = [[PasswordController alloc]init];
+	//PasswordController *pwController = [[PasswordController alloc]init];
 	
 	SSCrypto *crypto;
 	
@@ -54,7 +54,7 @@
 	NSData *publicKeyData = [SSCrypto generateRSAPublicKeyFromPrivateKey:privateKeyData];
 	
 	NSString *privateKeyString = [[NSString alloc]initWithData:privateKeyData encoding:NSUTF8StringEncoding];
-	
+	/*
 	crypto = [[SSCrypto alloc] initWithSymmetricKey:[pwController.symetricKey dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	[crypto setClearTextWithString:privateKeyString];
@@ -62,10 +62,11 @@
 	NSData *cipherText = [crypto encrypt:@"aes256"];
 	
 	NSString *test = [cipherText encodeBase64];
+	*/
+	 
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:privateKeyString, @"privateKeyString", privateKeyData,@"privateKeyData", publicKeyData,@"publicKeyData",nil];
 	
-	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:test, @"privateKeyString", cipherText,@"privateKeyData", publicKeyData,@"publicKeyData",nil];
-	
-	[pwController release];
+//	[pwController release];
 	[privateKeyString release];
 	[crypto release];	
 	

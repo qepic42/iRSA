@@ -14,7 +14,7 @@
 #import <SSCrypto/SSCrypto.h>
 #import "SendMail.h"
 #import "Globals.h"
-#import "Preferences Controller.h"
+#import "PreferencesController.h"
 
 @implementation MainGUIController
 @synthesize notificationPublicKeyDict, sendMailByNotification, mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
@@ -113,12 +113,12 @@
 	
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	BOOL refresh;
+	BOOL refresh = NO;
 	
 	if([myAppDelegate.keyDataArray count] == 0){
 		
 		[[keyPopUpButton menu]removeAllItems];
-		NSMenuItem *fail = [[NSMenuItem alloc]initWithTitle:@"" action:nil keyEquivalent:@""];
+		NSMenuItem *fail = [[[NSMenuItem alloc]initWithTitle:@"" action:nil keyEquivalent:@""]autorelease];
 		[[keyPopUpButton menu]addItem:fail];
 		[[keyPopUpButton menu]removeAllItems];
 		[enterButton setEnabled:NO];
@@ -392,7 +392,7 @@
 	
 	self.currentPublicKey = publicKeyMutableString;
 	
-	NSString *contentCache = contentCache = [NSString stringWithFormat:@"%@:\n\n%@\n\n%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
+	NSString *contentCache= [NSString stringWithFormat:@"%@:\n\n%@\n\n%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
 
 	[sendMailContent setString:contentCache];
 
@@ -432,10 +432,10 @@
 }
 
 - (IBAction)pushShowPreferencesWindow:(NSToolbarItem *)sender{
-	[oldPreferencesWindow orderFront:self];
-	[oldPreferencesWindow makeKeyWindow];
-//	[preferencesWindow orderFront:self];
-//	[preferencesWindow makeKeyWindow];
+//	[oldPreferencesWindow orderFront:self];
+//	[oldPreferencesWindow makeKeyWindow];
+	[preferencesWindow orderFront:self];
+	[preferencesWindow makeKeyWindow];
 }
 
 
@@ -464,10 +464,10 @@
 
 
 -(IBAction)showPrefernencesWindow:(id)sender{	
-	//[[Preferences_Controller sharedPrefsWindowController] showWindow:nil];
-	[oldPreferencesWindow orderFront:self];
-	[oldPreferencesWindow center];
-	[oldPreferencesWindow makeKeyWindow];
+	[[PreferencesController sharedPrefsWindowController] showWindow:nil];
+//	[oldPreferencesWindow orderFront:self];
+//	[oldPreferencesWindow center];
+//	[oldPreferencesWindow makeKeyWindow];
 }
 
 
@@ -492,10 +492,8 @@
 -(void)openInviteSheet{
 	
 	if (self.sendMailByNotification == NO){
-		NSLog(@"NO");
 		[NSApp beginSheet:mailSetupWindow modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
 	}else {
-		NSLog(@"YES");
 		[NSApp beginSheet:mailSetupWindow modalForWindow:infoSheet modalDelegate:self didEndSelector:nil contextInfo:nil];
 
 	}

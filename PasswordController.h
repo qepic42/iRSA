@@ -17,4 +17,8 @@
 @property(nonatomic,retain)NSData *symetricKeyData;
 @property(nonatomic,retain)NSString *symetricKey;
 
++(void)removePrivateKeyFromKeychains:(NSString *)identifier;
++(void)addPrivateKeyToKeychains:(NSString *)privateKey:(NSString *)identifier;
++(NSString *)getPrivateKeyFromKeychains:(NSString *)identifier;
+
 @end

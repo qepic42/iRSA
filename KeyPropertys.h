@@ -13,6 +13,7 @@
 	NSString *keyIdentifier; 
 	NSString *privateKey;
 	NSString *publicKey;
+	NSString *keyPerson;
 	NSData *privateKeyData;
 	NSData *publicKeyData;
 	
@@ -22,15 +23,16 @@
 @property(nonatomic,retain)NSString *keyIdentifier;
 @property(nonatomic,retain)NSString *privateKey;
 @property(nonatomic,retain)NSString *publicKey;
+@property(nonatomic,retain)NSString *keyPerson;
 @property(nonatomic,retain)NSData *privateKeyData;
 @property(nonatomic,retain)NSData *publicKeyData;
 
 + (id)keyItem;
-+ (id)keyItemWithData:(NSString*)identifier:(NSString *)publicKeyData: (NSString *)privateKeyData:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData;
-- (id)initKeyItemWithData:(NSString*)identifier:(NSString *)publicKeyData: (NSString *)privateKeyData:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData;
++ (id)keyItemWithData:(NSString*)identifier:(NSString *)publicKeyData: (NSString *)privateKeyData:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData: (NSString *)person;
+- (id)initKeyItemWithData:(NSString*)identifier:(NSString *)publicKeyString: (NSString *)privateKeyString:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData: (NSString *)person;
 - (void)setupInstanceVariables;
 
--(void)decodePrivateKey;
--(void)encodePrivateKey;
+-(NSDictionary *)getPrivateKeyFromKeychain:(NSString *)identifier;
+-(void)setPrivateKeyToKeychain:(NSString *)privateKeyParameter :(NSString *)identfier;
 
 @end

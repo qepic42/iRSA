@@ -12,7 +12,7 @@
 #import "SendMail.h"
 
 @implementation KeyTableView
-@synthesize dataArray, myTable, currentKeyLength, bitArray, keyAddModeInt;
+@synthesize dataArray, myTable, currentKeyLength, bitArray, keyAddModeInt, otherTable;
 
 
 #pragma mark -
@@ -25,7 +25,6 @@
 		self.bitArray = [[NSArray alloc]init];
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		myAppDelegate.keyDataArray = [[NSMutableArray alloc]init];
-		[myTable setFocusRingType:NSFocusRingTypeNone];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(addItem:)
@@ -37,6 +36,11 @@
 
 - (void)awakeFromNib{
 	[self setupBitPopupButton];
+	[myTable setTarget:self];
+	[otherTable setTarget:self];
+	[myTable setDoubleAction:@selector(doubleClickToRow:)];
+	[otherTable setDoubleAction:@selector(doubleClickToRow:)];
+
 }
 
 -(void)setupKeyPopUpButton{
@@ -59,6 +63,7 @@
 }
 
 - (void) dealloc{
+	[otherTable release];
 	[bitArray release];
 	[currentKeyLength release];
 	[keyClass release];
@@ -73,18 +78,20 @@
 - (void)addItem:(NSNotification *)notification{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[[notification userInfo]objectForKey:@"publicKey"] :[[notification userInfo]objectForKey:@"privateKey"] :[[notification userInfo]objectForKey:@"publicKeyData"] :[[notification userInfo]objectForKey:@"privateKeyData"]]];
+	[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[[notification userInfo]objectForKey:@"publicKey"] :[[notification userInfo]objectForKey:@"privateKey"] :[[notification userInfo]objectForKey:@"publicKeyData"] :[[notification userInfo]objectForKey:@"privateKeyData"]: @"noOne"]];
 	
 	[self setupKeyPopUpButton];
 	[self.myTable noteNumberOfRowsChanged];
-	
-	NSLog(@"Add:\n%@",[[notification userInfo]objectForKey:@"publicKey"]);
+	[self.otherTable noteNumberOfRowsChanged];
 	
 	NSInteger newRowIndex = [myAppDelegate.keyDataArray count]-1;
 	[myTable selectRowIndexes:[NSIndexSet indexSetWithIndex:newRowIndex]
 		 byExtendingSelection:NO];
 	
 	[myTable editColumn:[myTable columnWithIdentifier:@"identifier"]
+					row:newRowIndex withEvent:nil select:YES];
+	
+	[myTable editColumn:[myTable columnWithIdentifier:@"person"]
 					row:newRowIndex withEvent:nil select:YES];
 	
 }
@@ -102,6 +109,7 @@
 	[myAppDelegate.keyDataArray removeObjectsAtIndexes:[self.myTable selectedRowIndexes]];
 	[self setupKeyPopUpButton];
 	[self.myTable noteNumberOfRowsChanged];
+	[self.otherTable noteNumberOfRowsChanged];
 	[self setupKeyPopUpButton];
 }
 
@@ -128,17 +136,21 @@
 		
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		NSData *cache = [[enterOwnPublicKey stringValue] dataUsingEncoding:NSUTF8StringEncoding];
-		NSLog(@"Add:\n%@",[enterOwnPublicKey stringValue]);
-		[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[enterOwnPublicKey stringValue] :@"-" :cache :nil]];
-
+	
+		[myAppDelegate.keyDataArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[enterOwnPublicKey stringValue] :@"-" :cache :nil :@"noOne"]];
+		
 		[self setupKeyPopUpButton];
 		[self.myTable noteNumberOfRowsChanged];
+		[self.otherTable noteNumberOfRowsChanged];
 		
 		NSInteger newRowIndex = [myAppDelegate.keyDataArray count]-1;
 		[myTable selectRowIndexes:[NSIndexSet indexSetWithIndex:newRowIndex]
 			 byExtendingSelection:NO];
 		
 		[myTable editColumn:[myTable columnWithIdentifier:@"identifier"]
+						row:newRowIndex withEvent:nil select:YES];
+		
+		[myTable editColumn:[myTable columnWithIdentifier:@"person"]
 						row:newRowIndex withEvent:nil select:YES];
 	}
 	
@@ -161,7 +173,33 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-    return [myAppDelegate.keyDataArray count];
+	
+	NSMutableArray *externalKeys = [[[NSMutableArray alloc]init]autorelease];
+	NSMutableArray *internalKeys = [[[NSMutableArray alloc]init]autorelease];
+	
+	int max = [myAppDelegate.keyDataArray count];
+	int i;
+	
+	for(i=0;i<max;i++){
+		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+		
+		if ([item.privateKey isEqualToString:@"-"]) {
+			[externalKeys addObject:item];
+		}else {
+			[internalKeys addObject:item];
+		}
+
+	}
+	
+	NSInteger returnInteger = 0;
+	
+	if ([tableView tag] == 1) {
+		returnInteger = [internalKeys count];
+	}else {
+		returnInteger = [externalKeys count];
+	}
+
+    return returnInteger;
 }
 
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification {
@@ -175,28 +213,88 @@
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-	KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:rowIndex];
+	//KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:rowIndex];
 	
 	NSString *returnString;
 	
-	if ([[aTableColumn identifier] isEqualToString:@"identifier"]){
-		returnString = item.keyIdentifier;
-	}else if ([[aTableColumn identifier] isEqualToString:@"publicKey"]){
-		returnString = item.publicKey;
-	}else if ([[aTableColumn identifier] isEqualToString:@"privateKey"]){
-		returnString = item.privateKey;
-	}
+	int max = [myAppDelegate.keyDataArray count];
+	int i;
 	
-	[self setupKeyPopUpButton];
+	for(i=rowIndex;i<max;i++){
+		
+		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
+		
+		if ([aTableView tag] == 1) {
+			
+			if ([item.privateKey isEqualToString:@"-"]) {
+				continue;
+			}else if (![item.privateKey isEqualToString:@"-"]) {
+				if ([[aTableColumn identifier] isEqualToString:@"identifier"]){
+					returnString = item.keyIdentifier;
+				}else if ([[aTableColumn identifier] isEqualToString:@"publicKey"]){
+					returnString = item.publicKey;
+				}else if ([[aTableColumn identifier] isEqualToString:@"privateKey"]){
+					returnString = item.privateKey;
+				}
+				[self setupKeyPopUpButton];
+			}
+			
+		}else if ([aTableView tag] == 2){
+			
+			if ([item.privateKey isEqualToString:@"-"]) {
+				
+				if ([[aTableColumn identifier] isEqualToString:@"identifier"]){
+					returnString = item.keyIdentifier;
+				}else if ([[aTableColumn identifier] isEqualToString:@"publicKey"]){
+					returnString = item.publicKey;
+				}else if ([[aTableColumn identifier] isEqualToString:@"person"]){
+					returnString = item.keyPerson;
+				}
+			}else if (![item.privateKey isEqualToString:@"-"]) {
+				continue;
+			}
+			
+			
+		}
+		
+	}
+
+	
 	
 	return returnString;
 }
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+	
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:rowIndex];
-	[self setupKeyPopUpButton];
-	item.keyIdentifier = anObject;
+
+	if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
+		NSLog(@"identifier");
+		item.keyIdentifier = anObject;
+		[self setupKeyPopUpButton];
+	}else {
+		NSLog(@"person");
+		item.keyPerson = anObject;
+
+	}
+
+	
+	/*
+	if ([aTableView tag] == 1) {
+		if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
+			[self setupKeyPopUpButton];
+			item.keyIdentifier = anObject;
+		}
+	}else if ([aTableView tag] == 2) {
+		if ([[aTableColumn identifier] isEqualToString:@"person"]) {
+			item.keyPerson = anObject;
+		}else if ([[aTableColumn identifier] isEqualToString:@"identifier"]) {
+			[self setupKeyPopUpButton];
+			item.keyIdentifier = anObject;
+		}
+	}
+	*/
 }
 
 - (void)tabView:(NSTabView *)tabV didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
@@ -208,6 +306,22 @@
 		[keyAddEnterButton setTitle:@"Enter"];
 	}
 
+}
+
+-(void)doubleClickToRow:(NSTableView *)sender{
+	if ([sender clickedColumn] == 0){
+		NSLog(@"0!");
+	}else if ([sender clickedColumn] >= 1){
+		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+		KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:[sender clickedRow]];
+		//	NSLog(@"Item Nummer: %i",[sender clickedRow]);
+		//	NSLog(@"ItemIdentifier: %@",item.keyIdentifier);
+		//	NSLog(@"PublicKey: %@",item.publicKey);
+		[infoBox setTitle:item.keyIdentifier];
+		[publicKeyView setString:item.publicKey];
+		
+		[NSApp beginSheet:infoSheet modalForWindow:keyTableView modalDelegate:self didEndSelector:nil contextInfo:@""];
+	}
 }
 
 - (IBAction)doubleClickAction:(NSTableView *)sender {

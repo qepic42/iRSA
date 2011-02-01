@@ -12,9 +12,10 @@
 #import "CryptBySSCrypto.h"
 
 @implementation KeyPropertys
-@synthesize keyIdentifier, privateKey, publicKey, privateKeyData, publicKeyData;
+@synthesize keyIdentifier, privateKey, publicKey, privateKeyData, publicKeyData, keyPerson;
 
 - (void) dealloc{
+	[keyPerson release];
 	[pwController release];
 	[publicKeyData release];
 	[privateKeyData release];
@@ -30,8 +31,8 @@
 	return [[[KeyPropertys alloc] init] autorelease];
 }
 
-+ (id)keyItemWithData:(NSString*)identifier:(NSString *)publicKeyData: (NSString *)privateKeyData:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData; {
-	return [[[KeyPropertys alloc] initKeyItemWithData:identifier :publicKeyData :privateKeyData :publicKeyNSData :privateKeyNSData]autorelease];
++ (id)keyItemWithData:(NSString*)identifier:(NSString *)publicKeyData: (NSString *)privateKeyData:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData: (NSString *)person {
+	return [[[KeyPropertys alloc] initKeyItemWithData:identifier :publicKeyData :privateKeyData :publicKeyNSData :privateKeyNSData :person]autorelease];
 }
 
 - (void)setupInstanceVariables {
@@ -47,7 +48,7 @@
 	return self;
 }
 																		 
-- (id)initKeyItemWithData:(NSString*)identifier:(NSString *)publicKeyString: (NSString *)privateKeyString:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData;
+- (id)initKeyItemWithData:(NSString*)identifier:(NSString *)publicKeyString: (NSString *)privateKeyString:(NSData *)publicKeyNSData: (NSData *)privateKeyNSData: (NSString *)person;
 {
 	self = [super init];
 	if (self != nil) {
@@ -57,55 +58,50 @@
 		self.keyIdentifier = identifier;
 		self.publicKeyData = publicKeyNSData;
 		self.privateKeyData = privateKeyNSData;
+		self.keyPerson = person;
 	}
 	return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder{
-//	[self encodePrivateKey];
 	[encoder encodeObject:self.keyIdentifier forKey:@"keyIdentifier"];
-	[encoder encodeObject:self.privateKey forKey:@"privateKey"];
-	[encoder encodeObject:self.privateKeyData forKey:@"privateKeyData"];
+	[self setPrivateKeyToKeychain:self.privateKey :self.keyIdentifier];
+	//[encoder encodeObject:self.privateKey forKey:@"privateKey"];
+	//[encoder encodeObject:self.privateKeyData forKey:@"privateKeyData"];
 	[encoder encodeObject:self.publicKey forKey:@"publicKey"];
 	[encoder encodeObject:self.publicKeyData forKey:@"publicKeyData"];
-//	NSLog(@"Encode:\n%@",self.publicKey);
-}
+	[encoder encodeObject:self.keyPerson forKey:@"keyPerson"];}
 
 -(id)initWithCoder:(NSCoder *)decoder{
 	
 	self = [super init];
 	if (self != nil) {
 		self.keyIdentifier = [decoder decodeObjectForKey:@"keyIdentifier"];
-		self.privateKey = [decoder decodeObjectForKey:@"privateKey"];
-		self.privateKeyData = [decoder decodeObjectForKey:@"privateKeyData"];
+	//	self.privateKey = [decoder decodeObjectForKey:@"privateKey"];
+		NSDictionary *dict = [self getPrivateKeyFromKeychain:self.keyIdentifier];
+		self.privateKeyData = [dict objectForKey:@"privateKeyData"];
+		self.privateKey = [dict objectForKey:@"privateKey"];
+		//self.privateKeyData = [decoder decodeObjectForKey:@"privateKeyData"];
 		self.publicKey = [decoder decodeObjectForKey:@"publicKey"];
 		self.publicKeyData = [decoder decodeObjectForKey:@"publicKeyData"];
-//		NSLog(@"Decode:\n%@",self.publicKey);
-//		[self decodePrivateKey];
+		self.keyPerson = [decoder decodeObjectForKey:@"keyPerson"];
 	}
 	return self;
 }
 
 
-
--(void)decodePrivateKey{
-//	NSLog(@"Decode: %@",self.privateKey);
-	pwController = [[PasswordController alloc]init];
-	NSDictionary *dict = [CryptBySSCrypto decodePrivateKeyWithData:pwController.symetricKeyData key:self.privateKeyData];
-	self.privateKey = [dict objectForKey:@"decryptedString"];
-	self.privateKeyData = [dict objectForKey:@"decryptedPrivateKey"];
-//	NSLog(@"Decoded: %@",self.privateKey);
+-(NSDictionary *)getPrivateKeyFromKeychain:(NSString *)identifier{
+	NSString *privateKeyParamter = [PasswordController getPrivateKeyFromKeychains:identifier ];
+	NSData *data = [privateKeyParamter dataUsingEncoding:NSUTF8StringEncoding];
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:privateKeyParamter,@"privateKey",data,@"privateKeyData",nil];
+	
+	return dict;
 }
 
--(void)encodePrivateKey{
-//	NSLog(@"Encode: %@",self.privateKey);
-	pwController = [[PasswordController alloc]init];
-	NSDictionary *dict = [CryptBySSCrypto encodePrivateKeyWithData:pwController.symetricKeyData key:self.privateKeyData];
-	self.privateKey = [dict objectForKey:@"encryptedString"];
-	self.privateKeyData = [dict objectForKey:@"encryptedPrivateKey"];
-//	NSLog(@"Encoded: %@",self.privateKey);
+-(void)setPrivateKeyToKeychain:(NSString *)privateKeyParameter :(NSString *)identfier{
+	[PasswordController addPrivateKeyToKeychains:privateKeyParameter :identfier];
 }
-
 
 
 @end

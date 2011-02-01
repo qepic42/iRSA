@@ -21,8 +21,10 @@
 	IBOutlet NSWindow *infoSheet;
 	IBOutlet NSBox *infoBox;
 	IBOutlet NSTextView *publicKeyView;
+	IBOutlet NSTabView *keyModeTab;
 	NSMutableArray *dataArray;
 	NSTableView *myTable;
+	NSTableView *otherTable;
 	NSArray *bitArray;
 	KeyGenerate *keyClass;
 	int keyAddModeInt;
@@ -31,6 +33,7 @@
 
 @property (nonatomic,retain)NSMutableArray *dataArray;
 @property (nonatomic, assign)IBOutlet NSTableView *myTable;
+@property (nonatomic, assign)IBOutlet NSTableView *otherTable;
 @property int keyAddModeInt;
 @property (nonatomic,retain)NSArray *bitArray;
 @property (nonatomic,retain)NSNumber *currentKeyLength;
@@ -47,7 +50,7 @@
 -(void)addItem:(NSNotification *)notification;
 -(void)setupKeyPopUpButton;
 -(void)setupBitPopupButton;
-
+-(void)doubleClickToRow:(NSTableView *)sender;
 
 
 @end

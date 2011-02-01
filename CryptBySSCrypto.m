@@ -14,8 +14,6 @@
 
 +(NSDictionary *)encodeByRSAWithData:(NSString *)clearText key:(NSData *)publicKey{
 	
-//	NSLog(@"PKey: %@",[[NSString alloc] initWithData:publicKey encoding:NSUTF8StringEncoding]);
-	
 	SSCrypto *crypto;
 	
 	crypto = [[SSCrypto alloc] initWithPublicKey:publicKey];
@@ -42,7 +40,34 @@
 +(NSDictionary *)decodeByRSAWithData:(NSData *)encodedText key:(NSData *)privateKey{
 	
 	SSCrypto *crypto;
+	
+	// Now let RSA working
+	crypto = [[SSCrypto alloc] initWithPrivateKey:privateKey];
+	
+	[crypto setCipherText:encodedText];
+	NSData *decryptedData = [crypto decrypt];
+	NSString *decryptedString = [decryptedData encodeBase64];
+	
+	if (encodedText != nil) {
+		if (decryptedData == nil) {
+			NSException *e = [[NSException alloc]initWithName:@"Decode fails!" reason:@"No symmetric key or private key is set!" userInfo:nil];
+			@throw e;
+		}
+	}
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:decryptedData,@"decryptedData",decryptedString,@"decryptedString", nil];
+	
+	[crypto release];
+	
+	return dict;
+}
+
+/* Old using aes256
++(NSDictionary *)decodeByRSAWithData:(NSData *)encodedText key:(NSData *)privateKey{
+	
+	SSCrypto *crypto;
 	PasswordController	*pwController = [[PasswordController alloc]init];
+	
 	// Decrypt privateKey
 	crypto = [[SSCrypto alloc] initWithSymmetricKey:[pwController.symetricKey dataUsingEncoding:NSUTF8StringEncoding]];
 	
@@ -77,6 +102,7 @@
 	
 	return dict;
 }
+ */
 
 +(NSDictionary *)encodePrivateKeyWithData:(NSData *)password key:(NSData *)privateKey{
 	

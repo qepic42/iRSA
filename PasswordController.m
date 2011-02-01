@@ -24,15 +24,39 @@
 			NSDictionary *dict = [CryptBySSCrypto generateSymetricKeyWith:[NSNumber numberWithInt:128]];
 			self.symetricKey = [dict objectForKey:@"symetricKey"];
 			[EMInternetKeychainItem addInternetKeychainItemForServer:@"iRSA" withUsername:@"aes256-key" password:self.symetricKey path:@"/" port:128 protocol:kSecProtocolTypeFTP];
-	//		NSLog(@"Keychainitem nicht vorhanden");
 		}else {
 			self.symetricKey = keychainItem.password;
-	//		NSLog(@"Keychainitem nicht vorhanden");
 		}
 
 		
 	}
 	return self;
+}
+
+
++(void)addPrivateKeyToKeychains:(NSString *)privateKey:(NSString *)identifier{
+	[EMInternetKeychainItem unlockKeychain];
+	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:identifier path:@"/" port:42 protocol:kSecProtocolTypeSSH];
+	
+	if (keychainItem.password == nil) {
+		[EMInternetKeychainItem addInternetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:identifier password:privateKey path:@"/" port:42 protocol:kSecProtocolTypeSSH];	
+	}else if ([keychainItem.password isEqualToString:privateKey]){
+	}
+	
+}
+
++(NSString *)getPrivateKeyFromKeychains:(NSString *)identifier{
+	[EMInternetKeychainItem unlockKeychain];
+	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:identifier path:@"/" port:42 protocol:kSecProtocolTypeSSH];	
+	NSString *privateKey = keychainItem.password;
+	return privateKey;
+}
+
++(void)removePrivateKeyFromKeychains:(NSString *)identifier{
+	[EMInternetKeychainItem unlockKeychain];
+	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:identifier path:@"/" port:42 protocol:kSecProtocolTypeSSH];
+	[keychainItem removeFromKeychain];
+	
 }
 
 - (void) dealloc{

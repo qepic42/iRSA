@@ -17,8 +17,8 @@
 		101752B512EB628000C39ED0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 101752B412EB628000C39ED0 /* dsa_pub.pem */; };
 		1017545512EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png in Resources */ = {isa = PBXBuildFile; fileRef = 1017545412EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png */; };
 		101754A512EC450600C39ED0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 101754A412EC450600C39ED0 /* Credits.rtf */; };
+		101B187912F8BC3500765B69 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 101B187812F8BC3500765B69 /* PreferencesController.m */; };
 		10310B3812ED9E4900ABCAC1 /* PasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10310B3712ED9E4900ABCAC1 /* PasswordController.m */; };
-		103C7E4D12F2046F00A7C881 /* Preferences Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 103C7E4B12F2046F00A7C881 /* Preferences Controller.m */; };
 		103C7E4E12F2046F00A7C881 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 103C7E4C12F2046F00A7C881 /* Preferences.xib */; };
 		1066043412E4FB0900B9695C /* KeyPropertys.m in Sources */ = {isa = PBXBuildFile; fileRef = 1066043312E4FB0900B9695C /* KeyPropertys.m */; };
 		10745E2E12F05B37006FD617 /* app.icns in Resources */ = {isa = PBXBuildFile; fileRef = 10745E2D12F05B37006FD617 /* app.icns */; };
@@ -80,10 +80,10 @@
 		101752B412EB628000C39ED0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		1017545412EBA39F00C39ED0 /* Keychain_Access_Icon 20-56-52-327.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Keychain_Access_Icon 20-56-52-327.png"; sourceTree = "<group>"; };
 		101754A412EC450600C39ED0 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		101B187712F8BC3500765B69 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		101B187812F8BC3500765B69 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
 		10310B3612ED9E4900ABCAC1 /* PasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordController.h; sourceTree = "<group>"; };
 		10310B3712ED9E4900ABCAC1 /* PasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordController.m; sourceTree = "<group>"; };
-		103C7E4A12F2046F00A7C881 /* Preferences Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Preferences Controller.h"; sourceTree = "<group>"; };
-		103C7E4B12F2046F00A7C881 /* Preferences Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Preferences Controller.m"; sourceTree = "<group>"; };
 		103C7E4C12F2046F00A7C881 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		1066043212E4FB0900B9695C /* KeyPropertys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyPropertys.h; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 				10E9566812E0E53800EE2940 /* MainGUIController.m */,
 				10C6743212E39DD000F80368 /* KeyTableView.h */,
 				10C6743312E39DD000F80368 /* KeyTableView.m */,
-				103C7E4A12F2046F00A7C881 /* Preferences Controller.h */,
-				103C7E4B12F2046F00A7C881 /* Preferences Controller.m */,
+				101B187712F8BC3500765B69 /* PreferencesController.h */,
+				101B187812F8BC3500765B69 /* PreferencesController.m */,
 				10C673DB12E3970900F80368 /* KeyGenerate.h */,
 				10C673DC12E3970900F80368 /* KeyGenerate.m */,
 				10BA3E1F12E8E739008E5E51 /* CryptBySSCrypto.h */,
@@ -329,7 +329,7 @@
 				1017518312EA47AC00C39ED0 /* SendMail.m in Sources */,
 				10310B3812ED9E4900ABCAC1 /* PasswordController.m in Sources */,
 				10804A8312EE2FB100F591B4 /* EMKeychainItem.m in Sources */,
-				103C7E4D12F2046F00A7C881 /* Preferences Controller.m in Sources */,
+				101B187912F8BC3500765B69 /* PreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
