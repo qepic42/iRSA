@@ -328,7 +328,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>10AA0A6012FA0FF80087E8C9</string>
+										<string>10AA0A6C12FA10CC0087E8C9</string>
 										<key>history</key>
 										<array>
 											<string>10BA3DBD12E8D0BB008E5E51</string>
@@ -592,7 +592,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>iRSAAppDelegate.m</string>
+								<string>KeyGenerate.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

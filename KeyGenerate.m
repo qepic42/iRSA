@@ -37,7 +37,7 @@
 	
 	//PasswordController *pwController = [[PasswordController alloc]init];
 	
-	SSCrypto *crypto;
+//	SSCrypto *crypto;
 	
 	NSData *privateKeyData = [SSCrypto generateRSAPrivateKeyWithLength:[keyLenght intValue]];
 	NSData *publicKeyData = [SSCrypto generateRSAPublicKeyFromPrivateKey:privateKeyData];
@@ -57,7 +57,7 @@
 	
 //	[pwController release];
 	[privateKeyString release];
-	[crypto release];	
+	//[crypto release];	
 	
 	return dict;
 }
