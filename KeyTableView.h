@@ -22,35 +22,32 @@
 	IBOutlet NSBox *infoBox;
 	IBOutlet NSTextView *publicKeyView;
 	IBOutlet NSTabView *keyModeTab;
+	IBOutlet NSTableView *internalTable;
+	IBOutlet NSTableView *externalTable;
 	NSMutableArray *dataArray;
-	NSTableView *myTable;
-	NSTableView *otherTable;
 	NSArray *bitArray;
 	KeyGenerate *keyClass;
 	int keyAddModeInt;
+	int keyMode;
 	NSNumber *currentKeyLength;
 }
 
 @property (nonatomic,retain)NSMutableArray *dataArray;
-@property (nonatomic, assign)IBOutlet NSTableView *myTable;
-@property (nonatomic, assign)IBOutlet NSTableView *otherTable;
 @property int keyAddModeInt;
+@property int keyMode;
 @property (nonatomic,retain)NSArray *bitArray;
 @property (nonatomic,retain)NSNumber *currentKeyLength;
 
 -(IBAction)pushAddNewKey:(id)sender;
--(IBAction)pushRemoveKey:(id)sender;
 -(IBAction)pushGenerateSetupKey:(id)sender;
 -(IBAction)pushChooseBit:(id)sender;
 -(IBAction)pushCancelGenerate:(id)sender;
--(IBAction)doubleClickAction:(NSTableView *)sender;
 -(IBAction)pushDoneButton:(id)sender;
 -(IBAction)pushCancelButton:(id)sender;
 -(IBAction)pushShareByMailButton:(id)sender;
--(void)addItem:(NSNotification *)notification;
+-(IBAction)removeItemFromExternalArray:(id)sender;
 -(void)setupKeyPopUpButton;
 -(void)setupBitPopupButton;
--(void)doubleClickToRow:(NSTableView *)sender;
 
 
 @end

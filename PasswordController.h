@@ -20,5 +20,6 @@
 +(void)removePrivateKeyFromKeychains:(NSString *)identifier;
 +(void)addPrivateKeyToKeychains:(NSString *)privateKey:(NSString *)identifier;
 +(NSString *)getPrivateKeyFromKeychains:(NSString *)identifier;
++(void)renameIdentifierOfPrivateKeyFromKeychains:(NSString *)oldIdentifier :(NSString *)newIdentifier;
 
 @end

@@ -21,26 +21,15 @@
 	NSDictionary *dict = [self generateKeys:privateKeyLength];
 	
 	NSString *publicKeyString = [[NSString alloc] initWithData:[dict objectForKey:@"publicKeyData"] encoding:NSUTF8StringEncoding];
-//	NSString *privateKeyString = [[NSString alloc] initWithData:[dict objectForKey:@"privateKeyData"] encoding:NSUTF8StringEncoding];
 	
 	NSString *privateKeyString = [dict objectForKey:@"privateKeyString"];
-/*	
-	NSMutableString *publicKeyMutableString = [NSMutableString stringWithCapacity:[publicKeyString length]];
-	[publicKeyMutableString setString: publicKeyString];
-	NSRange myRange = 
-	[publicKeyMutableString rangeOfString:@"-----BEGIN PUBLIC KEY-----"options:NSCaseInsensitiveSearch];
-	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
-	[publicKeyMutableString rangeOfString:@"-----END PUBLIC KEY-----"options:NSCaseInsensitivePredicateOption];
-	[publicKeyMutableString replaceCharactersInRange:myRange withString:@""];
-*/	
-	NSDictionary *dictToSend = [NSDictionary dictionaryWithObjectsAndKeys:[dict objectForKey:@"publicKeyData"], @"publicKeyData",[dict objectForKey:@"privateKeyData"], @"privateKeyData", publicKeyString, @"publicKey", privateKeyString, @"privateKey", nil];
+	
+	NSDictionary *dictToSend = [NSDictionary dictionaryWithObjectsAndKeys:@"internal",@"mode",[dict objectForKey:@"publicKeyData"], @"publicKeyData",[dict objectForKey:@"privateKeyData"], @"privateKeyData", publicKeyString, @"publicKey", privateKeyString, @"privateKey", nil];
 	
 	[center postNotificationName:@"addNewKey" object:nil userInfo:dictToSend];
-	
 	[center postNotificationName:@"endKeyGenerate" object:nil userInfo:nil];
 	
 	[publicKeyString release];
-	
     [pool release];
 }
 

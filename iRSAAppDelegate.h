@@ -10,12 +10,17 @@
 
 @interface iRSAAppDelegate : NSObject <NSApplicationDelegate,NSCoding> {
     NSWindow *window;
-	NSMutableArray *keyDataArray;
+	NSMutableArray *internalKeyArray;
+	NSMutableArray *externalKeyArray;
+	NSData *internalData;
+	NSData *externalData;
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property(nonatomic,retain)NSMutableArray *keyDataArray;
+@property(nonatomic,retain)NSMutableArray *internalKeyArray;
+@property(nonatomic,retain)NSMutableArray *externalKeyArray;
 
-- (NSString *) pathForDataFile;
+-(NSString *)pathForDataFile:(BOOL)external;
+-(void)setupUserDefaults;
 
 @end

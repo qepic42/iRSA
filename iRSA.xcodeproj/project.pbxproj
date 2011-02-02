@@ -25,6 +25,8 @@
 		10745E8D12F0A810006FD617 /* Software Update.icns in Resources */ = {isa = PBXBuildFile; fileRef = 10745E8C12F0A810006FD617 /* Software Update.icns */; };
 		107460CA12F1F800006FD617 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 107460C912F1F800006FD617 /* AddressBook.framework */; };
 		10804A8312EE2FB100F591B4 /* EMKeychainItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 10804A8212EE2FB100F591B4 /* EMKeychainItem.m */; };
+		10AA089C12F9BDA60087E8C9 /* ExternalKeyTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AA089B12F9BDA60087E8C9 /* ExternalKeyTable.m */; };
+		10AA08A812F9BE300087E8C9 /* InternalKeyTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AA08A712F9BE300087E8C9 /* InternalKeyTable.m */; };
 		10BA3E0E12E8E648008E5E51 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0C12E8E648008E5E51 /* libcrypto.dylib */; };
 		10BA3E0F12E8E648008E5E51 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BA3E0D12E8E648008E5E51 /* libssl.dylib */; };
 		10BA3E2112E8E739008E5E51 /* CryptBySSCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BA3E2012E8E739008E5E51 /* CryptBySSCrypto.m */; };
@@ -93,6 +95,10 @@
 		107460C912F1F800006FD617 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
 		10804A8112EE2FB100F591B4 /* EMKeychainItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMKeychainItem.h; sourceTree = "<group>"; };
 		10804A8212EE2FB100F591B4 /* EMKeychainItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMKeychainItem.m; sourceTree = "<group>"; };
+		10AA089A12F9BDA60087E8C9 /* ExternalKeyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalKeyTable.h; sourceTree = "<group>"; };
+		10AA089B12F9BDA60087E8C9 /* ExternalKeyTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalKeyTable.m; sourceTree = "<group>"; };
+		10AA08A612F9BE300087E8C9 /* InternalKeyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternalKeyTable.h; sourceTree = "<group>"; };
+		10AA08A712F9BE300087E8C9 /* InternalKeyTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternalKeyTable.m; sourceTree = "<group>"; };
 		10BA3E0C12E8E648008E5E51 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libcrypto.dylib; sourceTree = "<group>"; };
 		10BA3E0D12E8E648008E5E51 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libssl.dylib; sourceTree = "<group>"; };
 		10BA3E1F12E8E739008E5E51 /* CryptBySSCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptBySSCrypto.h; sourceTree = "<group>"; };
@@ -146,6 +152,10 @@
 				10E9566812E0E53800EE2940 /* MainGUIController.m */,
 				10C6743212E39DD000F80368 /* KeyTableView.h */,
 				10C6743312E39DD000F80368 /* KeyTableView.m */,
+				10AA08A612F9BE300087E8C9 /* InternalKeyTable.h */,
+				10AA08A712F9BE300087E8C9 /* InternalKeyTable.m */,
+				10AA089A12F9BDA60087E8C9 /* ExternalKeyTable.h */,
+				10AA089B12F9BDA60087E8C9 /* ExternalKeyTable.m */,
 				101B187712F8BC3500765B69 /* PreferencesController.h */,
 				101B187812F8BC3500765B69 /* PreferencesController.m */,
 				10C673DB12E3970900F80368 /* KeyGenerate.h */,
@@ -330,6 +340,8 @@
 				10310B3812ED9E4900ABCAC1 /* PasswordController.m in Sources */,
 				10804A8312EE2FB100F591B4 /* EMKeychainItem.m in Sources */,
 				101B187912F8BC3500765B69 /* PreferencesController.m in Sources */,
+				10AA089C12F9BDA60087E8C9 /* ExternalKeyTable.m in Sources */,
+				10AA08A812F9BE300087E8C9 /* InternalKeyTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

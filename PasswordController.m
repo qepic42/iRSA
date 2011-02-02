@@ -35,7 +35,7 @@
 
 
 +(void)addPrivateKeyToKeychains:(NSString *)privateKey:(NSString *)identifier{
-	[EMInternetKeychainItem unlockKeychain];
+	//[EMInternetKeychainItem unlockKeychain];
 	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:identifier path:@"/" port:42 protocol:kSecProtocolTypeSSH];
 	
 	if (keychainItem.password == nil) {
@@ -46,17 +46,24 @@
 }
 
 +(NSString *)getPrivateKeyFromKeychains:(NSString *)identifier{
-	[EMInternetKeychainItem unlockKeychain];
+	//[EMInternetKeychainItem unlockKeychain];
 	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:identifier path:@"/" port:42 protocol:kSecProtocolTypeSSH];	
 	NSString *privateKey = keychainItem.password;
 	return privateKey;
 }
 
 +(void)removePrivateKeyFromKeychains:(NSString *)identifier{
-	[EMInternetKeychainItem unlockKeychain];
+	//[EMInternetKeychainItem unlockKeychain];
 	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:identifier path:@"/" port:42 protocol:kSecProtocolTypeSSH];
 	[keychainItem removeFromKeychain];
 	
+}
+
++(void)renameIdentifierOfPrivateKeyFromKeychains:(NSString *)oldIdentifier :(NSString *)newIdentifier{
+	EMInternetKeychainItem *keychainItem = [EMInternetKeychainItem internetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:oldIdentifier path:@"/" port:42 protocol:kSecProtocolTypeSSH];
+	NSString *privateKey = keychainItem.password;
+	[keychainItem removeFromKeychain];
+	[EMInternetKeychainItem addInternetKeychainItemForServer:@"iRSA-PrivateKey" withUsername:newIdentifier password:privateKey path:@"/" port:42 protocol:kSecProtocolTypeSSH];
 }
 
 - (void) dealloc{

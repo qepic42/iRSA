@@ -9,47 +9,82 @@
 #import "iRSAAppDelegate.h"
 
 @implementation iRSAAppDelegate
-@synthesize window, keyDataArray;
+@synthesize window, internalKeyArray, externalKeyArray;
 
 - (id) init{
 	self = [super init];
 	
 	if (self != nil) {
-		self.keyDataArray = [[NSMutableArray alloc]init];
+		self.internalKeyArray = [[NSMutableArray alloc]init];
+		self.externalKeyArray = [[NSMutableArray alloc]init];
+		[self setupUserDefaults];
 	}
 	
 	return self;
 }
 
 - (void) dealloc{
-	[self.keyDataArray release];
+	[internalData release];
+	[externalData release];
+	[self.internalKeyArray release];
+	[self.externalKeyArray release];
 	[super dealloc];
 }
 
+-(void)setupUserDefaults{
+	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+	
+	BOOL clear = [prefs boolForKey:@"clearTextByModeChange"];
+	
+	if (clear != YES && clear != NO){
+		[prefs setBool:YES forKey:@"clearTextByModeChange"];
+	}
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	
-	NSData* archive = [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathForDataFile]];
-
-	if (archive) {
-		NSArray* array = [NSKeyedUnarchiver unarchiveObjectWithData:archive];
-		self.keyDataArray = [NSMutableArray arrayWithArray:array];
+	// Begin internal
+	
+	self.internalKeyArray = [[NSMutableArray alloc]init];
+	
+	NSData *internalArchive = [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathForDataFile:NO]];
+	
+	if (internalArchive) {
+		NSArray* internalCacheArray = [NSKeyedUnarchiver unarchiveObjectWithData:internalArchive];
+		self.internalKeyArray = [NSMutableArray arrayWithArray:internalCacheArray];
 	} else {
-		self.keyDataArray = [NSMutableArray array];
+		self.internalKeyArray = [NSMutableArray array];
 	}
+	
+	// Continue external
+	
+	self.externalKeyArray = [[NSMutableArray alloc]init];
+	
+	NSData *externalArchive = [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathForDataFile:YES]];
+	
+	if (externalArchive) {
+		NSArray* externalCacheArray = [NSKeyedUnarchiver unarchiveObjectWithData:externalArchive];
+		self.externalKeyArray = [NSMutableArray arrayWithArray:externalCacheArray];
+	} else {
+		self.externalKeyArray = [NSMutableArray array];
+	}
+	
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"itemCountChanged" object:nil userInfo:nil];
-	
+		
 	[window center];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification{
-	NSData* archive = [NSKeyedArchiver archivedDataWithRootObject:self.keyDataArray];
-	[NSKeyedArchiver archiveRootObject:archive toFile:[self pathForDataFile]];
+	NSData *internalArchive = [NSKeyedArchiver archivedDataWithRootObject:self.internalKeyArray];
+	[NSKeyedArchiver archiveRootObject:internalArchive toFile:[self pathForDataFile:NO]];
+	
+	NSData *externalArchive = [NSKeyedArchiver archivedDataWithRootObject:self.externalKeyArray];
+	[NSKeyedArchiver archiveRootObject:externalArchive toFile:[self pathForDataFile:YES]];
 }
 
-- (NSString *)pathForDataFile{
+- (NSString *)pathForDataFile:(BOOL)external{
 	NSFileManager *fileManager = [NSFileManager defaultManager];
     
 	NSString *folder = @"~/Library/Application Support/iRSA/";
@@ -59,8 +94,15 @@
 	{
 		[fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil];
 	}
-    
-	NSString *fileName = @"iRSA_Keys.plist";
+	
+	NSString *fileName = @"";
+	
+    if (external == YES) {
+		fileName = @"iRSA_ExternalKeyData.plist";
+	}else {
+		fileName = @"iRSA_InternalKeyData.plist";
+	}
+
 	return [folder stringByAppendingPathComponent: fileName];    
 }
 
@@ -69,15 +111,21 @@
 
 - (void)encodeWithCoder:(NSCoder*)encoder {
 	[super encodeWithCoder:encoder];
-	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.keyDataArray];
-	[encoder encodeObject:data forKey:@"keyDataArray"];
+	internalData = [NSKeyedArchiver archivedDataWithRootObject:self.internalKeyArray];
+	[encoder encodeObject:internalData forKey:@"internalData"];
+	
+	externalData = [NSKeyedArchiver archivedDataWithRootObject:self.externalKeyArray];
+	[encoder encodeObject:externalData forKey:@"externalData"];
 }
 
 - (id) initWithCoder:(NSCoder*)decoder {
 	if (self = [super init]) {
 		[super initWithCoder:decoder];
-		NSData *data = [[decoder decodeObjectForKey:@"keyDataArray"] retain];
-		self.keyDataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+		internalData = [[decoder decodeObjectForKey:@"internalData"] retain];
+		self.internalKeyArray = [NSKeyedUnarchiver unarchiveObjectWithData:internalData];
+		
+		externalData = [[decoder decodeObjectForKey:@"externalData"] retain];
+		self.externalKeyArray = [NSKeyedUnarchiver unarchiveObjectWithData:externalData];
 
     }
 	return self;

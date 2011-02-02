@@ -37,7 +37,7 @@ static PreferencesController *_sharedPrefsWindowController = nil;
 -(void)awakeFromNib{
 	[self.window setContentSize:[generalPreferenceView frame].size];
 	[[self.window contentView] addSubview:generalPreferenceView];
-	[prefsBar setSelectedItemIdentifier:@"General"];
+	[prefsBar setSelectedItemIdentifier:@"general"];
 	[self.window center];
 }
 

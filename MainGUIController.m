@@ -78,13 +78,29 @@
 
 - (void)setPopUpStatus{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-	if ([myAppDelegate.keyDataArray count] == 0) {
-		[enterButton setEnabled:NO];
-		[removeButton setEnabled:NO];
-	}else {
-		[self setEnterButtonState];
-		[removeButton setEnabled:YES];
+	
+	if (self.mode == 0) {
+		
+		if ([myAppDelegate.internalKeyArray count] == 0) {
+			[enterButton setEnabled:NO];
+			[removeButton setEnabled:NO];
+		}else {
+			[self setEnterButtonState];
+			[removeButton setEnabled:YES];
+		}
+		
+	}else if (self.mode == 1) {
+		
+		if ([myAppDelegate.externalKeyArray count] == 0) {
+			[enterButton setEnabled:NO];
+			[removeButton setEnabled:NO];
+		}else {
+			[self setEnterButtonState];
+			[removeButton setEnabled:YES];
+		}
+		
 	}
+
 }
 
 - (void) dealloc{
@@ -115,48 +131,77 @@
 	
 	BOOL refresh = NO;
 	
-	if([myAppDelegate.keyDataArray count] == 0){
+	[[keyPopUpButton menu]removeAllItems];
+	
+	if (self.mode == 0) {
 		
-		[[keyPopUpButton menu]removeAllItems];
-		NSMenuItem *fail = [[[NSMenuItem alloc]initWithTitle:@"" action:nil keyEquivalent:@""]autorelease];
-		[[keyPopUpButton menu]addItem:fail];
-		[[keyPopUpButton menu]removeAllItems];
-		[enterButton setEnabled:NO];
-		refresh = YES;
-		
-	}else if ([myAppDelegate.keyDataArray count] >= 1) {
-		
-		[[keyPopUpButton menu]removeAllItems];
-		
-		int i;
-		int max = [myAppDelegate.keyDataArray count];
-		
-		for(i=0;i<max;i++){
-			KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
-			if (self.mode == 1) {
-				if ([item.privateKey isEqualToString:@"-"]) {
-					
-				}else {
-					NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-					[newItem setTarget:self];
-					[[keyPopUpButton menu] addItem:newItem];
-					[newItem release];
-				}
-			}else{
+		if ([myAppDelegate.externalKeyArray count] == 0) {
+			[[keyPopUpButton menu]removeAllItems];
+			NSMenuItem *fail = [[[NSMenuItem alloc]initWithTitle:@"" action:nil keyEquivalent:@""]autorelease];
+			[[keyPopUpButton menu]addItem:fail];
+			[[keyPopUpButton menu]removeAllItems];
+			[enterButton setEnabled:NO];
+			refresh = YES;
+			
+		}else {
+			
+			int i;
+			int max = [myAppDelegate.externalKeyArray count];
+			
+			for(i=0;i<max;i++){
+				KeyPropertys* item = [myAppDelegate.externalKeyArray objectAtIndex:i];
+				
 				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
 				[newItem setTarget:self];
 				[[keyPopUpButton menu] addItem:newItem];
 				[newItem release];
+				
 			}
-			refresh = NO;
+			
 		}
-	}			
-	
+
+	}else if (self.mode == 1){
 		
+		if ([myAppDelegate.internalKeyArray count] == 0) {
+			
+			[[keyPopUpButton menu]removeAllItems];
+			NSMenuItem *fail = [[[NSMenuItem alloc]initWithTitle:@"" action:nil keyEquivalent:@""]autorelease];
+			[[keyPopUpButton menu]addItem:fail];
+			[[keyPopUpButton menu]removeAllItems];
+			[enterButton setEnabled:NO];
+			refresh = YES;
+			
+		}else{
+			
+			int i;
+			int max = [myAppDelegate.internalKeyArray count];
+			
+			for(i=0;i<max;i++){
+				KeyPropertys* item = [myAppDelegate.internalKeyArray objectAtIndex:i];
+				
+				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+				[newItem setTarget:self];
+				[[keyPopUpButton menu] addItem:newItem];
+				[newItem release];
+				
+			}
+			
+		}
+			
+	}
+	
 	[self setEnterButtonState];
 		
 	if (refresh == NO) {
-		KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
+		
+		KeyPropertys *currentItem;
+		
+		if (self.mode == 0) {
+			currentItem = [myAppDelegate.internalKeyArray objectAtIndex:0];
+		}else if (self.mode == 1) {
+			currentItem = [myAppDelegate.externalKeyArray objectAtIndex:0];
+		}
+		
 		
 		self.currentIdentifier = currentItem.keyIdentifier;
 		self.currentPrivateKey = currentItem.privateKey;
@@ -182,33 +227,23 @@
 	
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	if(myAppDelegate.keyDataArray == 0){
-	}else if ([myAppDelegate.keyDataArray count] >= 1) {
+	if(myAppDelegate.internalKeyArray == 0){
+	}else if ([myAppDelegate.internalKeyArray count] >= 1) {
 		[[chooseKeyPopUpButton menu]removeAllItems];
 		
 		int i;
-		int max = [myAppDelegate.keyDataArray count];
+		int max = [myAppDelegate.internalKeyArray count];
 		
 		for(i=0;i<max;i++){
-			KeyPropertys* item = [myAppDelegate.keyDataArray objectAtIndex:i];
-			if (self.mode == 1) {
-				if ([item.privateKey isEqualToString:@"-"]) {
-					
-				}else {
-					NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-					[newItem setTarget:self];
-					[[chooseKeyPopUpButton menu] addItem:newItem];
-					[newItem release];
-				}
-			}else{
-				NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
-				[newItem setTarget:self];
-				[[chooseKeyPopUpButton menu] addItem:newItem];
-				[newItem release];
-			}
+			KeyPropertys* item = [myAppDelegate.internalKeyArray objectAtIndex:i];
+			
+			NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:item.keyIdentifier action:nil keyEquivalent:@""];
+			[newItem setTarget:self];
+			[[chooseKeyPopUpButton menu] addItem:newItem];
+			[newItem release];
 		}
 		
-		KeyPropertys *currentItem = [myAppDelegate.keyDataArray objectAtIndex:0];
+		KeyPropertys *currentItem = [myAppDelegate.internalKeyArray objectAtIndex:0];
 		self.currentIdentifier = currentItem.keyIdentifier;
 		self.currentPrivateKey = currentItem.privateKey;
 		self.currentPrivateKeyData = currentItem.privateKeyData;
@@ -257,7 +292,14 @@
 		self.mode = 1;
 		
 	}
-	[self clearText];
+	
+	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+	BOOL clear = [prefs boolForKey:@"clearTextByModeChange"];
+	
+	if (clear == YES) {
+		[self clearText];
+	}
+	
 	[self setupPopUpButton];
 	[self setEnterButtonState];
 }
@@ -477,9 +519,9 @@
 -(void)chooseKeyToShare:(id)sender{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	if ([myAppDelegate.keyDataArray count] == 0) {
+	if ([myAppDelegate.internalKeyArray count] == 0) {
 	}else {
-		KeyPropertys *item = [myAppDelegate.keyDataArray objectAtIndex:[sender indexOfSelectedItem]];
+		KeyPropertys *item = [myAppDelegate.internalKeyArray objectAtIndex:[sender indexOfSelectedItem]];
 		
 		self.currentIdentifier = item.keyIdentifier;
 		self.currentPublicKey = item.publicKey;
@@ -515,7 +557,6 @@
 	
 	if (self.sendMailByNotification == YES) {
 		NSString *publicKey = [self.notificationPublicKeyDict objectForKey:@"publicKey"];
-		NSLog(@"pubK: %@",publicKey);
 		[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, publicKey]];
 	}else {
 		[sendMailContent setString:[NSString stringWithFormat:@"%@%@",INVITE_MESSAGE, self.currentPublicKey]];
@@ -546,27 +587,6 @@
 
 -(void)tabView:(NSTabView *)tabV didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
 	self.tab = [[tabViewItem identifier]intValue];
-}
-
-
-#pragma mark -
-#pragma mark NSCoding Methods
-
-- (void)encodeWithCoder:(NSCoder*)encoder {
-	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-    [super encodeWithCoder:encoder];
-    [encoder encodeObject:myAppDelegate.keyDataArray forKey:@"keyDataArray"];
-}
-
-- (id) initWithCoder:(NSCoder*)decoder {
-    if (self = [super init]) {
-		[super initWithCoder:decoder];
-		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
-
-		myAppDelegate.keyDataArray = [[decoder decodeObjectForKey:@"keyDataArray"] retain];
-    }
-	
-    return self;
 }
 
 @end
