@@ -41,6 +41,7 @@
 - (void)awakeFromNib{
 	[myTable setTarget:self];
 	[myTable setDoubleAction:@selector(doubleClickToRow:)];
+	[removeButton setEnabled:NO];
 }
 
 
@@ -48,8 +49,7 @@
 #pragma mark Other Methods
 
 -(void)doubleClickToRow:(NSTableView *)sender{
-	if ([sender clickedColumn] == 0){
-	}else if ([sender clickedColumn] >= 1){
+	if ([sender clickedColumn] == 2){
 		
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		KeyPropertys* item = [myAppDelegate.internalKeyArray objectAtIndex:[sender clickedRow]];
@@ -113,10 +113,7 @@
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	NSInteger returnInteger = 0;
-	
-	returnInteger = [myAppDelegate.internalKeyArray count];
-	NSLog(@"count: %i",[myAppDelegate.internalKeyArray count]);
+	NSInteger returnInteger = [myAppDelegate.internalKeyArray count];
 	
     return returnInteger;
 }
@@ -142,6 +139,8 @@
 		returnString = item.publicKey;
 	}else if ([[aTableColumn identifier] isEqualToString:@"privateKey"]){
 		returnString = item.privateKey;
+	}else if ([[aTableColumn identifier] isEqualToString:@"bit"]) {
+		returnString = @"42";
 	}
 	
 	[self setupKeyPopUpButton];	

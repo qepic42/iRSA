@@ -7,6 +7,7 @@
 //
 
 #import "iRSAAppDelegate.h"
+#import "AddressBookController.h"
 
 @implementation iRSAAppDelegate
 @synthesize window, internalKeyArray, externalKeyArray;
@@ -18,6 +19,7 @@
 		self.internalKeyArray = [[NSMutableArray alloc]init];
 		self.externalKeyArray = [[NSMutableArray alloc]init];
 		[self setupUserDefaults];
+		[[AddressBookController alloc]init];
 	}
 	
 	return self;

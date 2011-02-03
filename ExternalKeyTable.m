@@ -9,8 +9,11 @@
 #import "ExternalKeyTable.h"
 #import "iRSAAppDelegate.h"
 #import "KeyPropertys.h"
+#import "AddressBookController.h"
+#import "ContactPropertys.h"
 
 @implementation ExternalKeyTable
+@synthesize currentPerson, currentPersonIndex;
 
 #pragma mark -
 #pragma mark Initialization Methods
@@ -36,9 +39,43 @@
 	return self;
 }
 
+- (void) dealloc
+{
+	[currentPerson release];
+	[super dealloc];
+}
+
+
 - (void)awakeFromNib{
 	[myTable setTarget:self];
-	[myTable setDoubleAction:@selector(doubleClickToRow:)];	
+	[removeButton setEnabled:NO];
+	[myTable setDoubleAction:@selector(doubleClickToRow:)];
+	
+	[personPopupMenu removeAllItems];
+	
+	NSMutableArray *people = [AddressBookController returnAllPeople];
+	
+	int i;
+	int max = [people count];
+	
+	for(i=0;i<max;i++){
+		
+		ContactPropertys *item = [people objectAtIndex:i];
+		
+		if (item.contactNachname == nil) {
+			NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@: %@",item.contactVorname, item.contactMainMailAddress] action:nil keyEquivalent:@""];
+			[newItem setTarget:self];
+			[personPopupMenu addItem:newItem];
+			[newItem release];
+		}else {
+			NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@ %@",item.contactVorname,item.contactNachname] action:nil keyEquivalent:@""];
+			[newItem setTarget:self];
+			[personPopupMenu addItem:newItem];
+			[newItem release];
+		}
+		
+	}
+	
 }
 
 
@@ -46,8 +83,7 @@
 #pragma mark Other Methods
 
 -(void)doubleClickToRow:(NSTableView *)sender{
-	if ([sender clickedColumn] == 0){
-	}else if ([sender clickedColumn] >= 1){
+	if ([sender clickedColumn] == 2){
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		KeyPropertys* item = [myAppDelegate.externalKeyArray objectAtIndex:[sender clickedRow]];
 		[infoBox setTitle:item.keyIdentifier];
@@ -107,6 +143,8 @@
 	[myTable noteNumberOfRowsChanged];
 }
 
+- (IBAction)pushChoosePerson:(id)sender{
+}
 
 #pragma mark -
 #pragma mark Delegate Methods
@@ -161,7 +199,12 @@
 		item.keyIdentifier = anObject;
 		[self setupKeyPopUpButton];
 	}else if ([[aTableColumn identifier] isEqualToString:@"person"]){
-		item.keyPerson = anObject;
+		[personPopupButton selectItemAtIndex:[anObject integerValue]];		
+		NSMutableArray *people = [AddressBookController returnAllPeople];
+		ContactPropertys *person = [people objectAtIndex:[anObject integerValue]];
+		item.keyPerson = [NSString stringWithFormat:@"%i",[anObject integerValue]];
+		self.currentPersonIndex = [anObject integerValue];
+		self.currentPerson = person.contactVorname;
 	}
 }
 

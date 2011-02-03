@@ -15,6 +15,7 @@
 #import "SendMail.h"
 #import "Globals.h"
 #import "PreferencesController.h"
+#import "AddressBookController.h"
 
 @implementation MainGUIController
 @synthesize notificationPublicKeyDict, sendMailByNotification, mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
@@ -437,7 +438,7 @@
 	NSString *contentCache= [NSString stringWithFormat:@"%@:\n\n%@\n\n%@:\n%@\n\n\n\n\n\n%@",MESSAGE_PREFIX,self.currentPublicKey, @"Encrypted text", [[resultTextView textStorage]string],MESSAGE_SIGNATURE];
 
 	[sendMailContent setString:contentCache];
-
+	[sendMailFrom setStringValue:[AddressBookController returnOwnMailAddress]];
 	[sendMailSubject setStringValue:MESSAGE_SUBJECT];
 }
 
@@ -554,6 +555,8 @@
 	self.currentPublicKey = publicKeyMutableString;
 	
 	[sendMailSubject setStringValue:INVITE_SUBJECT];
+	[sendMailFrom setStringValue:[AddressBookController returnOwnMailAddress]];
+	
 	
 	if (self.sendMailByNotification == YES) {
 		NSString *publicKey = [self.notificationPublicKeyDict objectForKey:@"publicKey"];

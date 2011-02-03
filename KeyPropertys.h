@@ -14,6 +14,7 @@
 	NSString *privateKey;
 	NSString *publicKey;
 	NSString *keyPerson;
+	NSString *keyBit;
 	NSData *privateKeyData;
 	NSData *publicKeyData;
 	

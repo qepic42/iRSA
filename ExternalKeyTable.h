@@ -16,9 +16,17 @@
 	IBOutlet NSWindow *mainKeyWindow;
 	IBOutlet NSBox *infoBox;
 	IBOutlet NSTextView *publicKeyView;
+	IBOutlet NSMenu *personPopupMenu;
+	IBOutlet NSPopUpButtonCell *personPopupButton;
+	NSString *currentPerson;
+	int currentPersonIndex;
 }
 
+@property(nonatomic,retain)NSString *currentPerson;
+@property()int currentPersonIndex;
+
 -(IBAction)pushRemoveKey:(id)sender;
+-(IBAction)pushChoosePerson:(id)sender;
 -(void)setupKeyPopUpButton;
 -(void)doubleClickToRow:(NSTableView *)sender;
 -(void)addItem:(NSNotification *)notification;
