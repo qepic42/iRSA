@@ -17,5 +17,6 @@
 
 +(NSString *)returnOwnMailAddress;
 +(NSMutableArray *)returnAllPeople;
++(NSString *)returnMainMailAddressForPerson:(NSString *)numberAsString;
 
 @end

@@ -64,6 +64,7 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder{
+	NSLog(@"set: %@",self.keyPerson);
 	[encoder encodeObject:self.keyIdentifier forKey:@"keyIdentifier"];
 	[self setPrivateKeyToKeychain:self.privateKey :self.keyIdentifier];
 	//[encoder encodeObject:self.privateKey forKey:@"privateKey"];
@@ -85,6 +86,7 @@
 		self.publicKey = [decoder decodeObjectForKey:@"publicKey"];
 		self.publicKeyData = [decoder decodeObjectForKey:@"publicKeyData"];
 		self.keyPerson = [decoder decodeObjectForKey:@"keyPerson"];
+		NSLog(@"get: %@",self.keyPerson);
 	}
 	return self;
 }

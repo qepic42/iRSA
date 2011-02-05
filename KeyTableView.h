@@ -17,6 +17,7 @@
 	IBOutlet NSWindow *keyTableView;
 	IBOutlet NSButton *keyAddEnterButton;
 	IBOutlet NSTextField *enterOwnPublicKey;
+	IBOutlet NSTextField *infoBoxExternLabel;
 	IBOutlet NSTabView *keyAddMode;
 	IBOutlet NSWindow *infoSheet;
 	IBOutlet NSBox *infoBox;

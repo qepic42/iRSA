@@ -83,10 +83,11 @@
 #pragma mark Other Methods
 
 -(void)doubleClickToRow:(NSTableView *)sender{
-	if ([sender clickedColumn] == 2){
+	if ([sender clickedColumn] == 3){
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		KeyPropertys* item = [myAppDelegate.externalKeyArray objectAtIndex:[sender clickedRow]];
-		[infoBox setTitle:item.keyIdentifier];
+		//[infoBox setTitle:item.keyIdentifier];
+		[infoBoxExternLabel setStringValue:item.keyIdentifier];
 		[publicKeyView setString:item.publicKey];
 		
 		[NSApp beginSheet:keyInfoSheet modalForWindow:mainKeyWindow modalDelegate:self didEndSelector:nil contextInfo:@""];
@@ -152,9 +153,7 @@
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
-	NSInteger returnInteger = 0;
-	
-	returnInteger = [myAppDelegate.externalKeyArray count];
+	NSInteger returnInteger = [myAppDelegate.externalKeyArray count];
 	
     return returnInteger;
 }
@@ -181,6 +180,8 @@
 		returnString = item.publicKey;
 	}else if ([[aTableColumn identifier] isEqualToString:@"person"]){
 		returnString = item.keyPerson;
+	}else if ([[aTableColumn identifier] isEqualToString:@"bit"]) {
+		returnString = [NSString stringWithFormat:@"%i",42];
 	}
 	
 	
@@ -205,6 +206,7 @@
 		item.keyPerson = [NSString stringWithFormat:@"%i",[anObject integerValue]];
 		self.currentPersonIndex = [anObject integerValue];
 		self.currentPerson = person.contactVorname;
+		NSLog(@"currentperson: %@",person.contactMainMailAddress);
 	}
 }
 

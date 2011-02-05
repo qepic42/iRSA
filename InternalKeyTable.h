@@ -13,6 +13,7 @@
 	IBOutlet NSTableView *myTable;
 	IBOutlet NSButton *removeButton;
 	IBOutlet NSWindow *keyInfoSheet;
+	IBOutlet NSTextField *infoBoxExternLabel;
 	IBOutlet NSWindow *mainKeyWindow;
 	IBOutlet NSBox *infoBox;
 	IBOutlet NSTextView *publicKeyView;

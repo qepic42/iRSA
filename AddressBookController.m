@@ -47,7 +47,7 @@
 	ABAddressBook *book = [ABAddressBook sharedAddressBook];
 	ABPerson *me = [book me];
 	ABMultiValue *test = [me valueForProperty:kABEmailProperty];
-	NSString *mailAddress =[test valueForIdentifier:[test primaryIdentifier]];
+	NSString *mailAddress = [test valueForIdentifier:[test primaryIdentifier]];
 	return mailAddress;
 }
 
@@ -68,7 +68,64 @@
 		}
 	}
 	
-	return allPeople;
+	NSSortDescriptor *sortDescriptor;
+	sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"contactVorname"
+												  ascending:YES] autorelease];
+	NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+	NSArray *sortedArray;
+	NSArray *allPeopleNormal = [NSArray arrayWithArray:allPeople];
+	sortedArray = [allPeopleNormal sortedArrayUsingDescriptors:sortDescriptors];
+	
+	NSMutableArray *resultArray = [NSMutableArray arrayWithArray:sortedArray];
+	
+	return resultArray;
+}
+
++(NSString *)returnMainMailAddressForPerson:(NSString *)numberAsString{
+	NSString *mainMailAddress = @"";
+/*	
+	ABAddressBook *book = [ABAddressBook sharedAddressBook];
+	NSArray *everyone = [book people];
+	ABPerson *person = [everyone objectAtIndex:[numberAsString integerValue]];
+	
+	NSLog(@"person: %@",numberAsString);
+	
+	ABMultiValue *test = [person valueForProperty:kABEmailProperty];
+	mainMailAddress = [test valueForIdentifier:[test primaryIdentifier]];
+	
+	NSLog(@"mail: %@",mainMailAddress);
+*/	
+	
+	NSMutableArray *allPeople = [[[NSMutableArray alloc]init]autorelease];
+	
+	ABAddressBook *book = [ABAddressBook sharedAddressBook];
+	NSArray *everyone = [book people];
+	ABPerson *person;
+	
+	for(person in everyone){
+		if ([person valueForProperty:kABFirstNameProperty] != nil) {
+			ContactPropertys *contactPropertys = [[ContactPropertys alloc]init];
+			contactPropertys.contactVorname = [person valueForProperty:kABFirstNameProperty];
+			contactPropertys.contactNachname =  [person valueForProperty:kABLastNameProperty];
+			contactPropertys.contactMainMailAddress = [[person valueForProperty:kABEmailProperty] valueForIdentifier:[[person valueForProperty:kABEmailProperty] primaryIdentifier]];
+			[allPeople addObject:contactPropertys];
+		}
+	}
+	
+	NSSortDescriptor *sortDescriptor;
+	sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"contactVorname"
+												  ascending:YES] autorelease];
+	NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+	NSArray *sortedArray;
+	NSArray *allPeopleNormal = [NSArray arrayWithArray:allPeople];
+	sortedArray = [allPeopleNormal sortedArrayUsingDescriptors:sortDescriptors];
+	
+	NSMutableArray *resultArray = [NSMutableArray arrayWithArray:sortedArray];
+	
+	ContactPropertys *contactProperyts = [resultArray objectAtIndex:[numberAsString intValue]];
+	mainMailAddress = contactProperyts.contactMainMailAddress;
+	
+	return mainMailAddress;
 }
 
 @end

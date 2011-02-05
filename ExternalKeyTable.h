@@ -15,6 +15,7 @@
 	IBOutlet NSWindow *keyInfoSheet;
 	IBOutlet NSWindow *mainKeyWindow;
 	IBOutlet NSBox *infoBox;
+	IBOutlet NSTextField *infoBoxExternLabel;
 	IBOutlet NSTextView *publicKeyView;
 	IBOutlet NSMenu *personPopupMenu;
 	IBOutlet NSPopUpButtonCell *personPopupButton;

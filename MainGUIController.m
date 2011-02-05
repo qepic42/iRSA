@@ -16,9 +16,10 @@
 #import "Globals.h"
 #import "PreferencesController.h"
 #import "AddressBookController.h"
+#import "DarkMainController.h"
 
 @implementation MainGUIController
-@synthesize notificationPublicKeyDict, sendMailByNotification, mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText;
+@synthesize notificationPublicKeyDict, sendMailByNotification, mode, tab, currentIdentifier, currentPublicKey, currentPrivateKey, currentText, loopCount, currentPublicKeyData, currentPrivateKeyData, currentEncodedText, currentMail;
 
 #pragma mark -
 #pragma mark Initialization & Dealloc
@@ -35,6 +36,11 @@
 
 -(void)awakeFromNib{
 	[self setEnterButtonState];
+	if ([[mainWindow title] isEqualToString:@"iRSA-Dark"]) {
+		[inputTextView setTextColor:[NSColor whiteColor]];
+	}
+//	NSColor*	translucent = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:0.0 alpha:0.6];
+//	[experimentalWindow setBackgroundColor:translucent];
 }
 
 - (void)setupOwnPropertys{
@@ -105,6 +111,7 @@
 }
 
 - (void) dealloc{
+	[currentMail release];
 	[notificationPublicKeyDict release];
 	[currentEncodedText release];
 	[currentPublicKeyData release];
@@ -319,96 +326,103 @@
 }
 
 - (IBAction)pushChooseKey:(id)sender{
-	[self chooseKeyToShare:sender];
+	//[self chooseKeyToShare:sender];
+	[self chooseExternalKeyToShare:sender];
 }
 
 - (IBAction)pushEnter:(id)sender{
-	[NSApp beginSheet:loadingSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-	[loadingIndicator startAnimation:self];
 	
-	NSString *resultString = @"";
-	BOOL fail;
-	
-	if([[[inputTextView textStorage] string] length] == 0){
-		NSBeep();
+	if ([[[inputTextView textStorage] string] isEqualToString:@"42"]) {
+		[mainWindow orderOut:self];
+		[[DarkMainController sharedMainDarkWindowController] showWindow:nil];
+	}else {
+		[NSApp beginSheet:loadingSheet modalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+		[loadingIndicator startAnimation:self];
 		
-		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-		[alert addButtonWithTitle:@"OK"];
-		[alert setMessageText:@"Enter text"];
-		[alert setInformativeText:@"Please enter some text to en/decode"];
-		[alert setAlertStyle:NSWarningAlertStyle];
-		[alert runModal];
+		NSString *resultString = @"";
+		BOOL fail;
 		
-		fail = YES;
-	}else{
-		
-		if (self.mode == 0){
+		if([[[inputTextView textStorage] string] length] == 0){
+			NSBeep();
 			
-			@try {
-				//	NSLog(@"Text: %@",[[inputTextView textStorage] string]);
-				//	NSLog(@"PKey: %@",[[NSString alloc] initWithData:self.currentPublicKeyData encoding:NSUTF8StringEncoding]);
-				
-				NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
-				NSString *resultString = [resultDict objectForKey:@"encryptedString"];
-				[resultTextView setString:resultString];
-				
-				NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-				[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
-				fail = NO;
-			}
-			@catch (NSException * e) {
-				NSBeep();
-				
-				NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-				[alert addButtonWithTitle:@"OK"];
-				[alert setMessageText:[e name]];
-				[alert setInformativeText:[e reason]];
-				[alert setAlertStyle:NSWarningAlertStyle];
-				//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-				[alert runModal];
-				
-				fail = YES;
-			}
+			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			[alert addButtonWithTitle:@"OK"];
+			[alert setMessageText:@"Enter text"];
+			[alert setInformativeText:@"Please enter some text to en/decode"];
+			[alert setAlertStyle:NSWarningAlertStyle];
+			[alert runModal];
 			
-		}else if (self.mode == 1){
+			fail = YES;
+		}else{
 			
-			NSData *test = [[[[inputTextView textStorage] string] dataUsingEncoding:NSUTF8StringEncoding] decodeBase64];
-			
-			@try {
-				NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test key:self.currentPrivateKeyData];
-				NSString *resultString = [[NSString alloc] initWithData:[resultDict objectForKey:@"decryptedData"] encoding:NSUTF8StringEncoding];
-				if(!resultString) {
-					resultString = [resultDict objectForKey:@"decryptedString"];
+			if (self.mode == 0){
+				
+				@try {
+					//	NSLog(@"Text: %@",[[inputTextView textStorage] string]);
+					//	NSLog(@"PKey: %@",[[NSString alloc] initWithData:self.currentPublicKeyData encoding:NSUTF8StringEncoding]);
+					
+					NSDictionary *resultDict = [CryptBySSCrypto encodeByRSAWithData:[[inputTextView textStorage] string] key:self.currentPublicKeyData];
+					NSString *resultString = [resultDict objectForKey:@"encryptedString"];
+					[resultTextView setString:resultString];
+					
+					NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+					[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+					fail = NO;
 				}
-				self.currentEncodedText = resultString;
-				[resultTextView setString:resultString];
+				@catch (NSException * e) {
+					NSBeep();
+					
+					NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+					[alert addButtonWithTitle:@"OK"];
+					[alert setMessageText:[e name]];
+					[alert setInformativeText:[e reason]];
+					[alert setAlertStyle:NSWarningAlertStyle];
+					//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+					[alert runModal];
+					
+					fail = YES;
+				}
 				
-				NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-				[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
-				fail = NO;
+			}else if (self.mode == 1){
+				
+				NSData *test = [[[[inputTextView textStorage] string] dataUsingEncoding:NSUTF8StringEncoding] decodeBase64];
+				
+				@try {
+					NSDictionary *resultDict = [CryptBySSCrypto decodeByRSAWithData:test key:self.currentPrivateKeyData];
+					NSString *resultString = [[NSString alloc] initWithData:[resultDict objectForKey:@"decryptedData"] encoding:NSUTF8StringEncoding];
+					if(!resultString) {
+						resultString = [resultDict objectForKey:@"decryptedString"];
+					}
+					self.currentEncodedText = resultString;
+					[resultTextView setString:resultString];
+					
+					NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+					[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+					fail = NO;
+				}
+				@catch (NSException * e) {
+					NSBeep();
+					NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+					[alert addButtonWithTitle:@"OK"];
+					[alert setMessageText:[e name]];
+					[alert setInformativeText:[e reason]];
+					[alert setAlertStyle:NSWarningAlertStyle];
+					[alert runModal];
+					//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+					fail = YES;
+				}
 			}
-			@catch (NSException * e) {
-				NSBeep();
-				NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-				[alert addButtonWithTitle:@"OK"];
-				[alert setMessageText:[e name]];
-				[alert setInformativeText:[e reason]];
-				[alert setAlertStyle:NSWarningAlertStyle];
-				[alert runModal];
-				//[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-				fail = YES;
-			}
-		}
-	}	
+		}	
 		
-	[resultString release];
-	
-	[loadingSheet orderOut:nil];
-	[NSApp endSheet:loadingSheet];
-	
-	if (fail == NO) {
-		NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-		[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+		[resultString release];
+		
+		[loadingSheet orderOut:nil];
+		[NSApp endSheet:loadingSheet];
+		
+		if (fail == NO) {
+			NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+			[center postNotificationName:@"loadingSheetClosed" object:nil userInfo:nil];
+		}
 	}
 	
 }
@@ -439,6 +453,9 @@
 
 	[sendMailContent setString:contentCache];
 	[sendMailFrom setStringValue:[AddressBookController returnOwnMailAddress]];
+	NSLog(@"to: %@",self.currentMail);
+	[sendMailTo setStringValue:self.currentMail];
+	//[sendMailTo setStringValue:self.currentMail];
 	[sendMailSubject setStringValue:MESSAGE_SUBJECT];
 }
 
@@ -517,6 +534,22 @@
 #pragma mark -
 #pragma mark Other Methods
 
+-(void)chooseExternalKeyToShare:(id)sender{
+	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
+	
+	if ([myAppDelegate.externalKeyArray count] == 0) {
+	}else {
+		KeyPropertys *item = [myAppDelegate.externalKeyArray objectAtIndex:[sender indexOfSelectedItem]];
+		
+		self.currentIdentifier = item.keyIdentifier;
+		self.currentPublicKey = item.publicKey;
+		self.currentPrivateKey = item.privateKey;
+		self.currentPublicKeyData = item.publicKeyData;
+		self.currentPrivateKeyData = item.privateKeyData;
+		self.currentMail = [AddressBookController returnMainMailAddressForPerson:item.keyPerson];
+	}
+}
+
 -(void)chooseKeyToShare:(id)sender{
 	iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 	
@@ -529,6 +562,8 @@
 		self.currentPrivateKey = item.privateKey;
 		self.currentPublicKeyData = item.publicKeyData;
 		self.currentPrivateKeyData = item.privateKeyData;
+		self.currentMail = @"";
+	//	self.currentMail = [AddressBookController returnMainMailAddressForPerson:item.keyPerson];
 	}
 }
 

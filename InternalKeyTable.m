@@ -53,7 +53,8 @@
 		
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		KeyPropertys* item = [myAppDelegate.internalKeyArray objectAtIndex:[sender clickedRow]];
-		[infoBox setTitle:item.keyIdentifier];
+		//[infoBox setTitle:item.keyIdentifier];
+		[infoBoxExternLabel setStringValue:item.keyIdentifier];
 		[publicKeyView setString:item.publicKey];
 		
 		[NSApp beginSheet:keyInfoSheet modalForWindow:mainKeyWindow modalDelegate:self didEndSelector:nil contextInfo:@""];
@@ -74,7 +75,7 @@
 	if ([[[notification userInfo]objectForKey:@"mode"] isEqualToString:@"internal"]) {
 		iRSAAppDelegate *myAppDelegate = (iRSAAppDelegate *)[[NSApplication sharedApplication] delegate];
 		
-		[myAppDelegate.internalKeyArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[[notification userInfo]objectForKey:@"publicKey"] :[[notification userInfo]objectForKey:@"privateKey"] :[[notification userInfo]objectForKey:@"publicKeyData"] :[[notification userInfo]objectForKey:@"privateKeyData"]: @"noOne"]];
+		[myAppDelegate.internalKeyArray addObject:[KeyPropertys keyItemWithData:@"untitled" :[[notification userInfo]objectForKey:@"publicKey"] :[[notification userInfo]objectForKey:@"privateKey"] :[[notification userInfo]objectForKey:@"publicKeyData"] :[[notification userInfo]objectForKey:@"privateKeyData"]: @"0"]];
 		
 		[self setupKeyPopUpButton];
 		[myTable noteNumberOfRowsChanged];

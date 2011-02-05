@@ -13,6 +13,7 @@
 @interface MainGUIController : NSObject <NSTextViewDelegate,NSTabViewDelegate,NSToolbarDelegate> {
 	
 	IBOutlet NSWindow *mainWindow;
+	IBOutlet NSWindow *experimentalWindow;
 	IBOutlet NSWindow *keysWindow;
 	IBOutlet NSWindow *loadingSheet;
 	IBOutlet NSWindow *keyManageSheet;
@@ -31,6 +32,7 @@
 	IBOutlet NSButton *keySheetDoneButton;
 	IBOutlet NSButton *keySheetAddButton;
 	IBOutlet NSButton *keySheetRemoveButton;
+	IBOutlet NSToolbarItem *toolbarKeysItem;
 	IBOutlet NSTextView *inputTextView;
 	IBOutlet NSTextView *resultTextView;
 	IBOutlet NSTextView *sendMailContent;
@@ -40,10 +42,12 @@
 	IBOutlet NSTextField *sendMailSubject;
 	IBOutlet NSTextField *sendMailFrom;
 	IBOutlet NSTextField *sendMailTo;
+	IBOutlet NSTextField *keyInfoIdentifier;
 	IBOutlet NSSegmentedControl *switchButton;
 	IBOutlet NSProgressIndicator *loadingIndicatorKeyWindow;
 	IBOutlet NSProgressIndicator *loadingIndicator;
 	IBOutlet NSToolbar *mainViewToolbar;
+	IBOutlet NSView *toolbarKeysView;
 	
 	
 	int tab;
@@ -56,6 +60,7 @@
 	NSString *currentIdentifier;
 	NSString *currentPublicKey;
 	NSString *currentPrivateKey;
+	NSString *currentMail;
 	NSData *currentPublicKeyData;
 	NSData *currentPrivateKeyData;
 	NSDictionary *notificationPublicKeyDict;
@@ -69,6 +74,7 @@
 @property(nonatomic,retain)NSString *currentIdentifier;
 @property(nonatomic,retain)NSString *currentPublicKey;
 @property(nonatomic,retain)NSString *currentPrivateKey;
+@property(nonatomic,retain)NSString *currentMail;
 @property(nonatomic,retain)NSString *currentText;
 @property(nonatomic,retain)NSString *currentEncodedText;
 @property(nonatomic,retain)NSData *currentPublicKeyData;
@@ -108,5 +114,6 @@
 -(void)setEnterButtonState;
 -(void)clearText;
 -(void)sendMailByNotification:(NSNotification *)notification;
+-(void)chooseExternalKeyToShare:(id)sender;
 
 @end
